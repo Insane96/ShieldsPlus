@@ -1,0 +1,27 @@
+modLoader="javafml"
+loaderVersion="[40,)"
+license="All rights reserved"
+issueTrackerURL="https://github.com/Insane96/ShieldsPlus/issues"
+[[mods]]
+modId="shieldsplus"
+version="${file.jarVersion}"
+displayName="ShieldsPlus"
+displayURL="https://minecraft.curseforge.com/projects/shieldsplus"
+logoFile="shieldsplus.png"
+# credits=""
+authors="Insane96MCP"
+description='''
+More shields and with actual blocking damages.
+'''
+[[dependencies.shieldsplus]]
+    modId="forge"
+    mandatory=true
+    versionRange="[40,)"
+    ordering="NONE"
+    side="BOTH"
+[[dependencies.shieldsplus]]
+    modId="minecraft"
+    mandatory=true
+    versionRange="[1.18.2,1.19)"
+    ordering="NONE"
+    side="BOTH"
