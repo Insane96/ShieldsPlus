@@ -1,5 +1,6 @@
 package com.insane96mcp.shieldsplus;
 
+import com.insane96mcp.shieldsplus.setup.Client;
 import com.insane96mcp.shieldsplus.setup.Config;
 import com.insane96mcp.shieldsplus.setup.SPItems;
 import com.mojang.logging.LogUtils;
@@ -19,6 +20,7 @@ public class ShieldsPlus
     public ShieldsPlus()
     {
         ModLoadingContext.get().registerConfig(net.minecraftforge.fml.config.ModConfig.Type.COMMON, Config.COMMON_SPEC);
+        FMLJavaModLoadingContext.get().getModEventBus().addListener(Client::setup);
         final IEventBus modEventBus = FMLJavaModLoadingContext.get().getModEventBus();
         SPItems.ITEMS.register(modEventBus);
     }
