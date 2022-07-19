@@ -53,6 +53,18 @@ public class ShieldBlockEntityWithoutLevelRenderer extends BlockEntityWithoutLev
         if (itemStack.is(SPItems.WOODEN_SHIELD.get())) {
             material = hasBanner ? SPShieldMaterials.WOODEN : SPShieldMaterials.WOODEN_NO_PATTERN;
         }
+        else if (itemStack.is(SPItems.STONE_SHIELD.get())) {
+            material = hasBanner ? SPShieldMaterials.STONE : SPShieldMaterials.STONE_NO_PATTERN;
+        }
+        else if (itemStack.is(SPItems.GOLDEN_SHIELD.get())) {
+            material = hasBanner ? SPShieldMaterials.GOLDEN : SPShieldMaterials.GOLDEN_NO_PATTERN;
+        }
+        else if (itemStack.is(SPItems.DIAMOND_SHIELD.get())) {
+            material = hasBanner ? SPShieldMaterials.DIAMOND : SPShieldMaterials.DIAMOND_NO_PATTERN;
+        }
+        else if (itemStack.is(SPItems.NETHERITE_SHIELD.get())) {
+            material = hasBanner ? SPShieldMaterials.NETHERITE : SPShieldMaterials.NETHERITE_NO_PATTERN;
+        }
         VertexConsumer vertexconsumer = material.sprite().wrap(ItemRenderer.getFoilBufferDirect(multiBufferSource, this.shieldModel.renderType(material.atlasLocation()), true, itemStack.hasFoil()));
         this.shieldModel.handle().render(poseStack, vertexconsumer, p_108834_, p_108835_, 1.0F, 1.0F, 1.0F, 1.0F);
         if (hasBanner) {

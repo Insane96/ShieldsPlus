@@ -5,44 +5,37 @@ import com.insane96mcp.shieldsplus.setup.Config;
 import insane96mcp.insanelib.base.Feature;
 import insane96mcp.insanelib.base.Label;
 import insane96mcp.insanelib.base.Module;
-import net.minecraft.server.level.ServerPlayer;
-import net.minecraft.world.entity.ai.attributes.AttributeModifier;
-import net.minecraft.world.entity.ai.attributes.Attributes;
-import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.Items;
-import net.minecraft.world.level.GameType;
 import net.minecraftforge.common.ForgeConfigSpec;
-import net.minecraftforge.common.util.FakePlayer;
-import net.minecraftforge.event.entity.living.LivingDeathEvent;
 import net.minecraftforge.event.entity.living.ShieldBlockEvent;
-import net.minecraftforge.event.entity.player.PlayerEvent;
-import net.minecraftforge.eventbus.api.EventPriority;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
-
-import java.util.UUID;
 
 @Label(name = "Shields+")
 public class BaseFeature extends Feature {
 
-    //private final ForgeConfigSpec.ConfigValue<Integer> startingHealthConfig;
+    private final ForgeConfigSpec.BooleanValue shieldBlockFixedDamageAmountConfig;
 
-    //public int startingHealth = 20;
+    public boolean shieldBlockFixedDamageAmount = true;
 
     public BaseFeature(Module module) {
         super(Config.builder, module, true, false);
-        super.pushConfig(Config.builder);
-
-        Config.builder.pop();
+        //super.pushConfig(Config.builder);
+        this.shieldBlockFixedDamageAmountConfig = Config.builder
+                .comment("If true shields will block only a certain amount of damage. If false the vanilla behaviour is used.")
+                .define("Shields Block Fixed Damage Amount", this.shieldBlockFixedDamageAmount);
+        //Config.builder.pop();
     }
 
     @Override
     public void loadConfig() {
         super.loadConfig();
+        this.shieldBlockFixedDamageAmount = this.shieldBlockFixedDamageAmountConfig.get();
     }
 
     @SubscribeEvent
     public void onShieldBlock(ShieldBlockEvent event) {
-        if (!this.isEnabled())
+        if (!this.isEnabled()
+                || !this.shieldBlockFixedDamageAmount)
             return;
 
         double blockedDamage;

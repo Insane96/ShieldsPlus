@@ -12,9 +12,9 @@ public class BaseModule extends Module {
 
     public BaseModule() {
         super(Config.builder, true, false);
-        this.pushConfig(Config.builder);
+        //this.pushConfig(Config.builder);
         base = new BaseFeature(this);
-        Config.builder.pop();
+        //Config.builder.pop();
     }
 
     @Override

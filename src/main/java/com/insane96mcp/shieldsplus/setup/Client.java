@@ -23,6 +23,14 @@ public class Client {
         if (event.getAtlas().location().equals(InventoryMenu.BLOCK_ATLAS)) {
             event.addSprite(SPShieldMaterials.WOODEN.texture());
             event.addSprite(SPShieldMaterials.WOODEN_NO_PATTERN.texture());
+            event.addSprite(SPShieldMaterials.STONE.texture());
+            event.addSprite(SPShieldMaterials.STONE_NO_PATTERN.texture());
+            event.addSprite(SPShieldMaterials.GOLDEN.texture());
+            event.addSprite(SPShieldMaterials.GOLDEN_NO_PATTERN.texture());
+            event.addSprite(SPShieldMaterials.DIAMOND.texture());
+            event.addSprite(SPShieldMaterials.DIAMOND_NO_PATTERN.texture());
+            event.addSprite(SPShieldMaterials.NETHERITE.texture());
+            event.addSprite(SPShieldMaterials.NETHERITE_NO_PATTERN.texture());
         }
     }
 
@@ -30,5 +38,9 @@ public class Client {
         //this matches up with ShieldCyclicItem where it calls startUsingItem() inside of use()
         ItemPropertyFunction blockFn = (stack, world, entity, seed) -> entity != null && entity.isUsingItem() && entity.getUseItem() == stack ? 1.0F : 0.0F;
         ItemProperties.register(SPItems.WOODEN_SHIELD.get(), SPShieldItem.BLOCKING, blockFn);
+        ItemProperties.register(SPItems.STONE_SHIELD.get(), SPShieldItem.BLOCKING, blockFn);
+        ItemProperties.register(SPItems.GOLDEN_SHIELD.get(), SPShieldItem.BLOCKING, blockFn);
+        ItemProperties.register(SPItems.DIAMOND_SHIELD.get(), SPShieldItem.BLOCKING, blockFn);
+        ItemProperties.register(SPItems.NETHERITE_SHIELD.get(), SPShieldItem.BLOCKING, blockFn);
     }
 }
