@@ -1,0 +1,11 @@
+{
+    "required": true,
+    "package": "com.insane96mcp.shieldsplus.mixin",
+    "compatibilityLevel": "JAVA_8",
+    "refmap": "shieldsplus.refmap.json",
+    "mixins": [
+        "LivingEntityMixin",
+        "PlayerMixin"
+    ],
+    "minVersion": "0.8"
+}

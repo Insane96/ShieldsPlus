@@ -13,23 +13,35 @@ import net.minecraftforge.eventbus.api.SubscribeEvent;
 @Label(name = "Shields+")
 public class BaseFeature extends Feature {
 
+    private final ForgeConfigSpec.BooleanValue removeShieldWindupConfig;
     private final ForgeConfigSpec.BooleanValue shieldBlockFixedDamageAmountConfig;
+    private final ForgeConfigSpec.DoubleValue minShieldHurtDamageConfig;
 
+    public boolean removeShieldWindup = true;
     public boolean shieldBlockFixedDamageAmount = true;
+    public double minShieldHurtDamage = 0f;
 
     public BaseFeature(Module module) {
         super(Config.builder, module, true, false);
         //super.pushConfig(Config.builder);
+        this.removeShieldWindupConfig = Config.builder
+                .comment("In vanilla when you start blocking with a shield, there's a 0.25 seconds window where you are still not blocking. If true this (stupid) windup time is removed.")
+                .define("Remove Shield Windup", this.removeShieldWindup);
         this.shieldBlockFixedDamageAmountConfig = Config.builder
                 .comment("If true shields will block only a certain amount of damage. If false the vanilla behaviour is used.")
                 .define("Shields Block Fixed Damage Amount", this.shieldBlockFixedDamageAmount);
+        this.minShieldHurtDamageConfig = Config.builder
+                .comment("The minimum damage dealt to the player for the shield to take damage (reduce durability). Vanilla is 3")
+                .defineInRange("Min Shield Hurt Damage", this.minShieldHurtDamage, 0f, Float.MAX_VALUE);
         //Config.builder.pop();
     }
 
     @Override
     public void loadConfig() {
         super.loadConfig();
+        this.removeShieldWindup = this.removeShieldWindupConfig.get();
         this.shieldBlockFixedDamageAmount = this.shieldBlockFixedDamageAmountConfig.get();
+        this.minShieldHurtDamage = this.minShieldHurtDamageConfig.get();
     }
 
     @SubscribeEvent
@@ -49,5 +61,9 @@ public class BaseFeature extends Feature {
             return;
 
         event.setBlockedDamage((float) blockedDamage);
+    }
+
+    public boolean shouldRemoveShieldWindup() {
+        return this.isEnabled() && this.removeShieldWindup;
     }
 }
