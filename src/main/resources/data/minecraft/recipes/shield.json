@@ -1,0 +1,19 @@
+{
+    "type": "minecraft:crafting_shaped",
+    "pattern": [
+        " I ",
+        "ISI",
+        " I "
+    ],
+    "key": {
+        "S": {
+            "item": "shieldsplus:stone_shield"
+        },
+        "I": {
+            "item": "minecraft:iron_ingot"
+        }
+    },
+    "result": {
+        "item": "minecraft:shield"
+    }
+}

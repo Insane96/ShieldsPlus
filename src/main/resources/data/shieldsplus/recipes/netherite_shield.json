@@ -1,0 +1,12 @@
+{
+    "type": "minecraft:smithing",
+    "base": {
+        "item": "shieldsplus:diamond_shield"
+    },
+    "addition": {
+        "item": "minecraft:netherite_ingot"
+    },
+    "result": {
+        "item": "shieldsplus:netherite_shield"
+    }
+}
