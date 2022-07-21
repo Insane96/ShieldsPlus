@@ -8,6 +8,7 @@ import insane96mcp.insanelib.base.Module;
 import net.minecraft.world.item.Items;
 import net.minecraftforge.common.ForgeConfigSpec;
 import net.minecraftforge.event.entity.living.ShieldBlockEvent;
+import net.minecraftforge.event.entity.player.ItemTooltipEvent;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
 
 @Label(name = "Shields+")
@@ -61,6 +62,17 @@ public class BaseFeature extends Feature {
             return;
 
         event.setBlockedDamage((float) blockedDamage);
+    }
+
+    @SubscribeEvent
+    public void onTooltip(ItemTooltipEvent event) {
+        if (!this.isEnabled()
+                || !this.shieldBlockFixedDamageAmount)
+            return;
+
+        if (event.getItemStack().is(Items.SHIELD)) {
+            SPShieldItem.addDamageBlockedText(event.getToolTip(), 5d);
+        }
     }
 
     public boolean shouldRemoveShieldWindup() {

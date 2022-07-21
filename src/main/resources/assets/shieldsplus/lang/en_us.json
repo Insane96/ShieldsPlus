@@ -4,5 +4,6 @@
     "item.shieldsplus.golden_shield": "Golden shield",
     "item.minecraft.shield": "Iron shield",
     "item.shieldsplus.diamond_shield": "Diamond shield",
-    "item.shieldsplus.netherite_shield": "Netherite shield"
+    "item.shieldsplus.netherite_shield": "Netherite shield",
+    "shieldsplus:damage_blocked": "%s damage blocked"
 }
