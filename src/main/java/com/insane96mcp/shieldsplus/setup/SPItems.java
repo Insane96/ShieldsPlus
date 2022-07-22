@@ -2,19 +2,30 @@ package com.insane96mcp.shieldsplus.setup;
 
 import com.insane96mcp.shieldsplus.ShieldsPlus;
 import com.insane96mcp.shieldsplus.item.SPShieldItem;
+import com.insane96mcp.shieldsplus.item.SPShieldMaterial;
 import net.minecraft.world.item.CreativeModeTab;
 import net.minecraft.world.item.Item;
 import net.minecraftforge.registries.DeferredRegister;
 import net.minecraftforge.registries.ForgeRegistries;
 import net.minecraftforge.registries.RegistryObject;
 
+import java.util.ArrayList;
+import java.util.List;
+
 public class SPItems {
     public static final DeferredRegister<Item> ITEMS = DeferredRegister.create(ForgeRegistries.ITEMS, ShieldsPlus.MOD_ID);
+    public static final List<SPShieldItem> SHIELDS = new ArrayList<>();
 
-    //1.344
-    public static final RegistryObject<SPShieldItem> WOODEN_SHIELD = ITEMS.register(Strings.Items.WOODEN_SHIELD, () -> new SPShieldItem(1d, new Item.Properties().durability(84).tab(CreativeModeTab.TAB_COMBAT)));
-    public static final RegistryObject<SPShieldItem> STONE_SHIELD = ITEMS.register(Strings.Items.STONE_SHIELD, () -> new SPShieldItem(3d, new Item.Properties().durability(112).tab(CreativeModeTab.TAB_COMBAT)));
-    public static final RegistryObject<SPShieldItem> GOLDEN_SHIELD = ITEMS.register(Strings.Items.GOLDEN_SHIELD, () -> new SPShieldItem(1d, new Item.Properties().durability(42).tab(CreativeModeTab.TAB_COMBAT)));
-    public static final RegistryObject<SPShieldItem> DIAMOND_SHIELD = ITEMS.register(Strings.Items.DIAMOND_SHIELD, () -> new SPShieldItem(7d, new Item.Properties().durability(588).tab(CreativeModeTab.TAB_COMBAT)));
-    public static final RegistryObject<SPShieldItem> NETHERITE_SHIELD = ITEMS.register(Strings.Items.NETHERITE_SHIELD, () -> new SPShieldItem(8d, new Item.Properties().durability(672).tab(CreativeModeTab.TAB_COMBAT)));
+    public static final RegistryObject<SPShieldItem> WOODEN_SHIELD = registerShield(Strings.Items.WOODEN_SHIELD, SPShieldMaterials.WOODEN);
+    public static final RegistryObject<SPShieldItem> STONE_SHIELD = registerShield(Strings.Items.WOODEN_SHIELD, SPShieldMaterials.STONE);
+    public static final RegistryObject<SPShieldItem> GOLDEN_SHIELD = registerShield(Strings.Items.WOODEN_SHIELD, SPShieldMaterials.GOLDEN);
+    public static final RegistryObject<SPShieldItem> DIAMOND_SHIELD = registerShield(Strings.Items.WOODEN_SHIELD, SPShieldMaterials.DIAMOND);
+    public static final RegistryObject<SPShieldItem> NETHERITE_SHIELD = registerShield(Strings.Items.WOODEN_SHIELD, SPShieldMaterials.NETHERITE);
+
+
+    public static RegistryObject<SPShieldItem> registerShield(String id, SPShieldMaterial material) {
+        RegistryObject<SPShieldItem> shield = ITEMS.register(id, () -> new SPShieldItem(material, new Item.Properties().durability(material.durability).tab(CreativeModeTab.TAB_COMBAT).rarity(material.rarity)));
+        SHIELDS.add(shield.get()); // Will surely not work
+        return shield;
+    }
 }

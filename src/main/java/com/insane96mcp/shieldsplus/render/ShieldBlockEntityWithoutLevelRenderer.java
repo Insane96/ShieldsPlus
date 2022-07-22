@@ -1,8 +1,7 @@
 package com.insane96mcp.shieldsplus.render;
 
 import com.insane96mcp.shieldsplus.ShieldsPlus;
-import com.insane96mcp.shieldsplus.setup.SPItems;
-import com.insane96mcp.shieldsplus.setup.SPShieldMaterials;
+import com.insane96mcp.shieldsplus.item.SPShieldItem;
 import com.mojang.blaze3d.vertex.PoseStack;
 import com.mojang.blaze3d.vertex.VertexConsumer;
 import com.mojang.datafixers.util.Pair;
@@ -50,20 +49,8 @@ public class ShieldBlockEntityWithoutLevelRenderer extends BlockEntityWithoutLev
         poseStack.pushPose();
         poseStack.scale(1.0F, -1.0F, -1.0F);
         Material material = hasBanner ? ModelBakery.SHIELD_BASE : ModelBakery.NO_PATTERN_SHIELD;
-        if (itemStack.is(SPItems.WOODEN_SHIELD.get())) {
-            material = hasBanner ? SPShieldMaterials.WOODEN : SPShieldMaterials.WOODEN_NO_PATTERN;
-        }
-        else if (itemStack.is(SPItems.STONE_SHIELD.get())) {
-            material = hasBanner ? SPShieldMaterials.STONE : SPShieldMaterials.STONE_NO_PATTERN;
-        }
-        else if (itemStack.is(SPItems.GOLDEN_SHIELD.get())) {
-            material = hasBanner ? SPShieldMaterials.GOLDEN : SPShieldMaterials.GOLDEN_NO_PATTERN;
-        }
-        else if (itemStack.is(SPItems.DIAMOND_SHIELD.get())) {
-            material = hasBanner ? SPShieldMaterials.DIAMOND : SPShieldMaterials.DIAMOND_NO_PATTERN;
-        }
-        else if (itemStack.is(SPItems.NETHERITE_SHIELD.get())) {
-            material = hasBanner ? SPShieldMaterials.NETHERITE : SPShieldMaterials.NETHERITE_NO_PATTERN;
+        if (itemStack.getItem() instanceof SPShieldItem spShieldItem) {
+            material = hasBanner ? spShieldItem.material.material : spShieldItem.material.noPatternMaterial;
         }
         VertexConsumer vertexconsumer = material.sprite().wrap(ItemRenderer.getFoilBufferDirect(multiBufferSource, this.shieldModel.renderType(material.atlasLocation()), true, itemStack.hasFoil()));
         this.shieldModel.handle().render(poseStack, vertexconsumer, p_108834_, p_108835_, 1.0F, 1.0F, 1.0F, 1.0F);

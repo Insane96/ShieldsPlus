@@ -21,15 +21,15 @@ import java.util.function.Consumer;
 public class SPShieldItem extends ShieldItem {
 
     public static final ResourceLocation BLOCKING = new ResourceLocation("minecraft:blocking");
-    private final double blockedDamage;
+    public final SPShieldMaterial material;
 
-    public SPShieldItem(double blockedDamage, Properties p_43089_) {
+    public SPShieldItem(SPShieldMaterial material, Properties p_43089_) {
         super(p_43089_);
-        this.blockedDamage = blockedDamage;
+        this.material = material;
     }
 
     public double getBlockedDamage() {
-        return this.blockedDamage;
+        return this.material.damageBlocked;
     }
 
     @Override
