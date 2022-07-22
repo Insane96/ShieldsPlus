@@ -1,5 +1,8 @@
 # Changelog
 
+## Upcoming
+* Changed recipes to always require a wooden shield as base, instead of upgrading Wood>Stone>Iron>Diamond
+
 ## 1.0.1
 * Added "blocking damage" tooltip on Shields
 * Raised mixin priority, should prevent IguanaTweaks from messing with the blocking delay (0.25 secs)
