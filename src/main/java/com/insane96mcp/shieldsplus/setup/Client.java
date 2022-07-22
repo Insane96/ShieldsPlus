@@ -20,6 +20,7 @@ public class Client {
 
     @SubscribeEvent
     public static void onStitch(TextureStitchEvent.Pre event) {
+        //TODO Check if I can loop the SPItems.SHIELDS to read all the textures from there
         if (event.getAtlas().location().equals(InventoryMenu.BLOCK_ATLAS)) {
             event.addSprite(SPShieldMaterials.WOODEN.material.texture());
             event.addSprite(SPShieldMaterials.WOODEN.noPatternMaterial.texture());

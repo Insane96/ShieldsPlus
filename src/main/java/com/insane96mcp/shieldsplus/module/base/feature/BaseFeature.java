@@ -2,6 +2,7 @@ package com.insane96mcp.shieldsplus.module.base.feature;
 
 import com.insane96mcp.shieldsplus.item.SPShieldItem;
 import com.insane96mcp.shieldsplus.setup.Config;
+import com.insane96mcp.shieldsplus.setup.SPShieldMaterials;
 import insane96mcp.insanelib.base.Feature;
 import insane96mcp.insanelib.base.Label;
 import insane96mcp.insanelib.base.Module;
@@ -53,7 +54,7 @@ public class BaseFeature extends Feature {
 
         double blockedDamage;
         if (event.getEntityLiving().getUseItem().is(Items.SHIELD)) {
-            blockedDamage = 5d;
+            blockedDamage = SPShieldMaterials.IRON.damageBlocked;
         }
         else if (event.getEntityLiving().getUseItem().getItem() instanceof SPShieldItem) {
             blockedDamage = ((SPShieldItem)event.getEntityLiving().getUseItem().getItem()).getBlockedDamage();
@@ -71,7 +72,7 @@ public class BaseFeature extends Feature {
             return;
 
         if (event.getItemStack().is(Items.SHIELD)) {
-            SPShieldItem.addDamageBlockedText(event.getToolTip(), 5d);
+            SPShieldItem.addDamageBlockedText(event.getToolTip(), SPShieldMaterials.IRON.damageBlocked);
         }
     }
 
