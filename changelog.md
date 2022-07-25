@@ -1,6 +1,6 @@
 # Changelog
 
-## Upcoming
+## 1.0.2
 * Changed recipes to always require a wooden shield as base, instead of upgrading Wood>Stone>Iron>Diamond
 * Internal changes to make registering shields easier
 
