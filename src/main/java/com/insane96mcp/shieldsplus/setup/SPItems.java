@@ -14,18 +14,18 @@ import java.util.List;
 
 public class SPItems {
     public static final DeferredRegister<Item> ITEMS = DeferredRegister.create(ForgeRegistries.ITEMS, ShieldsPlus.MOD_ID);
-    public static final List<SPShieldItem> SHIELDS = new ArrayList<>();
+    public static final List<RegistryObject<SPShieldItem>> SHIELDS = new ArrayList<>();
 
     public static final RegistryObject<SPShieldItem> WOODEN_SHIELD = registerShield(Strings.Items.WOODEN_SHIELD, SPShieldMaterials.WOODEN);
-    public static final RegistryObject<SPShieldItem> STONE_SHIELD = registerShield(Strings.Items.WOODEN_SHIELD, SPShieldMaterials.STONE);
-    public static final RegistryObject<SPShieldItem> GOLDEN_SHIELD = registerShield(Strings.Items.WOODEN_SHIELD, SPShieldMaterials.GOLDEN);
-    public static final RegistryObject<SPShieldItem> DIAMOND_SHIELD = registerShield(Strings.Items.WOODEN_SHIELD, SPShieldMaterials.DIAMOND);
-    public static final RegistryObject<SPShieldItem> NETHERITE_SHIELD = registerShield(Strings.Items.WOODEN_SHIELD, SPShieldMaterials.NETHERITE);
+    public static final RegistryObject<SPShieldItem> STONE_SHIELD = registerShield(Strings.Items.STONE_SHIELD, SPShieldMaterials.STONE);
+    public static final RegistryObject<SPShieldItem> GOLDEN_SHIELD = registerShield(Strings.Items.GOLDEN_SHIELD, SPShieldMaterials.GOLDEN);
+    public static final RegistryObject<SPShieldItem> DIAMOND_SHIELD = registerShield(Strings.Items.DIAMOND_SHIELD, SPShieldMaterials.DIAMOND);
+    public static final RegistryObject<SPShieldItem> NETHERITE_SHIELD = registerShield(Strings.Items.NETHERITE_SHIELD, SPShieldMaterials.NETHERITE);
 
 
     public static RegistryObject<SPShieldItem> registerShield(String id, SPShieldMaterial material) {
         RegistryObject<SPShieldItem> shield = ITEMS.register(id, () -> new SPShieldItem(material, new Item.Properties().durability(material.durability).tab(CreativeModeTab.TAB_COMBAT).rarity(material.rarity)));
-        SHIELDS.add(shield.get()); // Will surely not work
+        SHIELDS.add(shield); // Will surely not work
         return shield;
     }
 }
