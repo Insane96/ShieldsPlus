@@ -4,7 +4,6 @@ import com.insane96mcp.shieldsplus.ShieldsPlus;
 import com.insane96mcp.shieldsplus.item.SPShieldItem;
 import net.minecraft.client.renderer.item.ItemProperties;
 import net.minecraft.client.renderer.item.ItemPropertyFunction;
-import net.minecraft.world.inventory.InventoryMenu;
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.client.event.TextureStitchEvent;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
@@ -21,8 +20,12 @@ public class Client {
 
     @SubscribeEvent
     public static void onStitch(TextureStitchEvent.Pre event) {
-        //TODO Check if I can loop the SPItems.SHIELDS to read all the textures from there
-        if (event.getAtlas().location().equals(InventoryMenu.BLOCK_ATLAS)) {
+        //TODO Check if I can loop the SPItems.SHIELDS to read all the textures from there=
+        for (RegistryObject<SPShieldItem> shieldItem : SPItems.SHIELDS) {
+            event.addSprite(shieldItem.get().material.material.texture());
+            event.addSprite(shieldItem.get().material.noPatternMaterial.texture());
+        }
+        /*if (event.getAtlas().location().equals(InventoryMenu.BLOCK_ATLAS)) {
             event.addSprite(SPShieldMaterials.WOODEN.material.texture());
             event.addSprite(SPShieldMaterials.WOODEN.noPatternMaterial.texture());
             event.addSprite(SPShieldMaterials.STONE.material.texture());
@@ -33,7 +36,7 @@ public class Client {
             event.addSprite(SPShieldMaterials.DIAMOND.noPatternMaterial.texture());
             event.addSprite(SPShieldMaterials.NETHERITE.material.texture());
             event.addSprite(SPShieldMaterials.NETHERITE.noPatternMaterial.texture());
-        }
+        }*/
     }
 
     private static void initShields() {

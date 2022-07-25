@@ -2,6 +2,7 @@
 
 ## Upcoming
 * Changed recipes to always require a wooden shield as base, instead of upgrading Wood>Stone>Iron>Diamond
+* Internal changes to make registering shields easier
 
 ## 1.0.1
 * Added "blocking damage" tooltip on Shields
