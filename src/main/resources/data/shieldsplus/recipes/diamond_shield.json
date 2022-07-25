@@ -10,7 +10,7 @@
             "item": "minecraft:diamond"
         },
         "B": {
-            "item": "minecraft:shield"
+            "item": "shieldsplus:wooden_shield"
         }
     },
     "result": {
