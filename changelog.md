@@ -1,5 +1,8 @@
 # Changelog
 
+## 1.0.3
+* Fixed server not launching
+
 ## 1.0.2
 * Changed recipes to always require a wooden shield as base, instead of upgrading Wood>Stone>Iron>Diamond
 * Internal changes to make registering shields easier
