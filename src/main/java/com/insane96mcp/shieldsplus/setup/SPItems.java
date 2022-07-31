@@ -25,7 +25,7 @@ public class SPItems {
 
     public static RegistryObject<SPShieldItem> registerShield(String id, SPShieldMaterial material) {
         RegistryObject<SPShieldItem> shield = ITEMS.register(id, () -> new SPShieldItem(material, new Item.Properties().durability(material.durability).tab(CreativeModeTab.TAB_COMBAT).rarity(material.rarity)));
-        SHIELDS.add(shield); // Will surely not work
+        SHIELDS.add(shield);
         return shield;
     }
 }

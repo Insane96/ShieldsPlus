@@ -21,8 +21,9 @@ public class Client {
     @SubscribeEvent
     public static void onStitch(TextureStitchEvent.Pre event) {
         for (RegistryObject<SPShieldItem> shieldItem : SPItems.SHIELDS) {
-            event.addSprite(shieldItem.get().material.material.texture());
-            event.addSprite(shieldItem.get().material.noPatternMaterial.texture());
+            shieldItem.get().initClientMaterial();
+            event.addSprite(shieldItem.get().clientMaterial.texture());
+            event.addSprite(shieldItem.get().clientMaterialNoPattern.texture());
         }
     }
 

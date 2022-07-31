@@ -50,7 +50,7 @@ public class ShieldBlockEntityWithoutLevelRenderer extends BlockEntityWithoutLev
         poseStack.scale(1.0F, -1.0F, -1.0F);
         Material material = hasBanner ? ModelBakery.SHIELD_BASE : ModelBakery.NO_PATTERN_SHIELD;
         if (itemStack.getItem() instanceof SPShieldItem spShieldItem) {
-            material = hasBanner ? spShieldItem.material.material : spShieldItem.material.noPatternMaterial;
+            material = hasBanner ? spShieldItem.clientMaterial : spShieldItem.clientMaterialNoPattern;
         }
         VertexConsumer vertexconsumer = material.sprite().wrap(ItemRenderer.getFoilBufferDirect(multiBufferSource, this.shieldModel.renderType(material.atlasLocation()), true, itemStack.hasFoil()));
         this.shieldModel.handle().render(poseStack, vertexconsumer, p_108834_, p_108835_, 1.0F, 1.0F, 1.0F, 1.0F);
