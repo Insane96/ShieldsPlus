@@ -1,5 +1,8 @@
 # Changelog
 
+## Upcoming
+* Added Combat Test shield disabling
+
 ## 1.0.3
 * Fixed server not launching
 

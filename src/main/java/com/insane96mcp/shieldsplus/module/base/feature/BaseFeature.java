@@ -18,10 +18,12 @@ public class BaseFeature extends Feature {
     private final ForgeConfigSpec.BooleanValue removeShieldWindupConfig;
     private final ForgeConfigSpec.BooleanValue shieldBlockFixedDamageAmountConfig;
     private final ForgeConfigSpec.DoubleValue minShieldHurtDamageConfig;
+    private final ForgeConfigSpec.BooleanValue combatTestShieldDisablingConfig;
 
     public boolean removeShieldWindup = true;
     public boolean shieldBlockFixedDamageAmount = true;
     public double minShieldHurtDamage = 0f;
+    public boolean combatTestShieldDisabling = true;
 
     public BaseFeature(Module module) {
         super(Config.builder, module, true, false);
@@ -35,6 +37,9 @@ public class BaseFeature extends Feature {
         this.minShieldHurtDamageConfig = Config.builder
                 .comment("The minimum damage dealt to the player for the shield to take damage (reduce durability). Vanilla is 3")
                 .defineInRange("Min Shield Hurt Damage", this.minShieldHurtDamage, 0f, Float.MAX_VALUE);
+        combatTestShieldDisablingConfig = Config.builder
+                .comment("Makes shields always disable for 1.6 seconds like Combat Test snapshots.")
+                .define("Combat Test shield disabling", this.combatTestShieldDisabling);
         //Config.builder.pop();
     }
 
@@ -44,6 +49,7 @@ public class BaseFeature extends Feature {
         this.removeShieldWindup = this.removeShieldWindupConfig.get();
         this.shieldBlockFixedDamageAmount = this.shieldBlockFixedDamageAmountConfig.get();
         this.minShieldHurtDamage = this.minShieldHurtDamageConfig.get();
+        this.combatTestShieldDisabling = this.combatTestShieldDisablingConfig.get();
     }
 
     @SubscribeEvent
@@ -78,5 +84,9 @@ public class BaseFeature extends Feature {
 
     public boolean shouldRemoveShieldWindup() {
         return this.isEnabled() && this.removeShieldWindup;
+    }
+
+    public boolean combatTestShieldDisabling() {
+        return this.isEnabled() && this.combatTestShieldDisabling;
     }
 }
