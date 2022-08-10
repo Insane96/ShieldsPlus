@@ -2,6 +2,7 @@
 
 ## Upcoming
 * Added Combat Test shield disabling
+* Fixed (hopefully) vanilla shield recipe not being overridden
 
 ## 1.0.3
 * Fixed server not launching
