@@ -18,6 +18,7 @@ public class SPItems {
 
     public static final RegistryObject<SPShieldItem> WOODEN_SHIELD = registerShield(Strings.Items.WOODEN_SHIELD, SPShieldMaterials.WOODEN);
     public static final RegistryObject<SPShieldItem> STONE_SHIELD = registerShield(Strings.Items.STONE_SHIELD, SPShieldMaterials.STONE);
+    public static final RegistryObject<SPShieldItem> COPPER_SHIELD = registerShield(Strings.Items.COPPER_SHIELD, SPShieldMaterials.COPPER);
     public static final RegistryObject<SPShieldItem> GOLDEN_SHIELD = registerShield(Strings.Items.GOLDEN_SHIELD, SPShieldMaterials.GOLDEN);
     public static final RegistryObject<SPShieldItem> DIAMOND_SHIELD = registerShield(Strings.Items.DIAMOND_SHIELD, SPShieldMaterials.DIAMOND);
     public static final RegistryObject<SPShieldItem> NETHERITE_SHIELD = registerShield(Strings.Items.NETHERITE_SHIELD, SPShieldMaterials.NETHERITE);
