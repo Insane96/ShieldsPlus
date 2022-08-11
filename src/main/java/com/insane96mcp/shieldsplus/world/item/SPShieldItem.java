@@ -59,7 +59,7 @@ public class SPShieldItem extends ShieldItem {
     }
 
     @Override
-    public void appendHoverText(ItemStack itemStack, @Nullable Level level, List<Component> components, TooltipFlag tooltipFlag) {
+    public void appendHoverText(@NotNull ItemStack itemStack, @Nullable Level level, @NotNull List<Component> components, @NotNull TooltipFlag tooltipFlag) {
         super.appendHoverText(itemStack, level, components, tooltipFlag);
         addDamageBlockedText(components, this.getBlockedDamage());
     }
@@ -69,8 +69,10 @@ public class SPShieldItem extends ShieldItem {
     }
 
     @Override
-    public boolean isValidRepairItem(ItemStack repaired, ItemStack repairingMaterial) {
-        return super.isValidRepairItem(repaired, repairingMaterial);
+    public boolean isValidRepairItem(@NotNull ItemStack repaired, @NotNull ItemStack repairingMaterial) {
+        if (this.material.repairItem != null)
+            return repairingMaterial.is(this.material.repairItem);
+        return repairingMaterial.is(this.material.repairTag);
     }
 
     @OnlyIn(Dist.CLIENT)

@@ -4,6 +4,7 @@
 * Added Copper Shield
 * Added recipe to apply banners to shields
 * Added Combat Test shield disabling
+* Shields can now be repaired, also vanilla shields now require Iron to be repaired
 * Fixed (hopefully) vanilla shield recipe not being overridden
 
 ## 1.0.3
