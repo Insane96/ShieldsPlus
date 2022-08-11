@@ -1,6 +1,6 @@
 package com.insane96mcp.shieldsplus.setup;
 
-import com.insane96mcp.shieldsplus.item.SPShieldMaterial;
+import com.insane96mcp.shieldsplus.world.item.SPShieldMaterial;
 import net.minecraft.world.item.Rarity;
 
 public class SPShieldMaterials {

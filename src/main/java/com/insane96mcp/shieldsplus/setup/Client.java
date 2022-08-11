@@ -1,7 +1,7 @@
 package com.insane96mcp.shieldsplus.setup;
 
 import com.insane96mcp.shieldsplus.ShieldsPlus;
-import com.insane96mcp.shieldsplus.item.SPShieldItem;
+import com.insane96mcp.shieldsplus.world.item.SPShieldItem;
 import net.minecraft.client.renderer.item.ItemProperties;
 import net.minecraft.client.renderer.item.ItemPropertyFunction;
 import net.minecraftforge.api.distmarker.Dist;

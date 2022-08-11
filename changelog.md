@@ -1,6 +1,8 @@
 # Changelog
 
 ## Upcoming
+* Added Copper Shield
+* Added recipe to apply banners to shields
 * Added Combat Test shield disabling
 * Fixed (hopefully) vanilla shield recipe not being overridden
 

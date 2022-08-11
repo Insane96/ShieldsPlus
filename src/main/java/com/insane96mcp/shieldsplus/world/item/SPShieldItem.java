@@ -1,4 +1,4 @@
-package com.insane96mcp.shieldsplus.item;
+package com.insane96mcp.shieldsplus.world.item;
 
 import com.insane96mcp.shieldsplus.ShieldsPlus;
 import com.insane96mcp.shieldsplus.render.ShieldBlockEntityWithoutLevelRenderer;
@@ -17,6 +17,7 @@ import net.minecraft.world.level.Level;
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.api.distmarker.OnlyIn;
 import net.minecraftforge.client.IItemRenderProperties;
+import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
 import java.text.DecimalFormat;
@@ -36,6 +37,10 @@ public class SPShieldItem extends ShieldItem {
     public SPShieldItem(SPShieldMaterial material, Properties p_43089_) {
         super(p_43089_);
         this.material = material;
+    }
+
+    public @NotNull String getDescriptionId(@NotNull ItemStack itemStack) {
+        return super.getDescriptionId();
     }
 
     public double getBlockedDamage() {
@@ -61,6 +66,11 @@ public class SPShieldItem extends ShieldItem {
 
     public static void addDamageBlockedText(List<Component> components, double blockedDamage) {
         components.add(new TranslatableComponent(Strings.Translatable.DAMAGE_BLOCKED, new DecimalFormat("#.#").format(blockedDamage)).withStyle(ChatFormatting.BLUE));
+    }
+
+    @Override
+    public boolean isValidRepairItem(ItemStack repaired, ItemStack repairingMaterial) {
+        return super.isValidRepairItem(repaired, repairingMaterial);
     }
 
     @OnlyIn(Dist.CLIENT)

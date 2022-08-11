@@ -1,8 +1,8 @@
 package com.insane96mcp.shieldsplus.setup;
 
 import com.insane96mcp.shieldsplus.ShieldsPlus;
-import com.insane96mcp.shieldsplus.item.SPShieldItem;
-import com.insane96mcp.shieldsplus.item.SPShieldMaterial;
+import com.insane96mcp.shieldsplus.world.item.SPShieldItem;
+import com.insane96mcp.shieldsplus.world.item.SPShieldMaterial;
 import net.minecraft.world.item.CreativeModeTab;
 import net.minecraft.world.item.Item;
 import net.minecraftforge.registries.DeferredRegister;

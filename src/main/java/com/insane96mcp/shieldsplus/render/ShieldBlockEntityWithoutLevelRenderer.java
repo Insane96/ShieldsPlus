@@ -1,7 +1,7 @@
 package com.insane96mcp.shieldsplus.render;
 
 import com.insane96mcp.shieldsplus.ShieldsPlus;
-import com.insane96mcp.shieldsplus.item.SPShieldItem;
+import com.insane96mcp.shieldsplus.world.item.SPShieldItem;
 import com.mojang.blaze3d.vertex.PoseStack;
 import com.mojang.blaze3d.vertex.VertexConsumer;
 import com.mojang.datafixers.util.Pair;

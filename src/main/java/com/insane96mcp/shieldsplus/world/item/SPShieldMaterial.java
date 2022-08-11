@@ -1,4 +1,4 @@
-package com.insane96mcp.shieldsplus.item;
+package com.insane96mcp.shieldsplus.world.item;
 
 import net.minecraft.world.item.Rarity;
 
