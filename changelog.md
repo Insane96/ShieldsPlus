@@ -1,6 +1,6 @@
 # Changelog
 
-## Upcoming
+## 1.1.0
 * Added Copper Shield
 * Added recipe to apply banners to shields
 * Added Combat Test shield disabling
