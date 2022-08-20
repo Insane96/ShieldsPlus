@@ -1,5 +1,8 @@
 # Changelog
 
+## 1.1.1
+* Copper shield recipe no longer outputs a diamond shield
+
 ## 1.1.0
 * Added Copper Shield
 * Added recipe to apply banners to shields
