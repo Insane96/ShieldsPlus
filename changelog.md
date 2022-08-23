@@ -1,5 +1,8 @@
 # Changelog
 
+## Upcoming
+* Shields can now be enchanted at the Enchanting Table
+
 ## 1.1.1
 * Copper shield recipe no longer outputs a diamond shield
 

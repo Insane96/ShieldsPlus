@@ -29,4 +29,9 @@ public abstract class ShieldItemMixin extends Item {
     public void getDescriptionId(ItemStack stack, CallbackInfoReturnable<String> callbackInfo) {
         callbackInfo.setReturnValue(super.getDescriptionId());
     }
+
+    @Inject(at = @At("RETURN"), method = "getEnchantmentValue", cancellable = true)
+    public void getItemEnchantability(CallbackInfoReturnable<Integer> callbackInfo) {
+        callbackInfo.setReturnValue(5);
+    }
 }

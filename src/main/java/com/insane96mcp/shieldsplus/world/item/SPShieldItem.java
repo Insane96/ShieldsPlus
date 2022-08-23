@@ -59,6 +59,11 @@ public class SPShieldItem extends ShieldItem {
     }
 
     @Override
+    public int getEnchantmentValue() {
+        return this.material.enchantmentValue;
+    }
+
+    @Override
     public void appendHoverText(@NotNull ItemStack itemStack, @Nullable Level level, @NotNull List<Component> components, @NotNull TooltipFlag tooltipFlag) {
         super.appendHoverText(itemStack, level, components, tooltipFlag);
         addDamageBlockedText(components, this.getBlockedDamage());
