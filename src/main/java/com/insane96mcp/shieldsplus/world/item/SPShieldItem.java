@@ -4,6 +4,7 @@ import com.insane96mcp.shieldsplus.ShieldsPlus;
 import com.insane96mcp.shieldsplus.render.ShieldBlockEntityWithoutLevelRenderer;
 import com.insane96mcp.shieldsplus.setup.SPEnchantments;
 import com.insane96mcp.shieldsplus.setup.Strings;
+import com.insane96mcp.shieldsplus.world.item.enchantment.ShieldReinforcedEnchantment;
 import net.minecraft.ChatFormatting;
 import net.minecraft.client.renderer.BlockEntityWithoutLevelRenderer;
 import net.minecraft.client.resources.model.Material;
@@ -73,9 +74,9 @@ public class SPShieldItem extends ShieldItem {
 
     public static void addDamageBlockedText(ItemStack itemStack, List<Component> components, double blockedDamage) {
         int reinforced = EnchantmentHelper.getItemEnchantmentLevel(SPEnchantments.REINFORCED.get(), itemStack);
-        components.add(new TranslatableComponent(Strings.Translatable.DAMAGE_BLOCKED, new DecimalFormat("#.#").format(blockedDamage + reinforced * 0.5d)).withStyle(ChatFormatting.BLUE));
+        components.add(new TranslatableComponent(Strings.Translatable.DAMAGE_BLOCKED, new DecimalFormat("#.#").format(blockedDamage + ShieldReinforcedEnchantment.getDamageBlocked(reinforced))).withStyle(ChatFormatting.BLUE));
         if (reinforced > 0) {
-            components.add(new TranslatableComponent(Strings.Translatable.REINFORCED_BONUS, new DecimalFormat("#.#").format(reinforced * 0.5d)).withStyle(ChatFormatting.DARK_GRAY));
+            components.add(new TranslatableComponent(Strings.Translatable.REINFORCED_BONUS, new DecimalFormat("#.#").format(ShieldReinforcedEnchantment.getDamageBlocked(reinforced))).withStyle(ChatFormatting.DARK_GRAY));
         }
     }
 

@@ -4,6 +4,7 @@ import com.insane96mcp.shieldsplus.setup.Config;
 import com.insane96mcp.shieldsplus.setup.SPEnchantments;
 import com.insane96mcp.shieldsplus.setup.SPShieldMaterials;
 import com.insane96mcp.shieldsplus.world.item.SPShieldItem;
+import com.insane96mcp.shieldsplus.world.item.enchantment.ShieldReinforcedEnchantment;
 import insane96mcp.insanelib.base.Feature;
 import insane96mcp.insanelib.base.Label;
 import insane96mcp.insanelib.base.Module;
@@ -75,10 +76,7 @@ public class BaseFeature extends Feature {
         else
             return;
 
-        int reinforced = EnchantmentHelper.getItemEnchantmentLevel(SPEnchantments.REINFORCED.get(), event.getEntityLiving().getUseItem());
-        blockedDamage += reinforced * 0.5d;
-
-        event.setBlockedDamage((float) blockedDamage);
+        event.setBlockedDamage((float) (blockedDamage + ShieldReinforcedEnchantment.getDamageBlocked(event.getEntityLiving().getUseItem())));
 
         processEnchantments(event.getEntityLiving(), event.getDamageSource());
     }

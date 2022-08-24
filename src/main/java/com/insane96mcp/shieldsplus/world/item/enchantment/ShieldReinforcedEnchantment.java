@@ -1,12 +1,16 @@
 package com.insane96mcp.shieldsplus.world.item.enchantment;
 
+import com.insane96mcp.shieldsplus.setup.SPEnchantments;
 import net.minecraft.world.entity.EquipmentSlot;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.ShieldItem;
 import net.minecraft.world.item.enchantment.Enchantment;
 import net.minecraft.world.item.enchantment.EnchantmentCategory;
+import net.minecraft.world.item.enchantment.EnchantmentHelper;
 
 public class ShieldReinforcedEnchantment extends Enchantment {
+
+	public static final double DAMAGE_BLOCKED = 0.5d;
 
 	public ShieldReinforcedEnchantment() {
 		super(Rarity.COMMON, EnchantmentCategory.BREAKABLE, new EquipmentSlot[]{EquipmentSlot.MAINHAND, EquipmentSlot.OFFHAND});
@@ -27,5 +31,13 @@ public class ShieldReinforcedEnchantment extends Enchantment {
 	@Override
 	public boolean canApplyAtEnchantingTable(ItemStack stack) {
 		return stack.getItem() instanceof ShieldItem;
+	}
+
+	public static double getDamageBlocked(int level) {
+		return DAMAGE_BLOCKED * level;
+	}
+
+	public static double getDamageBlocked(ItemStack itemStack) {
+		return EnchantmentHelper.getItemEnchantmentLevel(SPEnchantments.REINFORCED.get(), itemStack) * DAMAGE_BLOCKED;
 	}
 }
