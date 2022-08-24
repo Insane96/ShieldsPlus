@@ -4,6 +4,7 @@ import com.insane96mcp.shieldsplus.ShieldsPlus;
 import com.insane96mcp.shieldsplus.render.ShieldBlockEntityWithoutLevelRenderer;
 import com.insane96mcp.shieldsplus.setup.SPEnchantments;
 import com.insane96mcp.shieldsplus.setup.Strings;
+import com.insane96mcp.shieldsplus.world.item.enchantment.ShieldReflectionEnchantment;
 import com.insane96mcp.shieldsplus.world.item.enchantment.ShieldReinforcedEnchantment;
 import net.minecraft.ChatFormatting;
 import net.minecraft.client.renderer.BlockEntityWithoutLevelRenderer;
@@ -74,9 +75,23 @@ public class SPShieldItem extends ShieldItem {
 
     public static void addDamageBlockedText(ItemStack itemStack, List<Component> components, double blockedDamage) {
         int reinforced = EnchantmentHelper.getItemEnchantmentLevel(SPEnchantments.REINFORCED.get(), itemStack);
-        components.add(new TranslatableComponent(Strings.Translatable.DAMAGE_BLOCKED, new DecimalFormat("#.#").format(blockedDamage + ShieldReinforcedEnchantment.getDamageBlocked(reinforced))).withStyle(ChatFormatting.BLUE));
+        float finalBlockedDamage = (float) (blockedDamage + ShieldReinforcedEnchantment.getDamageBlocked(reinforced));
+        int reflection = EnchantmentHelper.getItemEnchantmentLevel(SPEnchantments.REFLECTION.get(), itemStack);
+        float reflectedDamage = ShieldReflectionEnchantment.getReflectedDamage(reflection);
+        float blockedDamageReduction = (float) (ShieldReflectionEnchantment.getBlockedDamageReduction(reflection) * blockedDamage);
+        finalBlockedDamage -= blockedDamageReduction;
+        components.add(new TranslatableComponent(Strings.Translatable.DAMAGE_BLOCKED, new DecimalFormat("#.#").format(finalBlockedDamage)).withStyle(ChatFormatting.BLUE));
         if (reinforced > 0) {
             components.add(new TranslatableComponent(Strings.Translatable.REINFORCED_BONUS, new DecimalFormat("#.#").format(ShieldReinforcedEnchantment.getDamageBlocked(reinforced))).withStyle(ChatFormatting.DARK_GRAY));
+        }
+        if (reflection > 0) {
+            components.add(new TranslatableComponent(Strings.Translatable.REFLECTION_MALUS, new DecimalFormat("#.#").format(blockedDamageReduction)).withStyle(ChatFormatting.DARK_GRAY));
+        }
+        //Add here more blocking damage modifiers
+
+        if (reflection > 0) {
+            components.add(new TranslatableComponent(Strings.Translatable.DAMAGE_REFLECTED, new DecimalFormat("#.#").format(reflectedDamage * 100)).withStyle(ChatFormatting.BLUE));
+            components.add(new TranslatableComponent(Strings.Translatable.CAPPED_DAMAGE_REFLECTED, new DecimalFormat("#.#").format(ShieldReflectionEnchantment.getCappedReflectedDamage(reflection))).withStyle(ChatFormatting.DARK_GRAY));
         }
     }
 

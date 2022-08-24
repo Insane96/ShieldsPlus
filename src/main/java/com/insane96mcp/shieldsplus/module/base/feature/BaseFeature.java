@@ -4,6 +4,7 @@ import com.insane96mcp.shieldsplus.setup.Config;
 import com.insane96mcp.shieldsplus.setup.SPEnchantments;
 import com.insane96mcp.shieldsplus.setup.SPShieldMaterials;
 import com.insane96mcp.shieldsplus.world.item.SPShieldItem;
+import com.insane96mcp.shieldsplus.world.item.enchantment.ShieldReflectionEnchantment;
 import com.insane96mcp.shieldsplus.world.item.enchantment.ShieldReinforcedEnchantment;
 import insane96mcp.insanelib.base.Feature;
 import insane96mcp.insanelib.base.Label;
@@ -66,22 +67,25 @@ public class BaseFeature extends Feature {
                 || !this.shieldBlockFixedDamageAmount)
             return;
 
-        double blockedDamage;
+        double baseBlockedDamage;
         if (event.getEntityLiving().getUseItem().is(Items.SHIELD)) {
-            blockedDamage = SPShieldMaterials.IRON.damageBlocked;
+            baseBlockedDamage = SPShieldMaterials.IRON.damageBlocked;
         }
-        else if (event.getEntityLiving().getUseItem().getItem() instanceof SPShieldItem) {
-            blockedDamage = ((SPShieldItem)event.getEntityLiving().getUseItem().getItem()).getBlockedDamage();
+        else if (event.getEntityLiving().getUseItem().getItem() instanceof SPShieldItem shieldItem) {
+            baseBlockedDamage = ((SPShieldItem)event.getEntityLiving().getUseItem().getItem()).getBlockedDamage();
         }
         else
             return;
 
-        event.setBlockedDamage((float) (blockedDamage + ShieldReinforcedEnchantment.getDamageBlocked(event.getEntityLiving().getUseItem())));
+        float blockedDamage = (float) (baseBlockedDamage + ShieldReinforcedEnchantment.getDamageBlocked(event.getEntityLiving().getUseItem()));
+        blockedDamage -= baseBlockedDamage * ShieldReflectionEnchantment.getBlockedDamageReduction(event.getEntityLiving().getUseItem());
 
-        processEnchantments(event.getEntityLiving(), event.getDamageSource());
+        event.setBlockedDamage(blockedDamage);
+
+        processEnchantments(event.getEntityLiving(), event.getDamageSource(), event.getOriginalBlockedDamage());
     }
 
-    private void processEnchantments(LivingEntity blockingEntity, DamageSource source) {
+    private void processEnchantments(LivingEntity blockingEntity, DamageSource source, float amount) {
         if (blockingEntity.getUseItem().getItem() instanceof ShieldItem) {
             ItemStack shield = blockingEntity.getUseItem();
             int recoil = EnchantmentHelper.getItemEnchantmentLevel(SPEnchantments.RECOIL.get(), shield);
@@ -95,10 +99,10 @@ public class BaseFeature extends Feature {
                 }
             }
 
-            int pointed = EnchantmentHelper.getItemEnchantmentLevel(SPEnchantments.POINTED.get(), shield);
-            if (pointed > 0 && source.getEntity() instanceof LivingEntity sourceEntity && source.getEntity() == source.getDirectEntity())
+            int reflection = EnchantmentHelper.getItemEnchantmentLevel(SPEnchantments.REFLECTION.get(), shield);
+            if (reflection > 0 && source.getEntity() instanceof LivingEntity sourceEntity && source.getEntity() == source.getDirectEntity())
             {
-                sourceEntity.hurt(DamageSource.mobAttack(blockingEntity), pointed);
+                sourceEntity.hurt(DamageSource.thorns(blockingEntity), Math.min(ShieldReflectionEnchantment.getReflectedDamage(reflection) * amount, ShieldReflectionEnchantment.getCappedReflectedDamage(reflection)));
             }
         }
     }

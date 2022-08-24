@@ -38,6 +38,6 @@ public class ShieldReinforcedEnchantment extends Enchantment {
 	}
 
 	public static double getDamageBlocked(ItemStack itemStack) {
-		return EnchantmentHelper.getItemEnchantmentLevel(SPEnchantments.REINFORCED.get(), itemStack) * DAMAGE_BLOCKED;
+		return getDamageBlocked(EnchantmentHelper.getItemEnchantmentLevel(SPEnchantments.REINFORCED.get(), itemStack));
 	}
 }
