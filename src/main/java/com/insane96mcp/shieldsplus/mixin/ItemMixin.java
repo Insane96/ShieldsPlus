@@ -1,5 +1,6 @@
 package com.insane96mcp.shieldsplus.mixin;
 
+import com.insane96mcp.shieldsplus.setup.SPShieldMaterials;
 import com.insane96mcp.shieldsplus.world.item.SPShieldItem;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ShieldItem;
@@ -16,6 +17,6 @@ public abstract class ItemMixin {
         //noinspection ConstantConditions
         if (((Object)this) instanceof ShieldItem
                 && !(((Object)this) instanceof SPShieldItem))
-            callbackInfo.setReturnValue(5);
+            callbackInfo.setReturnValue(SPShieldMaterials.IRON.enchantmentValue);
     }
 }
