@@ -18,5 +18,6 @@ public class Strings {
 
     public static class Translatable {
         public static final String DAMAGE_BLOCKED = ShieldsPlus.RESOURCE_PREFIX + "damage_blocked";
-    }
+        public static final String REINFORCED_BONUS = ShieldsPlus.RESOURCE_PREFIX + "reinforced_bonus";
+	}
 }

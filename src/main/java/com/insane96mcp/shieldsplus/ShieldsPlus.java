@@ -1,9 +1,6 @@
 package com.insane96mcp.shieldsplus;
 
-import com.insane96mcp.shieldsplus.setup.Client;
-import com.insane96mcp.shieldsplus.setup.Config;
-import com.insane96mcp.shieldsplus.setup.SPItems;
-import com.insane96mcp.shieldsplus.setup.SPRecipeSerializers;
+import com.insane96mcp.shieldsplus.setup.*;
 import com.mojang.logging.LogUtils;
 import net.minecraftforge.eventbus.api.IEventBus;
 import net.minecraftforge.fml.ModLoadingContext;
@@ -24,6 +21,7 @@ public class ShieldsPlus
         FMLJavaModLoadingContext.get().getModEventBus().addListener(Client::setup);
         final IEventBus modEventBus = FMLJavaModLoadingContext.get().getModEventBus();
         SPItems.ITEMS.register(modEventBus);
+        SPEnchantments.ENCHANTMENTS.register(modEventBus);
         SPRecipeSerializers.RECIPE_SERIALIZERS.register(modEventBus);
     }
 }

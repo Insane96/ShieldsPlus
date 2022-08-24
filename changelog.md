@@ -1,6 +1,10 @@
 # Changelog
 
 ## Upcoming
+* Added 3 shields enchantments
+  * Reinforced: increases damage blocked by 0.5 per level (max IV)
+  * Recoil: Knockbacks entities and launches back projectiles that hit the shield (max II)
+  * Pointed: Damages entities that hit the shield by 1 per level (max II)
 * Shields can now be enchanted at the Enchanting Table
 
 ## 1.1.1

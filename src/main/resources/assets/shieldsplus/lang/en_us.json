@@ -6,5 +6,10 @@
     "item.minecraft.shield": "Iron shield",
     "item.shieldsplus.diamond_shield": "Diamond shield",
     "item.shieldsplus.netherite_shield": "Netherite shield",
-    "shieldsplus:damage_blocked": "%s damage blocked"
+    "shieldsplus:damage_blocked": "%s damage blocked",
+    "shieldsplus:reinforced_bonus": "(+%s from Reinforced)",
+
+    "enchantment.shieldsplus.recoil": "Recoil",
+    "enchantment.shieldsplus.pointed": "Pointed",
+    "enchantment.shieldsplus.reinforced": "Reinforced"
 }

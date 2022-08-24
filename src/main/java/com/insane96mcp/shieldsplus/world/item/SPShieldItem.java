@@ -2,6 +2,7 @@ package com.insane96mcp.shieldsplus.world.item;
 
 import com.insane96mcp.shieldsplus.ShieldsPlus;
 import com.insane96mcp.shieldsplus.render.ShieldBlockEntityWithoutLevelRenderer;
+import com.insane96mcp.shieldsplus.setup.SPEnchantments;
 import com.insane96mcp.shieldsplus.setup.Strings;
 import net.minecraft.ChatFormatting;
 import net.minecraft.client.renderer.BlockEntityWithoutLevelRenderer;
@@ -13,6 +14,7 @@ import net.minecraft.world.inventory.InventoryMenu;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.ShieldItem;
 import net.minecraft.world.item.TooltipFlag;
+import net.minecraft.world.item.enchantment.EnchantmentHelper;
 import net.minecraft.world.level.Level;
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.api.distmarker.OnlyIn;
@@ -66,11 +68,15 @@ public class SPShieldItem extends ShieldItem {
     @Override
     public void appendHoverText(@NotNull ItemStack itemStack, @Nullable Level level, @NotNull List<Component> components, @NotNull TooltipFlag tooltipFlag) {
         super.appendHoverText(itemStack, level, components, tooltipFlag);
-        addDamageBlockedText(components, this.getBlockedDamage());
+        addDamageBlockedText(itemStack, components, this.getBlockedDamage());
     }
 
-    public static void addDamageBlockedText(List<Component> components, double blockedDamage) {
-        components.add(new TranslatableComponent(Strings.Translatable.DAMAGE_BLOCKED, new DecimalFormat("#.#").format(blockedDamage)).withStyle(ChatFormatting.BLUE));
+    public static void addDamageBlockedText(ItemStack itemStack, List<Component> components, double blockedDamage) {
+        int reinforced = EnchantmentHelper.getItemEnchantmentLevel(SPEnchantments.REINFORCED.get(), itemStack);
+        components.add(new TranslatableComponent(Strings.Translatable.DAMAGE_BLOCKED, new DecimalFormat("#.#").format(blockedDamage + reinforced * 0.5d)).withStyle(ChatFormatting.BLUE));
+        if (reinforced > 0) {
+            components.add(new TranslatableComponent(Strings.Translatable.REINFORCED_BONUS, new DecimalFormat("#.#").format(reinforced * 0.5d)).withStyle(ChatFormatting.DARK_GRAY));
+        }
     }
 
     @Override

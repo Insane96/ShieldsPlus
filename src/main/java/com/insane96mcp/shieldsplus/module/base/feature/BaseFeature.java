@@ -1,12 +1,19 @@
 package com.insane96mcp.shieldsplus.module.base.feature;
 
 import com.insane96mcp.shieldsplus.setup.Config;
+import com.insane96mcp.shieldsplus.setup.SPEnchantments;
 import com.insane96mcp.shieldsplus.setup.SPShieldMaterials;
 import com.insane96mcp.shieldsplus.world.item.SPShieldItem;
 import insane96mcp.insanelib.base.Feature;
 import insane96mcp.insanelib.base.Label;
 import insane96mcp.insanelib.base.Module;
+import net.minecraft.world.damagesource.DamageSource;
+import net.minecraft.world.entity.LivingEntity;
+import net.minecraft.world.entity.projectile.Projectile;
+import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.Items;
+import net.minecraft.world.item.ShieldItem;
+import net.minecraft.world.item.enchantment.EnchantmentHelper;
 import net.minecraftforge.common.ForgeConfigSpec;
 import net.minecraftforge.event.entity.living.ShieldBlockEvent;
 import net.minecraftforge.event.entity.player.ItemTooltipEvent;
@@ -68,7 +75,34 @@ public class BaseFeature extends Feature {
         else
             return;
 
+        int reinforced = EnchantmentHelper.getItemEnchantmentLevel(SPEnchantments.REINFORCED.get(), event.getEntityLiving().getUseItem());
+        blockedDamage += reinforced * 0.5d;
+
         event.setBlockedDamage((float) blockedDamage);
+
+        processEnchantments(event.getEntityLiving(), event.getDamageSource());
+    }
+
+    private void processEnchantments(LivingEntity blockingEntity, DamageSource source) {
+        if (blockingEntity.getUseItem().getItem() instanceof ShieldItem) {
+            ItemStack shield = blockingEntity.getUseItem();
+            int recoil = EnchantmentHelper.getItemEnchantmentLevel(SPEnchantments.RECOIL.get(), shield);
+            if (recoil > 0)
+            {
+                if (source.getEntity() instanceof LivingEntity sourceEntity && source.getEntity() == source.getDirectEntity()) {
+                    sourceEntity.knockback(recoil * 0.4d, blockingEntity.getX() - sourceEntity.getX(), blockingEntity.getZ() - sourceEntity.getZ());
+                }
+                else if (source.getDirectEntity() instanceof Projectile projectile) {
+                    projectile.setDeltaMovement(projectile.getDeltaMovement().scale(recoil * 3.5d));
+                }
+            }
+
+            int pointed = EnchantmentHelper.getItemEnchantmentLevel(SPEnchantments.POINTED.get(), shield);
+            if (pointed > 0 && source.getEntity() instanceof LivingEntity sourceEntity && source.getEntity() == source.getDirectEntity())
+            {
+                sourceEntity.hurt(DamageSource.mobAttack(blockingEntity), pointed);
+            }
+        }
     }
 
     @SubscribeEvent
@@ -78,7 +112,7 @@ public class BaseFeature extends Feature {
             return;
 
         if (event.getItemStack().is(Items.SHIELD)) {
-            SPShieldItem.addDamageBlockedText(event.getToolTip(), SPShieldMaterials.IRON.damageBlocked);
+            SPShieldItem.addDamageBlockedText(event.getItemStack(), event.getToolTip(), SPShieldMaterials.IRON.damageBlocked);
         }
     }
 
