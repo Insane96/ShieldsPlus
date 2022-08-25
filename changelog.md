@@ -5,7 +5,8 @@
   * Reinforced: increases damage blocked by 0.5 per level (max IV)
   * Recoil: Knockbacks entities and launches back projectiles that hit the shield (max II)
   * Reflection: Damages entities that hit the shield by 15% per level of the damage taken (max III)
-  * Ablaze
+  * Ablaze: Sets the entities that hit the shield on fire for 4 seconds per level (max II)
+  * Shield Bash
 * Shields can now be enchanted at the Enchanting Table
 
 ## 1.1.1

@@ -1,6 +1,7 @@
 package com.insane96mcp.shieldsplus.setup;
 
 import com.insane96mcp.shieldsplus.ShieldsPlus;
+import com.insane96mcp.shieldsplus.world.item.enchantment.ShieldAblazeEnchantment;
 import com.insane96mcp.shieldsplus.world.item.enchantment.ShieldRecoilEnchantment;
 import com.insane96mcp.shieldsplus.world.item.enchantment.ShieldReflectionEnchantment;
 import com.insane96mcp.shieldsplus.world.item.enchantment.ShieldReinforcedEnchantment;
@@ -15,4 +16,5 @@ public class SPEnchantments {
     public static final RegistryObject<Enchantment> RECOIL = ENCHANTMENTS.register("recoil", ShieldRecoilEnchantment::new);
     public static final RegistryObject<Enchantment> REFLECTION = ENCHANTMENTS.register("reflection", ShieldReflectionEnchantment::new);
     public static final RegistryObject<Enchantment> REINFORCED = ENCHANTMENTS.register("reinforced", ShieldReinforcedEnchantment::new);
+    public static final RegistryObject<Enchantment> ABLAZE = ENCHANTMENTS.register("ablaze", ShieldAblazeEnchantment::new);
 }

@@ -4,6 +4,8 @@ import com.insane96mcp.shieldsplus.setup.Config;
 import com.insane96mcp.shieldsplus.setup.SPEnchantments;
 import com.insane96mcp.shieldsplus.setup.SPShieldMaterials;
 import com.insane96mcp.shieldsplus.world.item.SPShieldItem;
+import com.insane96mcp.shieldsplus.world.item.enchantment.ShieldAblazeEnchantment;
+import com.insane96mcp.shieldsplus.world.item.enchantment.ShieldRecoilEnchantment;
 import com.insane96mcp.shieldsplus.world.item.enchantment.ShieldReflectionEnchantment;
 import com.insane96mcp.shieldsplus.world.item.enchantment.ShieldReinforcedEnchantment;
 import insane96mcp.insanelib.base.Feature;
@@ -92,10 +94,10 @@ public class BaseFeature extends Feature {
             if (recoil > 0)
             {
                 if (source.getEntity() instanceof LivingEntity sourceEntity && source.getEntity() == source.getDirectEntity()) {
-                    sourceEntity.knockback(recoil * 0.4d, blockingEntity.getX() - sourceEntity.getX(), blockingEntity.getZ() - sourceEntity.getZ());
+                    sourceEntity.knockback(recoil * ShieldRecoilEnchantment.KNOCKBACK, blockingEntity.getX() - sourceEntity.getX(), blockingEntity.getZ() - sourceEntity.getZ());
                 }
                 else if (source.getDirectEntity() instanceof Projectile projectile) {
-                    projectile.setDeltaMovement(projectile.getDeltaMovement().scale(recoil * 3.5d));
+                    projectile.setDeltaMovement(projectile.getDeltaMovement().scale(recoil * ShieldRecoilEnchantment.PROJECTILE_KNOCKBACK));
                 }
             }
 
@@ -103,6 +105,11 @@ public class BaseFeature extends Feature {
             if (reflection > 0 && source.getEntity() instanceof LivingEntity sourceEntity && source.getEntity() == source.getDirectEntity())
             {
                 sourceEntity.hurt(DamageSource.thorns(blockingEntity), Math.min(ShieldReflectionEnchantment.getReflectedDamage(reflection) * amount, ShieldReflectionEnchantment.getCappedReflectedDamage(reflection)));
+            }
+
+            int ablaze = EnchantmentHelper.getItemEnchantmentLevel(SPEnchantments.ABLAZE.get(), shield);
+            if (ablaze > 0 && source.getEntity() instanceof LivingEntity sourceEntity && source.getEntity() == source.getDirectEntity()) {
+                sourceEntity.setSecondsOnFire(ablaze * ShieldAblazeEnchantment.SECONDS_ON_FIRE);
             }
         }
     }

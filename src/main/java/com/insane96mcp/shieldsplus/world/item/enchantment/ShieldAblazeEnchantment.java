@@ -6,12 +6,11 @@ import net.minecraft.world.item.ShieldItem;
 import net.minecraft.world.item.enchantment.Enchantment;
 import net.minecraft.world.item.enchantment.EnchantmentCategory;
 
-public class ShieldRecoilEnchantment extends Enchantment {
+public class ShieldAblazeEnchantment extends Enchantment {
 
-	public static final double KNOCKBACK = 0.4d;
-	public static final double PROJECTILE_KNOCKBACK = 3.5d;
+	public static final int SECONDS_ON_FIRE = 4;
 
-	public ShieldRecoilEnchantment() {
+	public ShieldAblazeEnchantment() {
 		super(Rarity.UNCOMMON, EnchantmentCategory.BREAKABLE, new EquipmentSlot[]{EquipmentSlot.MAINHAND, EquipmentSlot.OFFHAND});
 	}
 
