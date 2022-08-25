@@ -1,13 +1,13 @@
 # Changelog
 
-## Upcoming
+## Alpha 1.2.0
 * Added 6 shields enchantments
   * Reinforced: increases damage blocked by 0.5 per level (max IV)
   * Recoil: Knockbacks entities and launches back projectiles that hit the shield (max II)
   * Reflection: Damages entities that hit the shield by 15% per level of the damage taken (max III)
   * Ablaze: Sets the entities that hit the shield on fire for 4 seconds per level (max II)
   * Lightweight: Makes the player move faster when blocking
-  * Fast Recovery: Makes the Shield cooldown 0.6 seconds less
+  * Fast Recovery: Makes the Shield cooldown 0.6 seconds less (only works with `Combat Test shield disabling` enabled)
   * Shield Bash
 * Shields can now be enchanted at the Enchanting Table
 
