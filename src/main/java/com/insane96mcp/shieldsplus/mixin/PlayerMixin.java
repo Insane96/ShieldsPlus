@@ -1,10 +1,13 @@
 package com.insane96mcp.shieldsplus.mixin;
 
 import com.insane96mcp.shieldsplus.module.Modules;
+import com.insane96mcp.shieldsplus.setup.SPEnchantments;
+import com.insane96mcp.shieldsplus.world.item.enchantment.ShieldFastRecoveryEnchantment;
 import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.ItemCooldowns;
+import net.minecraft.world.item.enchantment.EnchantmentHelper;
 import net.minecraft.world.level.Level;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.Shadow;
@@ -30,8 +33,11 @@ public abstract class PlayerMixin extends LivingEntity {
     private void disableShield(boolean efficiencyAffected, CallbackInfo callbackInfo) {
         if (Modules.base.base.combatTestShieldDisabling()) {
             callbackInfo.cancel();
-            this.getCooldowns().addCooldown(this.getUseItem().getItem(), 32);
+            int ticks = 32;
+            int fastRecovery = EnchantmentHelper.getItemEnchantmentLevel(SPEnchantments.FAST_RECOVERY.get(), this.getUseItem());
+            this.getCooldowns().addCooldown(this.getUseItem().getItem(), ticks - (fastRecovery * ShieldFastRecoveryEnchantment.TICKS));
             this.stopUsingItem();
+            this.level.broadcastEntityEvent(this, (byte)30);
         }
     }
 

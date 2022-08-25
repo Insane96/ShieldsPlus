@@ -4,21 +4,23 @@ import com.insane96mcp.shieldsplus.setup.Config;
 import com.insane96mcp.shieldsplus.setup.SPEnchantments;
 import com.insane96mcp.shieldsplus.setup.SPShieldMaterials;
 import com.insane96mcp.shieldsplus.world.item.SPShieldItem;
-import com.insane96mcp.shieldsplus.world.item.enchantment.ShieldAblazeEnchantment;
-import com.insane96mcp.shieldsplus.world.item.enchantment.ShieldRecoilEnchantment;
-import com.insane96mcp.shieldsplus.world.item.enchantment.ShieldReflectionEnchantment;
-import com.insane96mcp.shieldsplus.world.item.enchantment.ShieldReinforcedEnchantment;
+import com.insane96mcp.shieldsplus.world.item.enchantment.*;
 import insane96mcp.insanelib.base.Feature;
 import insane96mcp.insanelib.base.Label;
 import insane96mcp.insanelib.base.Module;
+import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.world.damagesource.DamageSource;
 import net.minecraft.world.entity.LivingEntity;
+import net.minecraft.world.entity.ai.attributes.AttributeInstance;
+import net.minecraft.world.entity.ai.attributes.AttributeModifier;
+import net.minecraft.world.entity.ai.attributes.Attributes;
 import net.minecraft.world.entity.projectile.Projectile;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.Items;
 import net.minecraft.world.item.ShieldItem;
 import net.minecraft.world.item.enchantment.EnchantmentHelper;
 import net.minecraftforge.common.ForgeConfigSpec;
+import net.minecraftforge.event.TickEvent;
 import net.minecraftforge.event.entity.living.ShieldBlockEvent;
 import net.minecraftforge.event.entity.player.ItemTooltipEvent;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
@@ -65,24 +67,23 @@ public class BaseFeature extends Feature {
 
     @SubscribeEvent
     public void onShieldBlock(ShieldBlockEvent event) {
-        if (!this.isEnabled()
-                || !this.shieldBlockFixedDamageAmount)
+        if (!this.isEnabled())
             return;
 
-        double baseBlockedDamage;
-        if (event.getEntityLiving().getUseItem().is(Items.SHIELD)) {
-            baseBlockedDamage = SPShieldMaterials.IRON.damageBlocked;
+        if (this.shieldBlockFixedDamageAmount) {
+            double baseBlockedDamage;
+            if (event.getEntityLiving().getUseItem().is(Items.SHIELD)) {
+                baseBlockedDamage = SPShieldMaterials.IRON.damageBlocked;
+            }
+            else if (event.getEntityLiving().getUseItem().getItem() instanceof SPShieldItem) {
+                baseBlockedDamage = ((SPShieldItem) event.getEntityLiving().getUseItem().getItem()).getBlockedDamage();
+            }
+            else
+                return;
+            float blockedDamage = (float) (baseBlockedDamage + ShieldReinforcedEnchantment.getDamageBlocked(event.getEntityLiving().getUseItem()));
+            blockedDamage -= baseBlockedDamage * ShieldReflectionEnchantment.getBlockedDamageReduction(event.getEntityLiving().getUseItem());
+            event.setBlockedDamage(blockedDamage);
         }
-        else if (event.getEntityLiving().getUseItem().getItem() instanceof SPShieldItem shieldItem) {
-            baseBlockedDamage = ((SPShieldItem)event.getEntityLiving().getUseItem().getItem()).getBlockedDamage();
-        }
-        else
-            return;
-
-        float blockedDamage = (float) (baseBlockedDamage + ShieldReinforcedEnchantment.getDamageBlocked(event.getEntityLiving().getUseItem()));
-        blockedDamage -= baseBlockedDamage * ShieldReflectionEnchantment.getBlockedDamageReduction(event.getEntityLiving().getUseItem());
-
-        event.setBlockedDamage(blockedDamage);
 
         processEnchantments(event.getEntityLiving(), event.getDamageSource(), event.getOriginalBlockedDamage());
     }
@@ -111,6 +112,32 @@ public class BaseFeature extends Feature {
             if (ablaze > 0 && source.getEntity() instanceof LivingEntity sourceEntity && source.getEntity() == source.getDirectEntity()) {
                 sourceEntity.setSecondsOnFire(ablaze * ShieldAblazeEnchantment.SECONDS_ON_FIRE);
             }
+        }
+    }
+
+    @SubscribeEvent
+    public void onPlayerTick(TickEvent.PlayerTickEvent event) {
+        if (!this.isEnabled())
+            return;
+
+        if (!(event.player instanceof ServerPlayer player))
+            return;
+
+        AttributeInstance attribute = player.getAttribute(Attributes.MOVEMENT_SPEED);
+        if (attribute == null)
+            return;
+
+        if (player.isBlocking()) {
+            int lightweight = EnchantmentHelper.getItemEnchantmentLevel(SPEnchantments.LIGHTWEIGHT.get(), player.getUseItem());
+            if (lightweight > 0) {
+
+                if (attribute.getModifier(ShieldLightweightEnchantment.BONUS_SPEED_UUID) == null) {
+                    attribute.addTransientModifier(new AttributeModifier(ShieldLightweightEnchantment.BONUS_SPEED_UUID, "Lightweight bonus speed", ShieldLightweightEnchantment.BONUS_SPEED * lightweight, AttributeModifier.Operation.MULTIPLY_BASE));
+                }
+            }
+        }
+        else if (attribute.getModifier(ShieldLightweightEnchantment.BONUS_SPEED_UUID) != null) {
+            attribute.removeModifier(ShieldLightweightEnchantment.BONUS_SPEED_UUID);
         }
     }
 
