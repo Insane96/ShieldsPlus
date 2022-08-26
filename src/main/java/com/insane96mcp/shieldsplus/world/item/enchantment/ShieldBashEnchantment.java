@@ -1,5 +1,6 @@
 package com.insane96mcp.shieldsplus.world.item.enchantment;
 
+import com.insane96mcp.shieldsplus.setup.SPEnchantments;
 import insane96mcp.insanelib.util.MCUtils;
 import net.minecraft.core.particles.ParticleTypes;
 import net.minecraft.nbt.CompoundTag;
@@ -14,6 +15,7 @@ import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.ShieldItem;
 import net.minecraft.world.item.enchantment.Enchantment;
 import net.minecraft.world.item.enchantment.EnchantmentCategory;
+import net.minecraft.world.item.enchantment.EnchantmentHelper;
 import net.minecraft.world.phys.AABB;
 import net.minecraftforge.common.ForgeMod;
 import org.jetbrains.annotations.NotNull;
@@ -55,6 +57,10 @@ public class ShieldBashEnchantment extends Enchantment {
 	}
 
 	public static void onTick(Player player) {
+		int shieldBash = EnchantmentHelper.getItemEnchantmentLevel(SPEnchantments.SHIELD_BASH.get(), player.getUseItem());
+		if (shieldBash <= 0)
+			return;
+
 		CompoundTag tag = player.getPersistentData();
 		if (player.isBlocking() && tag.getByte("shield_bashing") <= 0) {
 			if (tag.getByte("bash_timer") < 30) {

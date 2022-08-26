@@ -1,5 +1,8 @@
 # Changelog
 
+## Upcoming
+* Fixed Shield Bash working without the enchantment
+
 ## Beta 1.2.1
 * Shield Bash now works
   * Treasure enchantment
