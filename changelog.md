@@ -1,6 +1,6 @@
 # Changelog
 
-## Upcoming
+## Beta 1.2.1
 * Shield Bash now works
   * Treasure enchantment
   * Block with the Shield for 1.5 seconds.  
