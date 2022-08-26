@@ -1,5 +1,8 @@
 # Changelog
 
+## Upcoming
+* Ablaze now sets projectiles on fire
+
 ## Alpha 1.2.0
 * Added 6 shields enchantments
   * Reinforced: increases damage blocked by 0.5 per level (max IV)

@@ -109,8 +109,8 @@ public class BaseFeature extends Feature {
             }
 
             int ablaze = EnchantmentHelper.getItemEnchantmentLevel(SPEnchantments.ABLAZE.get(), shield);
-            if (ablaze > 0 && source.getEntity() instanceof LivingEntity sourceEntity && source.getEntity() == source.getDirectEntity()) {
-                sourceEntity.setSecondsOnFire(ablaze * ShieldAblazeEnchantment.SECONDS_ON_FIRE);
+            if (ablaze > 0 && source.getDirectEntity() != null) {
+                source.getDirectEntity().setSecondsOnFire(ablaze * ShieldAblazeEnchantment.SECONDS_ON_FIRE);
             }
         }
     }
