@@ -1,24 +1,16 @@
 package com.insane96mcp.shieldsplus.module.base.feature;
 
 import com.insane96mcp.shieldsplus.setup.Config;
-import com.insane96mcp.shieldsplus.setup.SPEnchantments;
 import com.insane96mcp.shieldsplus.setup.SPShieldMaterials;
 import com.insane96mcp.shieldsplus.world.item.SPShieldItem;
 import com.insane96mcp.shieldsplus.world.item.enchantment.*;
 import insane96mcp.insanelib.base.Feature;
 import insane96mcp.insanelib.base.Label;
 import insane96mcp.insanelib.base.Module;
-import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.world.damagesource.DamageSource;
 import net.minecraft.world.entity.LivingEntity;
-import net.minecraft.world.entity.ai.attributes.AttributeInstance;
-import net.minecraft.world.entity.ai.attributes.AttributeModifier;
-import net.minecraft.world.entity.ai.attributes.Attributes;
-import net.minecraft.world.entity.projectile.Projectile;
-import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.Items;
 import net.minecraft.world.item.ShieldItem;
-import net.minecraft.world.item.enchantment.EnchantmentHelper;
 import net.minecraftforge.common.ForgeConfigSpec;
 import net.minecraftforge.event.TickEvent;
 import net.minecraftforge.event.entity.living.ShieldBlockEvent;
@@ -90,55 +82,20 @@ public class BaseFeature extends Feature {
 
     private void processEnchantments(LivingEntity blockingEntity, DamageSource source, float amount) {
         if (blockingEntity.getUseItem().getItem() instanceof ShieldItem) {
-            ItemStack shield = blockingEntity.getUseItem();
-            int recoil = EnchantmentHelper.getItemEnchantmentLevel(SPEnchantments.RECOIL.get(), shield);
-            if (recoil > 0)
-            {
-                if (source.getEntity() instanceof LivingEntity sourceEntity && source.getEntity() == source.getDirectEntity()) {
-                    sourceEntity.knockback(recoil * ShieldRecoilEnchantment.KNOCKBACK, blockingEntity.getX() - sourceEntity.getX(), blockingEntity.getZ() - sourceEntity.getZ());
-                }
-                else if (source.getDirectEntity() instanceof Projectile projectile) {
-                    projectile.setDeltaMovement(projectile.getDeltaMovement().scale(recoil * ShieldRecoilEnchantment.PROJECTILE_KNOCKBACK));
-                }
-            }
-
-            int reflection = EnchantmentHelper.getItemEnchantmentLevel(SPEnchantments.REFLECTION.get(), shield);
-            if (reflection > 0 && source.getEntity() instanceof LivingEntity sourceEntity && source.getEntity() == source.getDirectEntity())
-            {
-                sourceEntity.hurt(DamageSource.thorns(blockingEntity), Math.min(ShieldReflectionEnchantment.getReflectedDamage(reflection) * amount, ShieldReflectionEnchantment.getCappedReflectedDamage(reflection)));
-            }
-
-            int ablaze = EnchantmentHelper.getItemEnchantmentLevel(SPEnchantments.ABLAZE.get(), shield);
-            if (ablaze > 0 && source.getDirectEntity() != null) {
-                source.getDirectEntity().setSecondsOnFire(ablaze * ShieldAblazeEnchantment.SECONDS_ON_FIRE);
-            }
+            ShieldRecoilEnchantment.onBlocked(blockingEntity, source);
+            ShieldReflectionEnchantment.onBlocked(blockingEntity, source, amount);
+            ShieldAblazeEnchantment.onBlocked(blockingEntity, source);
         }
     }
 
     @SubscribeEvent
     public void onPlayerTick(TickEvent.PlayerTickEvent event) {
-        if (!this.isEnabled())
+        if (!this.isEnabled()
+                || event.phase != TickEvent.Phase.END)
             return;
 
-        if (!(event.player instanceof ServerPlayer player))
-            return;
-
-        AttributeInstance attribute = player.getAttribute(Attributes.MOVEMENT_SPEED);
-        if (attribute == null)
-            return;
-
-        if (player.isBlocking()) {
-            int lightweight = EnchantmentHelper.getItemEnchantmentLevel(SPEnchantments.LIGHTWEIGHT.get(), player.getUseItem());
-            if (lightweight > 0) {
-
-                if (attribute.getModifier(ShieldLightweightEnchantment.BONUS_SPEED_UUID) == null) {
-                    attribute.addTransientModifier(new AttributeModifier(ShieldLightweightEnchantment.BONUS_SPEED_UUID, "Lightweight bonus speed", ShieldLightweightEnchantment.BONUS_SPEED * lightweight, AttributeModifier.Operation.MULTIPLY_BASE));
-                }
-            }
-        }
-        else if (attribute.getModifier(ShieldLightweightEnchantment.BONUS_SPEED_UUID) != null) {
-            attribute.removeModifier(ShieldLightweightEnchantment.BONUS_SPEED_UUID);
-        }
+        ShieldLightweightEnchantment.onTick(event.player);
+        ShieldBashEnchantment.onTick(event.player);
     }
 
     @SubscribeEvent

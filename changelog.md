@@ -1,7 +1,14 @@
 # Changelog
 
 ## Upcoming
+* Shield Bash now works
+  * Treasure enchantment
+  * Block with the Shield for 1.5 seconds.  
+    After that, tap crouch to bash and damage any entity in your path (Ablaze works too)  
+    On bashing the ability is put on a 1.5 seconds cooldown
+  * Incompatible with Recoil and Reflection
 * Ablaze now sets projectiles on fire
+* Reduced Ablaze time on fire (~~4~~ -> 3 seconds per level)
 
 ## Alpha 1.2.0
 * Added 6 shields enchantments

@@ -1,10 +1,15 @@
 package com.insane96mcp.shieldsplus.world.item.enchantment;
 
+import com.insane96mcp.shieldsplus.setup.SPEnchantments;
+import net.minecraft.world.damagesource.DamageSource;
 import net.minecraft.world.entity.EquipmentSlot;
+import net.minecraft.world.entity.LivingEntity;
+import net.minecraft.world.entity.projectile.Projectile;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.ShieldItem;
 import net.minecraft.world.item.enchantment.Enchantment;
 import net.minecraft.world.item.enchantment.EnchantmentCategory;
+import net.minecraft.world.item.enchantment.EnchantmentHelper;
 
 public class ShieldRecoilEnchantment extends Enchantment {
 
@@ -30,5 +35,19 @@ public class ShieldRecoilEnchantment extends Enchantment {
 	@Override
 	public boolean canApplyAtEnchantingTable(ItemStack stack) {
 		return stack.getItem() instanceof ShieldItem;
+	}
+
+	public static void onBlocked(LivingEntity blockingEntity, DamageSource source) {
+		ItemStack shield = blockingEntity.getUseItem();
+		int recoil = EnchantmentHelper.getItemEnchantmentLevel(SPEnchantments.RECOIL.get(), shield);
+		if (recoil > 0)
+		{
+			if (source.getEntity() instanceof LivingEntity sourceEntity && source.getEntity() == source.getDirectEntity()) {
+				sourceEntity.knockback(recoil * ShieldRecoilEnchantment.KNOCKBACK, blockingEntity.getX() - sourceEntity.getX(), blockingEntity.getZ() - sourceEntity.getZ());
+			}
+			else if (source.getDirectEntity() instanceof Projectile projectile) {
+				projectile.setDeltaMovement(projectile.getDeltaMovement().scale(recoil * ShieldRecoilEnchantment.PROJECTILE_KNOCKBACK));
+			}
+		}
 	}
 }

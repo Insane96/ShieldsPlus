@@ -1,7 +1,9 @@
 package com.insane96mcp.shieldsplus.world.item.enchantment;
 
 import com.insane96mcp.shieldsplus.setup.SPEnchantments;
+import net.minecraft.world.damagesource.DamageSource;
 import net.minecraft.world.entity.EquipmentSlot;
+import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.ShieldItem;
 import net.minecraft.world.item.enchantment.Enchantment;
@@ -57,5 +59,14 @@ public class ShieldReflectionEnchantment extends Enchantment {
 
 	public static float getBlockedDamageReduction(ItemStack stack) {
 		return getBlockedDamageReduction(EnchantmentHelper.getItemEnchantmentLevel(SPEnchantments.REINFORCED.get(), stack));
+	}
+
+	public static void onBlocked(LivingEntity blockingEntity, DamageSource source, float amount) {
+		if (!(source.getEntity() instanceof LivingEntity sourceEntity && source.getEntity() == source.getDirectEntity()))
+			return;
+		ItemStack shield = blockingEntity.getUseItem();
+		int reflection = EnchantmentHelper.getItemEnchantmentLevel(SPEnchantments.REFLECTION.get(), shield);
+		if (reflection > 0)
+			sourceEntity.hurt(DamageSource.thorns(blockingEntity), Math.min(ShieldReflectionEnchantment.getReflectedDamage(reflection) * amount, ShieldReflectionEnchantment.getCappedReflectedDamage(reflection)));
 	}
 }
