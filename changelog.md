@@ -2,6 +2,7 @@
 
 ## Upcoming
 * Fixed Shield Bash working without the enchantment
+* Fixed shield bash charging too fast
 
 ## Beta 1.2.1
 * Shield Bash now works

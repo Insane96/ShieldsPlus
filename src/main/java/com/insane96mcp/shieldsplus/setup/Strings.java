@@ -13,6 +13,8 @@ public class Strings {
     }
 
     public static class Tags {
+        public static final String SHIELD_BASHING = ShieldsPlus.RESOURCE_PREFIX + "shield_bashing";
+        public static final String BASH_TIMER = ShieldsPlus.RESOURCE_PREFIX + "bash_timer";
 
     }
 
