@@ -104,7 +104,7 @@ public class ShieldBashEnchantment extends Enchantment {
 	}
 
 	public static void damageAndKnockback(Player player) {
-		AABB aabb = player.getBoundingBox().inflate(1.2d, 0.5d, 1.2d);
+		AABB aabb = player.getBoundingBox().inflate(1d, 0.3d, 1d);
 		List<LivingEntity> entities = player.level.getEntitiesOfClass(LivingEntity.class, aabb, entity -> entity != player);
 		for (LivingEntity entity : entities) {
 			if (entity.isDeadOrDying() || entity.invulnerableTime > 10)
