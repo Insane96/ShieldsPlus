@@ -16,6 +16,7 @@ import net.minecraft.world.inventory.InventoryMenu;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.ShieldItem;
 import net.minecraft.world.item.TooltipFlag;
+import net.minecraft.world.item.enchantment.EnchantmentCategory;
 import net.minecraft.world.item.enchantment.EnchantmentHelper;
 import net.minecraft.world.level.Level;
 import net.minecraftforge.api.distmarker.Dist;
@@ -29,6 +30,8 @@ import java.util.List;
 import java.util.function.Consumer;
 
 public class SPShieldItem extends ShieldItem {
+
+    public static final EnchantmentCategory SHIELD = EnchantmentCategory.create("shield", s -> s instanceof ShieldItem);
 
     public static final ResourceLocation BLOCKING = new ResourceLocation("minecraft:blocking");
     public final SPShieldMaterial material;

@@ -4,6 +4,8 @@
 * Reduced shield bash bounding box
 * Fixed Shield Bash working without the enchantment
 * Fixed shield bash charging too fast
+* Fixed Shield Bash being applied to non-Shield Items
+* Player no longer gets Step Height when using shield bash
 
 ## Beta 1.2.1
 * Shield Bash now works
