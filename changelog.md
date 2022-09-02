@@ -1,6 +1,6 @@
 # Changelog
 
-## Upcoming
+## 1.2.2
 * Reduced shield bash bounding box
 * Fixed Shield Bash working without the enchantment
 * Fixed shield bash charging too fast
