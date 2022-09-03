@@ -2,6 +2,7 @@ package com.insane96mcp.shieldsplus.world.item.enchantment;
 
 import com.insane96mcp.shieldsplus.setup.SPEnchantments;
 import net.minecraft.world.damagesource.DamageSource;
+import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.EquipmentSlot;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.item.ItemStack;
@@ -36,12 +37,12 @@ public class ShieldAblazeEnchantment extends Enchantment {
 	}
 
 	public static void onBlocked(LivingEntity blockingEntity, DamageSource source) {
-		if (!(source.getDirectEntity() instanceof LivingEntity livingEntity))
-			return;
-		apply(blockingEntity, livingEntity);
+		if (source.getDirectEntity() instanceof LivingEntity livingEntity)
+			apply(blockingEntity, livingEntity);
+		apply(blockingEntity, source.getDirectEntity());
 	}
 
-	public static void apply(LivingEntity attacker, LivingEntity other) {
+	public static void apply(LivingEntity attacker, Entity other) {
 		ItemStack shield = attacker.getUseItem();
 		int ablaze = EnchantmentHelper.getItemEnchantmentLevel(SPEnchantments.ABLAZE.get(), shield);
 		if (ablaze > 0)

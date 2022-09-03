@@ -1,5 +1,9 @@
 # Changelog
 
+## 1.2.3
+* Increased projectile speed and knockback with Recoil
+* Ablaze now sets blocked projectiles on fire
+
 ## 1.2.2
 * Reduced shield bash bounding box
 * Fixed Shield Bash working without the enchantment

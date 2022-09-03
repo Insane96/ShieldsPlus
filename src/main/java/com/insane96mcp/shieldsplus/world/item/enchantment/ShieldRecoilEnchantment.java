@@ -13,8 +13,8 @@ import net.minecraft.world.item.enchantment.EnchantmentHelper;
 
 public class ShieldRecoilEnchantment extends Enchantment {
 
-	public static final double KNOCKBACK = 0.4d;
-	public static final double PROJECTILE_KNOCKBACK = 3.5d;
+	public static final double KNOCKBACK = 0.5d;
+	public static final double PROJECTILE_KNOCKBACK = 5d;
 
 	public ShieldRecoilEnchantment() {
 		super(Rarity.UNCOMMON, EnchantmentCategory.BREAKABLE, new EquipmentSlot[]{EquipmentSlot.MAINHAND, EquipmentSlot.OFFHAND});
