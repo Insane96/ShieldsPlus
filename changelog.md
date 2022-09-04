@@ -1,5 +1,8 @@
 # Changelog
 
+## Upcoming
+* Fixed possible crash with Ablaze
+
 ## 1.2.3
 * Increased projectile speed and knockback with Recoil
 * Ablaze now sets blocked projectiles on fire
