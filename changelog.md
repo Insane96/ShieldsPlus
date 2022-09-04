@@ -1,6 +1,6 @@
 # Changelog
 
-## Upcoming
+## 1.2.4
 * Fixed possible crash with Ablaze
 
 ## 1.2.3

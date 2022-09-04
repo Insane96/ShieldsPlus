@@ -37,9 +37,7 @@ public class ShieldAblazeEnchantment extends Enchantment {
 	}
 
 	public static void onBlocked(LivingEntity blockingEntity, DamageSource source) {
-		if (source.getDirectEntity() instanceof LivingEntity livingEntity)
-			apply(blockingEntity, livingEntity);
-		else if (source.getDirectEntity() != null)
+		if (source.getDirectEntity() != null)
 			apply(blockingEntity, source.getDirectEntity());
 	}
 
