@@ -91,7 +91,7 @@ public class ShieldBashEnchantment extends Enchantment {
 			if (entity.isDeadOrDying() || entity.invulnerableTime > 10)
 				continue;
 			entity.knockback(1.5d, player.getX() - entity.getX(), player.getZ() - entity.getZ());
-			if (entity.hurt(DamageSource.playerAttack(player), 5)) {
+			if (entity.hurt(DamageSource.playerAttack(player), 6)) {
 				player.playSound(SoundEvents.SHIELD_BLOCK, 1.0f, 0.5f);
 				ShieldAblazeEnchantment.apply(player, entity);
 			}

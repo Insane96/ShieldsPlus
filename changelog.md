@@ -1,5 +1,8 @@
 # Changelog
 
+## Upcoming
+* Increased Shield Bash damage (5 -> 6)
+
 ## 1.2.4
 * Fixed possible crash with Ablaze
 
