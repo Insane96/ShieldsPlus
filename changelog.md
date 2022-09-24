@@ -1,7 +1,11 @@
 # Changelog
 
 ## Upcoming
-* Increased Shield Bash damage (5 -> 6)
+* Increased Shield Bash damage (~~5~~ -> 6)
+* Reinforced Enchantment
+  * No longer compatible with Reflection
+  * Max level increased (~~4~~ -> 5)
+  * Damage blocked increased (~~0.5 per level~~ -> 0.5 per level + 0.5)
 
 ## 1.2.4
 * Fixed possible crash with Ablaze

@@ -7,6 +7,7 @@ import net.minecraft.world.item.ShieldItem;
 import net.minecraft.world.item.enchantment.Enchantment;
 import net.minecraft.world.item.enchantment.EnchantmentCategory;
 import net.minecraft.world.item.enchantment.EnchantmentHelper;
+import org.jetbrains.annotations.NotNull;
 
 public class ShieldReinforcedEnchantment extends Enchantment {
 
@@ -17,7 +18,7 @@ public class ShieldReinforcedEnchantment extends Enchantment {
 	}
 
 	public int getMinCost(int p_44598_) {
-		return 8 + (p_44598_ - 1) * 10;
+		return 4 + (p_44598_ - 1) * 8;
 	}
 
 	public int getMaxCost(int p_44600_) {
@@ -25,7 +26,12 @@ public class ShieldReinforcedEnchantment extends Enchantment {
 	}
 
 	public int getMaxLevel() {
-		return 4;
+		return 5;
+	}
+
+	@Override
+	public boolean checkCompatibility(@NotNull Enchantment enchantment) {
+		return !(enchantment instanceof ShieldReflectionEnchantment) && super.checkCompatibility(enchantment);
 	}
 
 	@Override
@@ -34,7 +40,7 @@ public class ShieldReinforcedEnchantment extends Enchantment {
 	}
 
 	public static double getDamageBlocked(int level) {
-		return DAMAGE_BLOCKED * level;
+		return (DAMAGE_BLOCKED * level) + 0.5d;
 	}
 
 	public static double getDamageBlocked(ItemStack itemStack) {
