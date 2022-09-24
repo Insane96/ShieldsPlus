@@ -6,6 +6,10 @@
   * No longer compatible with Reflection
   * Max level increased (~~4~~ -> 5)
   * Damage blocked increased (~~0.5 per level~~ -> 0.5 per level + 0.5)
+* Reflection Enchantment changes 
+  * No longer compatible with Reinforced 
+  * Max level increased (~~3~~ -> 4)
+  * Damage reflected reduced (~~15%~~ -> 12.5% per level)
 
 ## 1.2.4
 * Fixed possible crash with Ablaze

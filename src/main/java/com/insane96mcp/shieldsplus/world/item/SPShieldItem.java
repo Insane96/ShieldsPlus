@@ -81,14 +81,9 @@ public class SPShieldItem extends ShieldItem {
         float finalBlockedDamage = (float) (blockedDamage + ShieldReinforcedEnchantment.getDamageBlocked(reinforced));
         int reflection = EnchantmentHelper.getItemEnchantmentLevel(SPEnchantments.REFLECTION.get(), itemStack);
         float reflectedDamage = ShieldReflectionEnchantment.getReflectedDamage(reflection);
-        float blockedDamageReduction = (float) (ShieldReflectionEnchantment.getBlockedDamageReduction(reflection) * blockedDamage);
-        finalBlockedDamage -= blockedDamageReduction;
         components.add(new TranslatableComponent(Strings.Translatable.DAMAGE_BLOCKED, new DecimalFormat("#.#").format(finalBlockedDamage)).withStyle(ChatFormatting.BLUE));
         if (reinforced > 0) {
             components.add(new TranslatableComponent(Strings.Translatable.REINFORCED_BONUS, new DecimalFormat("#.#").format(ShieldReinforcedEnchantment.getDamageBlocked(reinforced))).withStyle(ChatFormatting.DARK_GRAY));
-        }
-        if (reflection > 0) {
-            components.add(new TranslatableComponent(Strings.Translatable.REFLECTION_MALUS, new DecimalFormat("#.#").format(blockedDamageReduction)).withStyle(ChatFormatting.DARK_GRAY));
         }
         //Add here more blocking damage modifiers
 

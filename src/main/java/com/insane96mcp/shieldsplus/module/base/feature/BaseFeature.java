@@ -73,7 +73,6 @@ public class BaseFeature extends Feature {
             else
                 return;
             float blockedDamage = (float) (baseBlockedDamage + ShieldReinforcedEnchantment.getDamageBlocked(event.getEntityLiving().getUseItem()));
-            blockedDamage -= baseBlockedDamage * ShieldReflectionEnchantment.getBlockedDamageReduction(event.getEntityLiving().getUseItem());
             event.setBlockedDamage(blockedDamage);
         }
 

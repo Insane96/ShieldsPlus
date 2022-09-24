@@ -9,19 +9,19 @@ import net.minecraft.world.item.ShieldItem;
 import net.minecraft.world.item.enchantment.Enchantment;
 import net.minecraft.world.item.enchantment.EnchantmentCategory;
 import net.minecraft.world.item.enchantment.EnchantmentHelper;
+import org.jetbrains.annotations.NotNull;
 
 public class ShieldReflectionEnchantment extends Enchantment {
 
-	public static final float REFLECTED_DAMAGE = 0.15f;
+	public static final float REFLECTED_DAMAGE = 0.125f;
 	public static final float CAPPED_REFLECTED_DAMAGE = 2f;
-	public static final float BLOCKED_DAMAGE_REDUCTION = 0.1f;
 
 	public ShieldReflectionEnchantment() {
 		super(Rarity.RARE, EnchantmentCategory.BREAKABLE, new EquipmentSlot[]{EquipmentSlot.MAINHAND, EquipmentSlot.OFFHAND});
 	}
 
 	public int getMinCost(int p_44598_) {
-		return 9 + (p_44598_ - 1) * 14;
+		return 8 + (p_44598_ - 1) * 10;
 	}
 
 	public int getMaxCost(int p_44600_) {
@@ -29,7 +29,12 @@ public class ShieldReflectionEnchantment extends Enchantment {
 	}
 
 	public int getMaxLevel() {
-		return 3;
+		return 4;
+	}
+
+	@Override
+	public boolean checkCompatibility(@NotNull Enchantment enchantment) {
+		return !(enchantment instanceof ShieldReinforcedEnchantment) && super.checkCompatibility(enchantment);
 	}
 
 	@Override
@@ -51,14 +56,6 @@ public class ShieldReflectionEnchantment extends Enchantment {
 
 	public static float getCappedReflectedDamage(ItemStack stack) {
 		return getReflectedDamage(EnchantmentHelper.getItemEnchantmentLevel(SPEnchantments.REINFORCED.get(), stack));
-	}
-
-	public static float getBlockedDamageReduction(int level) {
-		return level * BLOCKED_DAMAGE_REDUCTION;
-	}
-
-	public static float getBlockedDamageReduction(ItemStack stack) {
-		return getBlockedDamageReduction(EnchantmentHelper.getItemEnchantmentLevel(SPEnchantments.REINFORCED.get(), stack));
 	}
 
 	public static void onBlocked(LivingEntity blockingEntity, DamageSource source, float amount) {
