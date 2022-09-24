@@ -40,7 +40,7 @@ public class ShieldReinforcedEnchantment extends Enchantment {
 	}
 
 	public static double getDamageBlocked(int level) {
-		return (DAMAGE_BLOCKED * level) + 0.5d;
+		return (DAMAGE_BLOCKED * level) + (level > 0 ? 0.5d : 0d);
 	}
 
 	public static double getDamageBlocked(ItemStack itemStack) {
