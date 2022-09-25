@@ -1,6 +1,6 @@
 # Changelog
 
-## Upcoming
+## 1.2.5
 * Increased Shield Bash damage (~~5~~ -> 6)
 * Reinforced Enchantment
   * No longer compatible with Reflection
