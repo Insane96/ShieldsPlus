@@ -10,7 +10,6 @@ import net.minecraft.ChatFormatting;
 import net.minecraft.client.renderer.BlockEntityWithoutLevelRenderer;
 import net.minecraft.client.resources.model.Material;
 import net.minecraft.network.chat.Component;
-import net.minecraft.network.chat.TranslatableComponent;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.inventory.InventoryMenu;
 import net.minecraft.world.item.ItemStack;
@@ -21,7 +20,7 @@ import net.minecraft.world.item.enchantment.EnchantmentHelper;
 import net.minecraft.world.level.Level;
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.api.distmarker.OnlyIn;
-import net.minecraftforge.client.IItemRenderProperties;
+import net.minecraftforge.client.extensions.common.IClientItemExtensions;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
@@ -55,11 +54,10 @@ public class SPShieldItem extends ShieldItem {
     }
 
     @Override
-    public void initializeClient(Consumer<IItemRenderProperties> consumer) {
-        consumer.accept(new IItemRenderProperties() {
-
+    public void initializeClient(Consumer<IClientItemExtensions> consumer) {
+        consumer.accept(new IClientItemExtensions() {
             @Override
-            public BlockEntityWithoutLevelRenderer getItemStackRenderer() {
+            public BlockEntityWithoutLevelRenderer getCustomRenderer() {
                 return ShieldBlockEntityWithoutLevelRenderer.instance;
             }
         });
@@ -81,15 +79,15 @@ public class SPShieldItem extends ShieldItem {
         float finalBlockedDamage = (float) (blockedDamage + ShieldReinforcedEnchantment.getDamageBlocked(reinforced));
         int reflection = EnchantmentHelper.getItemEnchantmentLevel(SPEnchantments.REFLECTION.get(), itemStack);
         float reflectedDamage = ShieldReflectionEnchantment.getReflectedDamage(reflection);
-        components.add(new TranslatableComponent(Strings.Translatable.DAMAGE_BLOCKED, new DecimalFormat("#.#").format(finalBlockedDamage)).withStyle(ChatFormatting.BLUE));
+        components.add(Component.translatable(Strings.Translatable.DAMAGE_BLOCKED, new DecimalFormat("#.#").format(finalBlockedDamage)).withStyle(ChatFormatting.BLUE));
         if (reinforced > 0) {
-            components.add(new TranslatableComponent(Strings.Translatable.REINFORCED_BONUS, new DecimalFormat("#.#").format(ShieldReinforcedEnchantment.getDamageBlocked(reinforced))).withStyle(ChatFormatting.DARK_GRAY));
+            components.add(Component.translatable(Strings.Translatable.REINFORCED_BONUS, new DecimalFormat("#.#").format(ShieldReinforcedEnchantment.getDamageBlocked(reinforced))).withStyle(ChatFormatting.DARK_GRAY));
         }
         //Add here more blocking damage modifiers
 
         if (reflection > 0) {
-            components.add(new TranslatableComponent(Strings.Translatable.DAMAGE_REFLECTED, new DecimalFormat("#.#").format(reflectedDamage * 100)).withStyle(ChatFormatting.BLUE));
-            components.add(new TranslatableComponent(Strings.Translatable.CAPPED_DAMAGE_REFLECTED, new DecimalFormat("#.#").format(ShieldReflectionEnchantment.getCappedReflectedDamage(reflection))).withStyle(ChatFormatting.DARK_GRAY));
+            components.add(Component.translatable(Strings.Translatable.DAMAGE_REFLECTED, new DecimalFormat("#.#").format(reflectedDamage * 100)).withStyle(ChatFormatting.BLUE));
+            components.add(Component.translatable(Strings.Translatable.CAPPED_DAMAGE_REFLECTED, new DecimalFormat("#.#").format(ShieldReflectionEnchantment.getCappedReflectedDamage(reflection))).withStyle(ChatFormatting.DARK_GRAY));
         }
     }
 

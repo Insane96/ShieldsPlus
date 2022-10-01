@@ -64,19 +64,19 @@ public class BaseFeature extends Feature {
 
         if (this.shieldBlockFixedDamageAmount) {
             double baseBlockedDamage;
-            if (event.getEntityLiving().getUseItem().is(Items.SHIELD)) {
+            if (event.getEntity().getUseItem().is(Items.SHIELD)) {
                 baseBlockedDamage = SPShieldMaterials.IRON.damageBlocked;
             }
-            else if (event.getEntityLiving().getUseItem().getItem() instanceof SPShieldItem) {
-                baseBlockedDamage = ((SPShieldItem) event.getEntityLiving().getUseItem().getItem()).getBlockedDamage();
+            else if (event.getEntity().getUseItem().getItem() instanceof SPShieldItem) {
+                baseBlockedDamage = ((SPShieldItem) event.getEntity().getUseItem().getItem()).getBlockedDamage();
             }
             else
                 return;
-            float blockedDamage = (float) (baseBlockedDamage + ShieldReinforcedEnchantment.getDamageBlocked(event.getEntityLiving().getUseItem()));
+            float blockedDamage = (float) (baseBlockedDamage + ShieldReinforcedEnchantment.getDamageBlocked(event.getEntity().getUseItem()));
             event.setBlockedDamage(blockedDamage);
         }
 
-        processEnchantments(event.getEntityLiving(), event.getDamageSource(), event.getOriginalBlockedDamage());
+        processEnchantments(event.getEntity(), event.getDamageSource(), event.getOriginalBlockedDamage());
     }
 
     private void processEnchantments(LivingEntity blockingEntity, DamageSource source, float amount) {
