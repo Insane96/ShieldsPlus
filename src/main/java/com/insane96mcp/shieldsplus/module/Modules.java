@@ -1,15 +1,15 @@
 package com.insane96mcp.shieldsplus.module;
 
 
-import com.insane96mcp.shieldsplus.module.base.BaseModule;
+import com.insane96mcp.shieldsplus.ShieldsPlus;
+import insane96mcp.insanelib.base.Module;
 
 public class Modules {
-    public static BaseModule base;
-    public static void init() {
-        base = new BaseModule();
-    }
+    public static Module BaseModule;
 
-    public static void loadConfig() {
-        base.loadConfig();
+    public static void init() {
+        BaseModule = Module.Builder.create(ShieldsPlus.RESOURCE_PREFIX + "base", "Shields Plus")
+                .canBeDisabled(false)
+                .build();
     }
 }

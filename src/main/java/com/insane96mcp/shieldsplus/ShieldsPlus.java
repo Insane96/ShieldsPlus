@@ -1,5 +1,6 @@
 package com.insane96mcp.shieldsplus;
 
+import com.insane96mcp.shieldsplus.module.Modules;
 import com.insane96mcp.shieldsplus.setup.*;
 import com.mojang.logging.LogUtils;
 import net.minecraftforge.eventbus.api.IEventBus;
@@ -17,6 +18,7 @@ public class ShieldsPlus
 
     public ShieldsPlus()
     {
+        Modules.init();
         ModLoadingContext.get().registerConfig(net.minecraftforge.fml.config.ModConfig.Type.COMMON, Config.COMMON_SPEC);
         FMLJavaModLoadingContext.get().getModEventBus().addListener(Client::setup);
         final IEventBus modEventBus = FMLJavaModLoadingContext.get().getModEventBus();

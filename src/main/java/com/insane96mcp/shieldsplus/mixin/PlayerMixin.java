@@ -1,6 +1,7 @@
 package com.insane96mcp.shieldsplus.mixin;
 
 import com.insane96mcp.shieldsplus.module.Modules;
+import com.insane96mcp.shieldsplus.module.base.feature.BaseFeature;
 import com.insane96mcp.shieldsplus.setup.SPEnchantments;
 import com.insane96mcp.shieldsplus.world.item.enchantment.ShieldFastRecoveryEnchantment;
 import net.minecraft.world.entity.EntityType;
@@ -26,7 +27,7 @@ public abstract class PlayerMixin extends LivingEntity {
 
     @ModifyConstant(constant = @Constant(floatValue = 3.0F), method = "hurtCurrentlyUsedShield")
     private float blockingWindupTime(float minDamage) {
-        return (float) Modules.base.base.minShieldHurtDamage;
+        return BaseFeature.minShieldHurtDamage.floatValue();
     }
 
     @Inject(method = "disableShield", at = @At("HEAD"), cancellable = true)

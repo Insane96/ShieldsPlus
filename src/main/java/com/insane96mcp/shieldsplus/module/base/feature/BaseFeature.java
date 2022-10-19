@@ -1,60 +1,41 @@
 package com.insane96mcp.shieldsplus.module.base.feature;
 
-import com.insane96mcp.shieldsplus.setup.Config;
+import com.insane96mcp.shieldsplus.ShieldsPlus;
 import com.insane96mcp.shieldsplus.setup.SPShieldMaterials;
 import com.insane96mcp.shieldsplus.world.item.SPShieldItem;
 import com.insane96mcp.shieldsplus.world.item.enchantment.*;
 import insane96mcp.insanelib.base.Feature;
 import insane96mcp.insanelib.base.Label;
 import insane96mcp.insanelib.base.Module;
+import insane96mcp.insanelib.base.config.Config;
+import insane96mcp.insanelib.base.config.LoadFeature;
 import net.minecraft.world.damagesource.DamageSource;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.item.Items;
 import net.minecraft.world.item.ShieldItem;
-import net.minecraftforge.common.ForgeConfigSpec;
 import net.minecraftforge.event.TickEvent;
 import net.minecraftforge.event.entity.living.ShieldBlockEvent;
 import net.minecraftforge.event.entity.player.ItemTooltipEvent;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
 
 @Label(name = "Shields+")
+@LoadFeature(module = ShieldsPlus.RESOURCE_PREFIX + "base", canBeDisabled = false)
 public class BaseFeature extends Feature {
+    @Config
+    @Label(name = "Remove Shield Windup", description = "In vanilla when you start blocking with a shield, there's a 0.25 seconds window where you are still not blocking. If true this (stupid) windup time is removed.")
+    public static Boolean removeShieldWindup = true;
+    @Config
+    @Label(name = "Shields Block Fixed Damage Amount", description = "If true shields will block only a certain amount of damage. If false the vanilla behaviour is used.")
+    public static Boolean shieldBlockFixedDamageAmount = true;
+    @Config(min = 0d, max = Float.MAX_VALUE)
+    @Label(name = "Min Shield Hurt Damage", description = "The minimum damage dealt to the player for the shield to take damage (reduce durability). Vanilla is 3.")
+    public static Double minShieldHurtDamage = 0d;
+    @Config
+    @Label(name = "Combat Test shield disabling", description = "Makes shields always disable for 1.6 seconds like Combat Test snapshots.")
+    public static Boolean combatTestShieldDisabling = true;
 
-    private final ForgeConfigSpec.BooleanValue removeShieldWindupConfig;
-    private final ForgeConfigSpec.BooleanValue shieldBlockFixedDamageAmountConfig;
-    private final ForgeConfigSpec.DoubleValue minShieldHurtDamageConfig;
-    private final ForgeConfigSpec.BooleanValue combatTestShieldDisablingConfig;
-
-    public boolean removeShieldWindup = true;
-    public boolean shieldBlockFixedDamageAmount = true;
-    public double minShieldHurtDamage = 0f;
-    public boolean combatTestShieldDisabling = true;
-
-    public BaseFeature(Module module) {
-        super(Config.builder, module, true, false);
-        //super.pushConfig(Config.builder);
-        this.removeShieldWindupConfig = Config.builder
-                .comment("In vanilla when you start blocking with a shield, there's a 0.25 seconds window where you are still not blocking. If true this (stupid) windup time is removed.")
-                .define("Remove Shield Windup", this.removeShieldWindup);
-        this.shieldBlockFixedDamageAmountConfig = Config.builder
-                .comment("If true shields will block only a certain amount of damage. If false the vanilla behaviour is used.")
-                .define("Shields Block Fixed Damage Amount", this.shieldBlockFixedDamageAmount);
-        this.minShieldHurtDamageConfig = Config.builder
-                .comment("The minimum damage dealt to the player for the shield to take damage (reduce durability). Vanilla is 3")
-                .defineInRange("Min Shield Hurt Damage", this.minShieldHurtDamage, 0f, Float.MAX_VALUE);
-        combatTestShieldDisablingConfig = Config.builder
-                .comment("Makes shields always disable for 1.6 seconds like Combat Test snapshots.")
-                .define("Combat Test shield disabling", this.combatTestShieldDisabling);
-        //Config.builder.pop();
-    }
-
-    @Override
-    public void loadConfig() {
-        super.loadConfig();
-        this.removeShieldWindup = this.removeShieldWindupConfig.get();
-        this.shieldBlockFixedDamageAmount = this.shieldBlockFixedDamageAmountConfig.get();
-        this.minShieldHurtDamage = this.minShieldHurtDamageConfig.get();
-        this.combatTestShieldDisabling = this.combatTestShieldDisablingConfig.get();
+    public BaseFeature(Module module, boolean enabledByDefault, boolean canBeDisabled) {
+        super(module, enabledByDefault, canBeDisabled);
     }
 
     @SubscribeEvent
@@ -62,7 +43,7 @@ public class BaseFeature extends Feature {
         if (!this.isEnabled())
             return;
 
-        if (this.shieldBlockFixedDamageAmount) {
+        if (shieldBlockFixedDamageAmount) {
             double baseBlockedDamage;
             if (event.getEntity().getUseItem().is(Items.SHIELD)) {
                 baseBlockedDamage = SPShieldMaterials.IRON.damageBlocked;
@@ -100,7 +81,7 @@ public class BaseFeature extends Feature {
     @SubscribeEvent
     public void onTooltip(ItemTooltipEvent event) {
         if (!this.isEnabled()
-                || !this.shieldBlockFixedDamageAmount)
+                || !shieldBlockFixedDamageAmount)
             return;
 
         if (event.getItemStack().is(Items.SHIELD)) {
@@ -109,10 +90,10 @@ public class BaseFeature extends Feature {
     }
 
     public boolean shouldRemoveShieldWindup() {
-        return this.isEnabled() && this.removeShieldWindup;
+        return this.isEnabled() && removeShieldWindup;
     }
 
     public boolean combatTestShieldDisabling() {
-        return this.isEnabled() && this.combatTestShieldDisabling;
+        return this.isEnabled() && combatTestShieldDisabling;
     }
 }
