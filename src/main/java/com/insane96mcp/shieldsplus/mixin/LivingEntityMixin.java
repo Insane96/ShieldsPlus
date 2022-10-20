@@ -21,6 +21,7 @@ public abstract class LivingEntityMixin extends Entity {
         return BaseFeature.shouldRemoveShieldWindup() ? 0 : ticks;
     }
 
+    //TODO Fix entity hit sound
 	/*@Inject(at = @At(value = "JUMP", target = "Lnet/minecraft/world/entity/LivingEntity;playHurtSound(Lnet/minecraft/world/damagesource/DamageSource;)V"), method = "hurt", cancellable = true)
 	private void onHurtSound(DamageSource source, float amount, CallbackInfoReturnable<Boolean> callbackInfo) {
 	}*/

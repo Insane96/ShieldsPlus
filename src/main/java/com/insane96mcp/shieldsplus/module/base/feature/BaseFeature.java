@@ -89,11 +89,11 @@ public class BaseFeature extends Feature {
         }
     }
 
-    public boolean shouldRemoveShieldWindup() {
-        return this.isEnabled() && removeShieldWindup;
+    public static boolean shouldRemoveShieldWindup() {
+        return isEnabled(BaseFeature.class) && removeShieldWindup;
     }
 
-    public boolean combatTestShieldDisabling() {
-        return this.isEnabled() && combatTestShieldDisabling;
+    public static boolean combatTestShieldDisabling() {
+        return isEnabled(BaseFeature.class) && combatTestShieldDisabling;
     }
 }

@@ -1,6 +1,5 @@
 package com.insane96mcp.shieldsplus.mixin;
 
-import com.insane96mcp.shieldsplus.module.Modules;
 import com.insane96mcp.shieldsplus.module.base.feature.BaseFeature;
 import com.insane96mcp.shieldsplus.setup.SPEnchantments;
 import com.insane96mcp.shieldsplus.world.item.enchantment.ShieldFastRecoveryEnchantment;
@@ -32,7 +31,7 @@ public abstract class PlayerMixin extends LivingEntity {
 
     @Inject(method = "disableShield", at = @At("HEAD"), cancellable = true)
     private void disableShield(boolean efficiencyAffected, CallbackInfo callbackInfo) {
-        if (Modules.base.base.combatTestShieldDisabling()) {
+        if (BaseFeature.combatTestShieldDisabling()) {
             callbackInfo.cancel();
             int ticks = 32;
             int fastRecovery = EnchantmentHelper.getItemEnchantmentLevel(SPEnchantments.FAST_RECOVERY.get(), this.getUseItem());
