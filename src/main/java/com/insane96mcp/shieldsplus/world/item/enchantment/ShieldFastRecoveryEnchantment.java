@@ -1,17 +1,15 @@
 package com.insane96mcp.shieldsplus.world.item.enchantment;
 
+import com.insane96mcp.shieldsplus.world.item.SPShieldItem;
 import net.minecraft.world.entity.EquipmentSlot;
-import net.minecraft.world.item.ItemStack;
-import net.minecraft.world.item.ShieldItem;
 import net.minecraft.world.item.enchantment.Enchantment;
-import net.minecraft.world.item.enchantment.EnchantmentCategory;
 
 public class ShieldFastRecoveryEnchantment extends Enchantment {
 
 	public static final int TICKS = 12;
 
 	public ShieldFastRecoveryEnchantment() {
-		super(Rarity.RARE, EnchantmentCategory.BREAKABLE, new EquipmentSlot[]{EquipmentSlot.MAINHAND, EquipmentSlot.OFFHAND});
+		super(Rarity.RARE, SPShieldItem.SHIELD, new EquipmentSlot[]{EquipmentSlot.MAINHAND, EquipmentSlot.OFFHAND});
 	}
 
 	public int getMinCost(int p_44598_) {
@@ -24,10 +22,5 @@ public class ShieldFastRecoveryEnchantment extends Enchantment {
 
 	public int getMaxLevel() {
 		return 1;
-	}
-
-	@Override
-	public boolean canApplyAtEnchantingTable(ItemStack stack) {
-		return stack.getItem() instanceof ShieldItem;
 	}
 }

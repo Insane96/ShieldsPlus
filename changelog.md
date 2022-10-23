@@ -1,5 +1,8 @@
 # Changelog
 
+## Upcoming
+* Fixed Enchantments not having the correct Enchantment Category
+
 ## 1.3.1
 * Updated to InsaneLib 1.7.0
 

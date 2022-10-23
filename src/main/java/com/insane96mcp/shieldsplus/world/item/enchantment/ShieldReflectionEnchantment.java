@@ -1,13 +1,12 @@
 package com.insane96mcp.shieldsplus.world.item.enchantment;
 
 import com.insane96mcp.shieldsplus.setup.SPEnchantments;
+import com.insane96mcp.shieldsplus.world.item.SPShieldItem;
 import net.minecraft.world.damagesource.DamageSource;
 import net.minecraft.world.entity.EquipmentSlot;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.item.ItemStack;
-import net.minecraft.world.item.ShieldItem;
 import net.minecraft.world.item.enchantment.Enchantment;
-import net.minecraft.world.item.enchantment.EnchantmentCategory;
 import net.minecraft.world.item.enchantment.EnchantmentHelper;
 import org.jetbrains.annotations.NotNull;
 
@@ -17,7 +16,7 @@ public class ShieldReflectionEnchantment extends Enchantment {
 	public static final float CAPPED_REFLECTED_DAMAGE = 2f;
 
 	public ShieldReflectionEnchantment() {
-		super(Rarity.RARE, EnchantmentCategory.BREAKABLE, new EquipmentSlot[]{EquipmentSlot.MAINHAND, EquipmentSlot.OFFHAND});
+		super(Rarity.RARE, SPShieldItem.SHIELD, new EquipmentSlot[]{EquipmentSlot.MAINHAND, EquipmentSlot.OFFHAND});
 	}
 
 	public int getMinCost(int p_44598_) {
@@ -35,11 +34,6 @@ public class ShieldReflectionEnchantment extends Enchantment {
 	@Override
 	public boolean checkCompatibility(@NotNull Enchantment enchantment) {
 		return !(enchantment instanceof ShieldReinforcedEnchantment) && super.checkCompatibility(enchantment);
-	}
-
-	@Override
-	public boolean canApplyAtEnchantingTable(ItemStack stack) {
-		return stack.getItem() instanceof ShieldItem;
 	}
 
 	public static float getReflectedDamage(int level) {
