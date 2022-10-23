@@ -1,6 +1,7 @@
 package com.insane96mcp.shieldsplus.setup;
 
 import com.insane96mcp.shieldsplus.ShieldsPlus;
+import com.insane96mcp.shieldsplus.module.Modules;
 import insane96mcp.insanelib.base.Module;
 import net.minecraftforge.common.ForgeConfigSpec;
 import org.apache.commons.lang3.tuple.Pair;
@@ -20,7 +21,8 @@ public class Config {
 
     public static class CommonConfig {
         public CommonConfig(final ForgeConfigSpec.Builder builder) {
-            Module.loadFeatures(ShieldsPlus.MOD_ID, this.getClass().getClassLoader(), builder);
+            Modules.init();
+            Module.loadFeatures(ShieldsPlus.MOD_ID, this.getClass().getClassLoader());
         }
     }
 }
