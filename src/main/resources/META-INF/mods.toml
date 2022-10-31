@@ -28,6 +28,6 @@ issueTrackerURL="https://github.com/Insane96/ShieldsPlus/issues"
     [[dependencies.shieldsplus]]
         modId="insanelib"
         mandatory=true
-        versionRange="[1.7.0,)"
+        versionRange="[1.7.1,)"
         ordering="AFTER"
         side="BOTH"
