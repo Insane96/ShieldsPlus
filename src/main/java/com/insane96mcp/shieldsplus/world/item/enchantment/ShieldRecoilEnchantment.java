@@ -8,7 +8,6 @@ import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.projectile.Projectile;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.enchantment.Enchantment;
-import net.minecraft.world.item.enchantment.EnchantmentHelper;
 
 public class ShieldRecoilEnchantment extends Enchantment {
 
@@ -33,7 +32,7 @@ public class ShieldRecoilEnchantment extends Enchantment {
 
 	public static void onBlocked(LivingEntity blockingEntity, DamageSource source) {
 		ItemStack shield = blockingEntity.getUseItem();
-		int recoil = EnchantmentHelper.getItemEnchantmentLevel(SPEnchantments.RECOIL.get(), shield);
+		int recoil = shield.getEnchantmentLevel(SPEnchantments.RECOIL.get());
 		if (recoil > 0)
 		{
 			if (source.getEntity() instanceof LivingEntity sourceEntity && source.getEntity() == source.getDirectEntity()) {

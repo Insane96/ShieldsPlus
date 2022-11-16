@@ -8,7 +8,6 @@ import net.minecraft.world.entity.ai.attributes.AttributeModifier;
 import net.minecraft.world.entity.ai.attributes.Attributes;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.enchantment.Enchantment;
-import net.minecraft.world.item.enchantment.EnchantmentHelper;
 
 import java.util.UUID;
 
@@ -39,7 +38,7 @@ public class ShieldLightweightEnchantment extends Enchantment {
 			return;
 
 		if (player.isBlocking()) {
-			int lightweight = EnchantmentHelper.getItemEnchantmentLevel(SPEnchantments.LIGHTWEIGHT.get(), player.getUseItem());
+			int lightweight = player.getUseItem().getEnchantmentLevel(SPEnchantments.LIGHTWEIGHT.get());
 			if (lightweight > 0) {
 
 				if (attribute.getModifier(ShieldLightweightEnchantment.BONUS_SPEED_UUID) == null) {

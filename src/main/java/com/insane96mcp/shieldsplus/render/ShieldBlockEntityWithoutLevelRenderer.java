@@ -26,6 +26,7 @@ import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.client.event.RegisterClientReloadListenersEvent;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.common.Mod;
+import org.jetbrains.annotations.NotNull;
 
 import java.util.List;
 
@@ -45,7 +46,7 @@ public class ShieldBlockEntityWithoutLevelRenderer extends BlockEntityWithoutLev
     }
 
     @Override
-    public void renderByItem(ItemStack itemStack, ItemTransforms.TransformType transformType, PoseStack poseStack, MultiBufferSource multiBufferSource, int p_108834_, int p_108835_) {
+    public void renderByItem(@NotNull ItemStack itemStack, ItemTransforms.@NotNull TransformType transformType, PoseStack poseStack, @NotNull MultiBufferSource multiBufferSource, int p_108834_, int p_108835_) {
         boolean hasBanner = BlockItem.getBlockEntityData(itemStack) != null;
         poseStack.pushPose();
         poseStack.scale(1.0F, -1.0F, -1.0F);

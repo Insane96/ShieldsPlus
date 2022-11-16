@@ -65,7 +65,6 @@ public class BaseFeature extends Feature {
             ShieldRecoilEnchantment.onBlocked(blockingEntity, source);
             ShieldReflectionEnchantment.onBlocked(blockingEntity, source, amount);
             ShieldAblazeEnchantment.onBlocked(blockingEntity, source);
-            ShieldParryEnchantment.onBlocked(blockingEntity, source);
         }
     }
 

@@ -5,7 +5,6 @@ import com.insane96mcp.shieldsplus.world.item.SPShieldItem;
 import net.minecraft.world.entity.EquipmentSlot;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.enchantment.Enchantment;
-import net.minecraft.world.item.enchantment.EnchantmentHelper;
 import org.jetbrains.annotations.NotNull;
 
 public class ShieldReinforcedEnchantment extends Enchantment {
@@ -38,6 +37,6 @@ public class ShieldReinforcedEnchantment extends Enchantment {
 	}
 
 	public static double getDamageBlocked(ItemStack itemStack) {
-		return getDamageBlocked(EnchantmentHelper.getItemEnchantmentLevel(SPEnchantments.REINFORCED.get(), itemStack));
+		return getDamageBlocked(itemStack.getEnchantmentLevel(SPEnchantments.REINFORCED.get()));
 	}
 }

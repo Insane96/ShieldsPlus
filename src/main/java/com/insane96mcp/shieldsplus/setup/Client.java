@@ -14,6 +14,7 @@ import net.minecraftforge.registries.RegistryObject;
 @Mod.EventBusSubscriber(value = Dist.CLIENT, bus = Mod.EventBusSubscriber.Bus.MOD, modid = ShieldsPlus.MOD_ID)
 public class Client {
 
+    @SuppressWarnings("unused")
     public static void setup(final FMLClientSetupEvent event) {
         initShields();
     }
@@ -28,6 +29,7 @@ public class Client {
     }
 
     private static void initShields() {
+        //noinspection deprecation
         ItemPropertyFunction blockFn = (stack, world, entity, seed) -> entity != null && entity.isUsingItem() && entity.getUseItem() == stack ? 1.0F : 0.0F;
         for (RegistryObject<SPShieldItem> shieldItem : SPItems.SHIELDS) {
             ItemProperties.register(shieldItem.get(), SPShieldItem.BLOCKING, blockFn);

@@ -12,7 +12,6 @@ import net.minecraft.world.entity.EquipmentSlot;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.enchantment.Enchantment;
-import net.minecraft.world.item.enchantment.EnchantmentHelper;
 import net.minecraft.world.phys.AABB;
 import org.jetbrains.annotations.NotNull;
 
@@ -48,7 +47,7 @@ public class ShieldBashEnchantment extends Enchantment {
 
 	public static void onTick(Player player) {
 		CompoundTag tag = player.getPersistentData();
-		int shieldBash = EnchantmentHelper.getItemEnchantmentLevel(SPEnchantments.SHIELD_BASH.get(), player.getUseItem());
+		int shieldBash = player.getUseItem().getEnchantmentLevel(SPEnchantments.SHIELD_BASH.get());
 
 		if (tag.getByte(Strings.Tags.BASH_TIMER) < 0){
 			tag.putByte(Strings.Tags.BASH_TIMER, (byte) (tag.getByte(Strings.Tags.BASH_TIMER) + 1));
@@ -65,7 +64,7 @@ public class ShieldBashEnchantment extends Enchantment {
 				float f = -Mth.sin(player.getYRot() * ((float) Math.PI / 180F));
 				float f1 = Mth.cos(player.getYRot() * ((float) Math.PI / 180F));
 				player.playSound(SoundEvents.SHIELD_BLOCK, 1f, 1.3f);
-				player.setDeltaMovement(player.getDeltaMovement().add(f * 2.75d, 0.4d, f1 * 2.75d));
+				player.setDeltaMovement(player.getDeltaMovement().add(f * 3d, 0.45d, f1 * 3d));
 				for (int i = 0; i < 50; i++) {
 					player.level.addParticle(ParticleTypes.CLOUD, player.getX() + Mth.nextDouble(player.getRandom(), -0.5d, 0.5d), player.getY() + Mth.nextDouble(player.getRandom(), -0.5d, 0.5d) + 0.9d, player.getZ() + Mth.nextDouble(player.getRandom(), -0.5d, 0.5d), 0.1, 0, 0.1);
 				}

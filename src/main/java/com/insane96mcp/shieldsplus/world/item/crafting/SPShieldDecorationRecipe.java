@@ -34,15 +34,9 @@ public class SPShieldDecorationRecipe extends CustomRecipe {
                     bannerStack = itemStack;
                 }
                 else {
-                    if (!(itemStack.getItem() instanceof SPShieldItem)) {
-                        return false;
-                    }
-
-                    if (!shieldStack.isEmpty()) {
-                        return false;
-                    }
-
-                    if (BlockItem.getBlockEntityData(itemStack) != null) {
+                    if (!(itemStack.getItem() instanceof SPShieldItem)
+                            || !shieldStack.isEmpty()
+                            || BlockItem.getBlockEntityData(itemStack) != null) {
                         return false;
                     }
 

@@ -1,19 +1,17 @@
 package com.insane96mcp.shieldsplus;
 
 import com.insane96mcp.shieldsplus.setup.*;
-import com.mojang.logging.LogUtils;
 import net.minecraftforge.eventbus.api.IEventBus;
 import net.minecraftforge.fml.ModLoadingContext;
 import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.fml.javafmlmod.FMLJavaModLoadingContext;
-import org.slf4j.Logger;
 
 @Mod(ShieldsPlus.MOD_ID)
 public class ShieldsPlus
 {
     public static final String MOD_ID = "shieldsplus";
     public static final String RESOURCE_PREFIX = MOD_ID + ":";
-    public static final Logger LOGGER = LogUtils.getLogger();
+    //public static final Logger LOGGER = LogUtils.getLogger();
 
     public ShieldsPlus()
     {

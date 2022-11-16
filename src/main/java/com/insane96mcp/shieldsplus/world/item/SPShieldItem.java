@@ -16,7 +16,6 @@ import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.ShieldItem;
 import net.minecraft.world.item.TooltipFlag;
 import net.minecraft.world.item.enchantment.EnchantmentCategory;
-import net.minecraft.world.item.enchantment.EnchantmentHelper;
 import net.minecraft.world.level.Level;
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.api.distmarker.OnlyIn;
@@ -64,7 +63,7 @@ public class SPShieldItem extends ShieldItem {
     }
 
     @Override
-    public int getEnchantmentValue() {
+    public int getEnchantmentValue(ItemStack stack) {
         return this.material.enchantmentValue;
     }
 
@@ -75,9 +74,9 @@ public class SPShieldItem extends ShieldItem {
     }
 
     public static void addDamageBlockedText(ItemStack itemStack, List<Component> components, double blockedDamage) {
-        int reinforced = EnchantmentHelper.getItemEnchantmentLevel(SPEnchantments.REINFORCED.get(), itemStack);
+        int reinforced = itemStack.getEnchantmentLevel(SPEnchantments.REINFORCED.get());
         float finalBlockedDamage = (float) (blockedDamage + ShieldReinforcedEnchantment.getDamageBlocked(reinforced));
-        int reflection = EnchantmentHelper.getItemEnchantmentLevel(SPEnchantments.REFLECTION.get(), itemStack);
+        int reflection = itemStack.getEnchantmentLevel(SPEnchantments.REFLECTION.get());
         float reflectedDamage = ShieldReflectionEnchantment.getReflectedDamage(reflection);
         components.add(Component.translatable(Strings.Translatable.DAMAGE_BLOCKED, new DecimalFormat("#.#").format(finalBlockedDamage)).withStyle(ChatFormatting.BLUE));
         if (reinforced > 0) {

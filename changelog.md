@@ -1,5 +1,8 @@
 # Changelog
 
+## Upcoming
+* Slightly increased Shield bash launch force
+
 ## 1.3.2
 * Updated to InsaneLib 1.7.1
 * Fixed Enchantments not having the correct Enchantment Category
