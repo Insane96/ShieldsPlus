@@ -69,7 +69,7 @@ public class ShieldBashEnchantment extends Enchantment {
 				float x = -Mth.sin(player.getYRot() * ((float) Math.PI / 180F));
 				float z = Mth.cos(player.getYRot() * ((float) Math.PI / 180F));
 				player.playSound(SoundEvents.SHIELD_BLOCK, 1f, 1.3f);
-				player.setDeltaMovement(player.getDeltaMovement().add(x * getForce(shieldBash), 0.45d + (shieldBash * 0.05d), z * getForce(shieldBash)));
+				player.setDeltaMovement(player.getDeltaMovement().add(x * getForce(shieldBash), 0.45d, z * getForce(shieldBash)));
 				for (int i = 0; i < 50; i++) {
 					player.level.addParticle(ParticleTypes.CLOUD, player.getX() + Mth.nextDouble(player.getRandom(), -0.5d, 0.5d), player.getY() + Mth.nextDouble(player.getRandom(), -0.5d, 0.5d) + 0.9d, player.getZ() + Mth.nextDouble(player.getRandom(), -0.5d, 0.5d), 0.1, 0, 0.1);
 				}
