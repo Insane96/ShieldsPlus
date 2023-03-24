@@ -1,6 +1,5 @@
 package com.insane96mcp.shieldsplus.world.item;
 
-import com.insane96mcp.shieldsplus.ShieldsPlus;
 import com.insane96mcp.shieldsplus.render.ShieldBlockEntityWithoutLevelRenderer;
 import com.insane96mcp.shieldsplus.setup.SPEnchantments;
 import com.insane96mcp.shieldsplus.setup.Strings;
@@ -8,17 +7,13 @@ import com.insane96mcp.shieldsplus.world.item.enchantment.ShieldReflectionEnchan
 import com.insane96mcp.shieldsplus.world.item.enchantment.ShieldReinforcedEnchantment;
 import net.minecraft.ChatFormatting;
 import net.minecraft.client.renderer.BlockEntityWithoutLevelRenderer;
-import net.minecraft.client.resources.model.Material;
 import net.minecraft.network.chat.Component;
 import net.minecraft.resources.ResourceLocation;
-import net.minecraft.world.inventory.InventoryMenu;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.ShieldItem;
 import net.minecraft.world.item.TooltipFlag;
 import net.minecraft.world.item.enchantment.EnchantmentCategory;
 import net.minecraft.world.level.Level;
-import net.minecraftforge.api.distmarker.Dist;
-import net.minecraftforge.api.distmarker.OnlyIn;
 import net.minecraftforge.client.extensions.common.IClientItemExtensions;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
@@ -34,18 +29,9 @@ public class SPShieldItem extends ShieldItem {
     public static final ResourceLocation BLOCKING = new ResourceLocation("minecraft:blocking");
     public final SPShieldMaterial material;
 
-    @OnlyIn(Dist.CLIENT)
-    public Material clientMaterial;
-    @OnlyIn(Dist.CLIENT)
-    public Material clientMaterialNoPattern;
-
     public SPShieldItem(SPShieldMaterial material, Properties p_43089_) {
         super(p_43089_);
         this.material = material;
-    }
-
-    public @NotNull String getDescriptionId(@NotNull ItemStack itemStack) {
-        return super.getDescriptionId();
     }
 
     public double getBlockedDamage() {
@@ -79,9 +65,9 @@ public class SPShieldItem extends ShieldItem {
         int reflection = itemStack.getEnchantmentLevel(SPEnchantments.REFLECTION.get());
         float reflectedDamage = ShieldReflectionEnchantment.getReflectedDamage(reflection);
         components.add(Component.translatable(Strings.Translatable.DAMAGE_BLOCKED, new DecimalFormat("#.#").format(finalBlockedDamage)).withStyle(ChatFormatting.BLUE));
-        if (reinforced > 0) {
+        /*if (reinforced > 0) {
             components.add(Component.translatable(Strings.Translatable.REINFORCED_BONUS, new DecimalFormat("#.#").format(ShieldReinforcedEnchantment.getDamageBlocked(reinforced))).withStyle(ChatFormatting.DARK_GRAY));
-        }
+        }*/
         //Add here more blocking damage modifiers
 
         if (reflection > 0) {
@@ -95,11 +81,5 @@ public class SPShieldItem extends ShieldItem {
         if (this.material.repairItem != null)
             return repairingMaterial.is(this.material.repairItem);
         return repairingMaterial.is(this.material.repairTag);
-    }
-
-    @OnlyIn(Dist.CLIENT)
-    public void initClientMaterial() {
-        this.clientMaterial = new Material(InventoryMenu.BLOCK_ATLAS, new ResourceLocation(ShieldsPlus.MOD_ID, "entity/%s_shield".formatted(this.material.materialName)));
-        this.clientMaterialNoPattern = new Material(InventoryMenu.BLOCK_ATLAS, new ResourceLocation(ShieldsPlus.MOD_ID, "entity/%s_shield_nopattern".formatted(this.material.materialName)));
     }
 }

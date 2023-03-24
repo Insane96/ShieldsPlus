@@ -8,6 +8,7 @@ import net.minecraft.world.inventory.CraftingContainer;
 import net.minecraft.world.item.BannerItem;
 import net.minecraft.world.item.BlockItem;
 import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.item.crafting.CraftingBookCategory;
 import net.minecraft.world.item.crafting.CustomRecipe;
 import net.minecraft.world.item.crafting.RecipeSerializer;
 import net.minecraft.world.level.Level;
@@ -15,8 +16,9 @@ import net.minecraft.world.level.block.entity.BlockEntityType;
 import org.jetbrains.annotations.NotNull;
 
 public class SPShieldDecorationRecipe extends CustomRecipe {
-    public SPShieldDecorationRecipe(ResourceLocation id) {
-        super(id);
+
+    public SPShieldDecorationRecipe(ResourceLocation id, CraftingBookCategory category) {
+        super(id, category);
     }
 
     public boolean matches(CraftingContainer craftingContainer, @NotNull Level level) {

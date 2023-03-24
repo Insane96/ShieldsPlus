@@ -17,6 +17,7 @@ public class ShieldsPlus
     {
         ModLoadingContext.get().registerConfig(net.minecraftforge.fml.config.ModConfig.Type.COMMON, Config.COMMON_SPEC);
         FMLJavaModLoadingContext.get().getModEventBus().addListener(Client::setup);
+        FMLJavaModLoadingContext.get().getModEventBus().addListener(Client::creativeTabsBuildContents);
         final IEventBus modEventBus = FMLJavaModLoadingContext.get().getModEventBus();
         SPItems.ITEMS.register(modEventBus);
         SPEnchantments.ENCHANTMENTS.register(modEventBus);

@@ -10,7 +10,7 @@ public class Modules {
     public static Module BaseModule;
 
     public static void init() {
-        BaseModule = Module.Builder.create(ShieldsPlus.RESOURCE_PREFIX + "base", "Shields Plus", ModConfig.Type.COMMON, Config.builder)
+        BaseModule = Module.Builder.create(ShieldsPlus.MOD_ID, "base", "Shields Plus", ModConfig.Type.COMMON, Config.builder)
                 .canBeDisabled(false)
                 .build();
     }

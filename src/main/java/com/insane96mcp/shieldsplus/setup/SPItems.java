@@ -3,7 +3,6 @@ package com.insane96mcp.shieldsplus.setup;
 import com.insane96mcp.shieldsplus.ShieldsPlus;
 import com.insane96mcp.shieldsplus.world.item.SPShieldItem;
 import com.insane96mcp.shieldsplus.world.item.SPShieldMaterial;
-import net.minecraft.world.item.CreativeModeTab;
 import net.minecraft.world.item.Item;
 import net.minecraftforge.registries.DeferredRegister;
 import net.minecraftforge.registries.ForgeRegistries;
@@ -24,9 +23,8 @@ public class SPItems {
     public static final RegistryObject<SPShieldItem> DIAMOND_SHIELD = registerShield(Strings.Items.DIAMOND_SHIELD, SPShieldMaterials.DIAMOND);
     public static final RegistryObject<SPShieldItem> NETHERITE_SHIELD = registerShield(Strings.Items.NETHERITE_SHIELD, SPShieldMaterials.NETHERITE);
 
-
     public static RegistryObject<SPShieldItem> registerShield(String id, SPShieldMaterial material) {
-        RegistryObject<SPShieldItem> shield = ITEMS.register(id, () -> new SPShieldItem(material, new Item.Properties().durability(material.durability).tab(CreativeModeTab.TAB_COMBAT).rarity(material.rarity)));
+        RegistryObject<SPShieldItem> shield = ITEMS.register(id, () -> new SPShieldItem(material, new Item.Properties().durability(material.durability).rarity(material.rarity)));
         SHIELDS.add(shield);
         return shield;
     }
