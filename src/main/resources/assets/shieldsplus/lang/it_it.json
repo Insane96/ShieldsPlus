@@ -1,0 +1,21 @@
+{
+    "item.shieldsplus.wooden_shield": "Scudo di legno",
+    "item.shieldsplus.stone_shield": "Scudo di pietra",
+    "item.shieldsplus.copper_shield": "Scudo di rame",
+    "item.shieldsplus.golden_shield": "Scudo d'oro",
+    "item.minecraft.shield": "Scudo di ferro",
+    "item.shieldsplus.diamond_shield": "Scudo di diamante",
+    "item.shieldsplus.netherite_shield": "Scudo di netherite",
+    "shieldsplus:damage_blocked": "%s danno bloccato",
+    "shieldsplus:reinforced_bonus": "(+%s da Rinfrorzato)",
+    "shieldsplus:damage_reflected": "%s%% danno riflesso",
+    "shieldsplus:capped_damage_reflected": "(fino a %s danno riflesso)",
+
+    "enchantment.shieldsplus.recoil": "Rinculo",
+    "enchantment.shieldsplus.reflection": "Riflesso",
+    "enchantment.shieldsplus.reinforced": "Rinforzato",
+    "enchantment.shieldsplus.ablaze": "Fiammante",
+    "enchantment.shieldsplus.lightweight": "Leggerezza",
+    "enchantment.shieldsplus.fast_recovery": "Recupero Rapido",
+    "enchantment.shieldsplus.shield_bash": "Colpo di Scudo"
+}

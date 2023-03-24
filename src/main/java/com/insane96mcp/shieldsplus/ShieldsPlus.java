@@ -1,6 +1,10 @@
 package com.insane96mcp.shieldsplus;
 
-import com.insane96mcp.shieldsplus.setup.*;
+import com.insane96mcp.shieldsplus.setup.Config;
+import com.insane96mcp.shieldsplus.setup.SPEnchantments;
+import com.insane96mcp.shieldsplus.setup.SPItems;
+import com.insane96mcp.shieldsplus.setup.SPRecipeSerializers;
+import com.insane96mcp.shieldsplus.setup.client.Client;
 import net.minecraftforge.eventbus.api.IEventBus;
 import net.minecraftforge.fml.ModLoadingContext;
 import net.minecraftforge.fml.common.Mod;

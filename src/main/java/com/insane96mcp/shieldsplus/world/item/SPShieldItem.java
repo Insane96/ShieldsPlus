@@ -3,10 +3,13 @@ package com.insane96mcp.shieldsplus.world.item;
 import com.insane96mcp.shieldsplus.render.ShieldBlockEntityWithoutLevelRenderer;
 import com.insane96mcp.shieldsplus.setup.SPEnchantments;
 import com.insane96mcp.shieldsplus.setup.Strings;
+import com.insane96mcp.shieldsplus.setup.client.ClientMaterials;
 import com.insane96mcp.shieldsplus.world.item.enchantment.ShieldReflectionEnchantment;
 import com.insane96mcp.shieldsplus.world.item.enchantment.ShieldReinforcedEnchantment;
 import net.minecraft.ChatFormatting;
 import net.minecraft.client.renderer.BlockEntityWithoutLevelRenderer;
+import net.minecraft.client.renderer.Sheets;
+import net.minecraft.client.resources.model.Material;
 import net.minecraft.network.chat.Component;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.item.ItemStack;
@@ -15,6 +18,7 @@ import net.minecraft.world.item.TooltipFlag;
 import net.minecraft.world.item.enchantment.EnchantmentCategory;
 import net.minecraft.world.level.Level;
 import net.minecraftforge.client.extensions.common.IClientItemExtensions;
+import net.minecraftforge.registries.ForgeRegistries;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
@@ -28,6 +32,8 @@ public class SPShieldItem extends ShieldItem {
 
     public static final ResourceLocation BLOCKING = new ResourceLocation("minecraft:blocking");
     public final SPShieldMaterial material;
+
+    public ClientMaterials clientMaterials;
 
     public SPShieldItem(SPShieldMaterial material, Properties p_43089_) {
         super(p_43089_);
@@ -81,5 +87,16 @@ public class SPShieldItem extends ShieldItem {
         if (this.material.repairItem != null)
             return repairingMaterial.is(this.material.repairItem);
         return repairingMaterial.is(this.material.repairTag);
+    }
+
+    public void tryCacheClientMaterials() {
+        if (this.clientMaterials == null) {
+            this.clientMaterials = new ClientMaterials(new Material(Sheets.SHIELD_SHEET, new ResourceLocation(ForgeRegistries.ITEMS.getKey(this).getNamespace(), "entity/shield/%s_shield_nopattern".formatted(this.material.materialName))), new Material(Sheets.SHIELD_SHEET, new ResourceLocation(ForgeRegistries.ITEMS.getKey(this).getNamespace(), "entity/shield/%s_shield".formatted(this.material.materialName))));
+        }
+    }
+
+    public Material getClientMaterial(boolean hasBanner) {
+        tryCacheClientMaterials();
+        return hasBanner ? this.clientMaterials.patternMaterial() : this.clientMaterials.noPatternMaterial();
     }
 }

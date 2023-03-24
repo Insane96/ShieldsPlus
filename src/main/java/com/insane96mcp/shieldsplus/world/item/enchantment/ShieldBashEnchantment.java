@@ -137,8 +137,8 @@ public class ShieldBashEnchantment extends Enchantment {
 			entity.knockback(1d + (0.4d * level), player.getX() - entity.getX(), player.getZ() - entity.getZ());
 			//TODO Send knockback packet to player
 			if (entity.hurt(DamageSource.playerAttack(player), 3 + (3 * level))) {
-				player.playSound(SoundEvents.SHIELD_BLOCK, 1.0f, 0.5f);
 				ShieldAblazeEnchantment.apply(player, entity);
+				player.playSound(SoundEvents.SHIELD_BLOCK, 1.0f, 0.5f);
 			}
 		}
 	}

@@ -1,5 +1,9 @@
 # Changelog
 
+## 1.4.1
+* Added italian translation
+* Fixed registering other mods shields not getting the texture correctly
+
 ## 1.4.0
 * Updated to MC 1.19.3
 * Slight rework of Shield Bash

@@ -1,6 +1,7 @@
-package com.insane96mcp.shieldsplus.setup;
+package com.insane96mcp.shieldsplus.setup.client;
 
 import com.insane96mcp.shieldsplus.ShieldsPlus;
+import com.insane96mcp.shieldsplus.setup.SPItems;
 import com.insane96mcp.shieldsplus.world.item.SPShieldItem;
 import net.minecraft.client.renderer.item.ItemProperties;
 import net.minecraft.client.renderer.item.ItemPropertyFunction;
