@@ -1,7 +1,10 @@
 # Changelog
 
-## Upcoming
-* Slightly increased Shield bash launch force
+## 1.4.0
+* Updated to MC 1.19.3
+* Slight rework of Shield Bash
+  * Shield Bash max level is now 3 instead of 1 (it's not possible to find books with shield bash > 1)
+  * Higher levels increase bash force, damage and knockback dealt
 
 ## 1.3.2
 * Updated to InsaneLib 1.7.1
