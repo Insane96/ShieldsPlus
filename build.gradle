@@ -20,7 +20,7 @@ apply plugin: 'org.spongepowered.mixin'
 
 
 version = "${mod_version}-mc${mc_version}"
-group = 'com.insane96mcp.shieldsplus'
+group = 'insane96mcp.shieldsplus'
 archivesBaseName = 'Shields+'
 
 java.toolchain.languageVersion = JavaLanguageVersion.of(17)
