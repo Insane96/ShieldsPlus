@@ -1,5 +1,8 @@
 # Changelog
 
+## 1.4.2
+* Fixed basically every feature of the config not working
+
 ## 1.4.1
 * Added italian translation
 * Fixed registering other mods shields not getting the texture correctly
