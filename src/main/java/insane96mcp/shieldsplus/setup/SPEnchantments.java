@@ -1,4 +1,4 @@
-package com.insane96mcp.shieldsplus.setup;
+package insane96mcp.shieldsplus.setup;
 
 import insane96mcp.shieldsplus.ShieldsPlus;
 import insane96mcp.shieldsplus.world.item.enchantment.*;
