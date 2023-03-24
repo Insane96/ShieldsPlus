@@ -1,5 +1,9 @@
-package insane96mcp.shieldsplus.module.base.feature;
+package com.insane96mcp.shieldsplus.module.base.feature;
 
+import com.insane96mcp.shieldsplus.ShieldsPlus;
+import com.insane96mcp.shieldsplus.setup.SPShieldMaterials;
+import com.insane96mcp.shieldsplus.world.item.SPShieldItem;
+import com.insane96mcp.shieldsplus.world.item.enchantment.*;
 import insane96mcp.insanelib.base.Feature;
 import insane96mcp.insanelib.base.Label;
 import insane96mcp.insanelib.base.Module;
