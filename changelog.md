@@ -2,6 +2,7 @@
 
 ## 1.4.3
 * Fixed recipes not unlocking
+* Shield material now requires a LazyLoadedValue
 
 ## 1.4.2
 * Fixed basically every feature of the config not working

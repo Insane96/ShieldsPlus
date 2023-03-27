@@ -19,7 +19,7 @@ public abstract class ShieldItemMixin extends Item {
     @Inject(at = @At("RETURN"), method = "isValidRepairItem", cancellable = true)
     public void isValidRepairItem(ItemStack p_43091_, ItemStack repairingMaterial, CallbackInfoReturnable<Boolean> callbackInfo) {
         if (SPShieldMaterials.IRON.repairItem != null) {
-            callbackInfo.setReturnValue(repairingMaterial.is(SPShieldMaterials.IRON.repairItem));
+            callbackInfo.setReturnValue(repairingMaterial.is(SPShieldMaterials.IRON.repairItem.get()));
             return;
         }
         callbackInfo.setReturnValue(repairingMaterial.is(SPShieldMaterials.IRON.repairTag));

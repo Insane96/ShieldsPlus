@@ -85,7 +85,7 @@ public class SPShieldItem extends ShieldItem {
     @Override
     public boolean isValidRepairItem(@NotNull ItemStack repaired, @NotNull ItemStack repairingMaterial) {
         if (this.material.repairItem != null)
-            return repairingMaterial.is(this.material.repairItem);
+            return repairingMaterial.is(this.material.repairItem.get());
         return repairingMaterial.is(this.material.repairTag);
     }
 
