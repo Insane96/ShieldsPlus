@@ -2,6 +2,7 @@ package insane96mcp.shieldsplus.world.item.crafting;
 
 import insane96mcp.shieldsplus.setup.SPRecipeSerializers;
 import insane96mcp.shieldsplus.world.item.SPShieldItem;
+import net.minecraft.core.RegistryAccess;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.inventory.CraftingContainer;
@@ -50,7 +51,8 @@ public class SPShieldDecorationRecipe extends CustomRecipe {
         return !shieldStack.isEmpty() && !bannerStack.isEmpty();
     }
 
-    public @NotNull ItemStack assemble(CraftingContainer craftingContainer) {
+    @Override
+    public @NotNull ItemStack assemble(CraftingContainer craftingContainer, @NotNull RegistryAccess registryAccess) {
         ItemStack bannerStack = ItemStack.EMPTY;
         ItemStack shieldStack = ItemStack.EMPTY;
 

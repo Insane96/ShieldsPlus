@@ -1,5 +1,8 @@
 # Changelog
 
+## 1.5.0
+* MC 1.19.4
+
 ## 1.4.3
 * Fixed recipes not unlocking
 * Shield material now requires a LazyLoadedValue

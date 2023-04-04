@@ -6,7 +6,6 @@ import insane96mcp.shieldsplus.world.item.SPShieldItem;
 import net.minecraft.core.particles.ParticleTypes;
 import net.minecraft.sounds.SoundEvents;
 import net.minecraft.util.Mth;
-import net.minecraft.world.damagesource.DamageSource;
 import net.minecraft.world.entity.EquipmentSlot;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.player.Player;
@@ -136,7 +135,7 @@ public class ShieldBashEnchantment extends Enchantment {
 				continue;
 			entity.knockback(1d + (0.4d * level), player.getX() - entity.getX(), player.getZ() - entity.getZ());
 			//TODO Send knockback packet to player
-			if (entity.hurt(DamageSource.playerAttack(player), 3 + (3 * level))) {
+			if (entity.hurt(player.damageSources().playerAttack(player), 3 + (3 * level))) {
 				ShieldAblazeEnchantment.apply(player, entity);
 				player.playSound(SoundEvents.SHIELD_BLOCK, 1.0f, 0.5f);
 			}

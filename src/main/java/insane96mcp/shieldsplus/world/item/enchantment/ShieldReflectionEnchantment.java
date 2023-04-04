@@ -49,6 +49,6 @@ public class ShieldReflectionEnchantment extends Enchantment {
 		ItemStack shield = blockingEntity.getUseItem();
 		int reflection = shield.getEnchantmentLevel(SPEnchantments.REFLECTION.get());
 		if (reflection > 0)
-			sourceEntity.hurt(DamageSource.thorns(blockingEntity), Math.min(ShieldReflectionEnchantment.getReflectedDamage(reflection) * amount, ShieldReflectionEnchantment.getCappedReflectedDamage(reflection)));
+			sourceEntity.hurt(blockingEntity.damageSources().thorns(blockingEntity), Math.min(ShieldReflectionEnchantment.getReflectedDamage(reflection) * amount, ShieldReflectionEnchantment.getCappedReflectedDamage(reflection)));
 	}
 }
