@@ -1,5 +1,8 @@
 # Changelog
 
+## 1.5.1
+* Added `SPShieldItem#blockingDamageOverride`
+
 ## 1.5.0
 * MC 1.19.4
 

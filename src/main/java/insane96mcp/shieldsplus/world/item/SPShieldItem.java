@@ -35,12 +35,16 @@ public class SPShieldItem extends ShieldItem {
 
     public ClientMaterials clientMaterials;
 
+    public Double blockingDamageOverride = null;
+
     public SPShieldItem(SPShieldMaterial material, Properties p_43089_) {
         super(p_43089_);
         this.material = material;
     }
 
     public double getBlockedDamage() {
+        if (this.blockingDamageOverride != null)
+            return blockingDamageOverride;
         return this.material.damageBlocked;
     }
 
