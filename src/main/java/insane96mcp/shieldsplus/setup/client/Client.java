@@ -7,7 +7,7 @@ import net.minecraft.client.renderer.item.ItemProperties;
 import net.minecraft.client.renderer.item.ItemPropertyFunction;
 import net.minecraft.world.item.CreativeModeTabs;
 import net.minecraftforge.api.distmarker.Dist;
-import net.minecraftforge.event.CreativeModeTabEvent;
+import net.minecraftforge.event.BuildCreativeModeTabContentsEvent;
 import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.fml.event.lifecycle.FMLClientSetupEvent;
 import net.minecraftforge.registries.RegistryObject;
@@ -37,9 +37,9 @@ public class Client {
         }
     }
 
-    public static void creativeTabsBuildContents(final CreativeModeTabEvent.BuildContents event)
+    public static void creativeTabsBuildContents(final BuildCreativeModeTabContentsEvent event)
     {
-        if (event.getTab() == CreativeModeTabs.COMBAT) {
+        if (event.getTabKey() == CreativeModeTabs.COMBAT) {
             for (RegistryObject<SPShieldItem> shield : SPItems.SHIELDS) {
                 event.accept(shield.get());
             }

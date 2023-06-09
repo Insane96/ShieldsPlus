@@ -36,7 +36,7 @@ public abstract class PlayerMixin extends LivingEntity {
             int fastRecovery = this.getUseItem().getEnchantmentLevel(SPEnchantments.FAST_RECOVERY.get());
             this.getCooldowns().addCooldown(this.getUseItem().getItem(), ticks - (fastRecovery * ShieldFastRecoveryEnchantment.TICKS));
             this.stopUsingItem();
-            this.level.broadcastEntityEvent(this, (byte)30);
+            this.level().broadcastEntityEvent(this, (byte)30);
         }
     }
 

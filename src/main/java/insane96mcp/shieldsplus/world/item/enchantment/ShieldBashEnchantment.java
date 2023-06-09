@@ -62,7 +62,7 @@ public class ShieldBashEnchantment extends Enchantment {
 				if (getChargeUpTimer(player) >= 30)
 					player.playSound(SoundEvents.SHIELD_BLOCK, 1f, 1.65f);
 			}
-			else if (player.isCrouching() && player.isOnGround()) {
+			else if (player.isCrouching() && player.onGround()) {
 				setBashingTimer(player, (byte) 12);
 				setBashingLevel(player, shieldBash);
 				float x = -Mth.sin(player.getYRot() * ((float) Math.PI / 180F));
@@ -70,7 +70,7 @@ public class ShieldBashEnchantment extends Enchantment {
 				player.playSound(SoundEvents.SHIELD_BLOCK, 1f, 1.3f);
 				player.setDeltaMovement(player.getDeltaMovement().add(x * getForce(shieldBash), 0.45d, z * getForce(shieldBash)));
 				for (int i = 0; i < 50; i++) {
-					player.level.addParticle(ParticleTypes.CLOUD, player.getX() + Mth.nextDouble(player.getRandom(), -0.5d, 0.5d), player.getY() + Mth.nextDouble(player.getRandom(), -0.5d, 0.5d) + 0.9d, player.getZ() + Mth.nextDouble(player.getRandom(), -0.5d, 0.5d), 0.1, 0, 0.1);
+					player.level().addParticle(ParticleTypes.CLOUD, player.getX() + Mth.nextDouble(player.getRandom(), -0.5d, 0.5d), player.getY() + Mth.nextDouble(player.getRandom(), -0.5d, 0.5d) + 0.9d, player.getZ() + Mth.nextDouble(player.getRandom(), -0.5d, 0.5d), 0.1, 0, 0.1);
 				}
 				putChargeUpTimerOnCooldown(player);
 			}
@@ -129,7 +129,7 @@ public class ShieldBashEnchantment extends Enchantment {
 
 	public static void damageAndKnockback(Player player, int level) {
 		AABB aabb = player.getBoundingBox().inflate(0.6d, 0.2d, 0.6d);
-		List<LivingEntity> entities = player.level.getEntitiesOfClass(LivingEntity.class, aabb, entity -> entity != player);
+		List<LivingEntity> entities = player.level().getEntitiesOfClass(LivingEntity.class, aabb, entity -> entity != player);
 		for (LivingEntity entity : entities) {
 			if (entity.isDeadOrDying() || entity.invulnerableTime > 10)
 				continue;
