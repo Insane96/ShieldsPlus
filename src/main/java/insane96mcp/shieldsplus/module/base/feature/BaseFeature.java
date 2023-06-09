@@ -21,9 +21,9 @@ import net.minecraftforge.eventbus.api.SubscribeEvent;
 @Label(name = "Shields+")
 @LoadFeature(module = ShieldsPlus.RESOURCE_PREFIX + "base", canBeDisabled = false)
 public class BaseFeature extends Feature {
-    @Config
-    @Label(name = "Remove Shield Windup", description = "In vanilla when you start blocking with a shield, there's a 0.25 seconds window where you are still not blocking. If true this (stupid) windup time is removed.")
-    public static Boolean removeShieldWindup = true;
+    @Config(min = 0)
+    @Label(name = "Shield Windup", description = "In vanilla when you start blocking with a shield, there's a 0.25 seconds (5 ticks) window where you are still not blocking. With this you can change that or remove it.")
+    public static Integer shieldWindup = 2;
     @Config
     @Label(name = "Shields Block Fixed Damage Amount", description = "If true shields will block only a certain amount of damage. If false the vanilla behaviour is used.")
     public static Boolean shieldBlockFixedDamageAmount = true;
@@ -90,7 +90,7 @@ public class BaseFeature extends Feature {
     }
 
     public static boolean shouldRemoveShieldWindup() {
-        return isEnabled(BaseFeature.class) && removeShieldWindup;
+        return isEnabled(BaseFeature.class) && shieldWindup != 5;
     }
 
     public static boolean combatTestShieldDisabling() {
