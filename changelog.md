@@ -1,5 +1,8 @@
 # Changelog
 
+## 1.6.1
+* Fixed Netherite Shield recipe erroring
+
 ## 1.6.0
 * MC 1.20
 
