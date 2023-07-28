@@ -29,11 +29,11 @@ import java.util.function.Consumer;
 public class SPShieldItem extends ShieldItem {
 
     public static final EnchantmentCategory SHIELD = EnchantmentCategory.create("shield", s -> s instanceof ShieldItem);
-
     public static final ResourceLocation BLOCKING = new ResourceLocation("minecraft:blocking");
     public final SPShieldMaterial material;
-
     public ClientMaterials clientMaterials;
+
+    public Double blockingDamageOverride = null;
 
     public SPShieldItem(SPShieldMaterial material, Properties p_43089_) {
         super(p_43089_);
@@ -41,6 +41,8 @@ public class SPShieldItem extends ShieldItem {
     }
 
     public double getBlockedDamage() {
+        if (this.blockingDamageOverride != null)
+            return blockingDamageOverride;
         return this.material.damageBlocked;
     }
 

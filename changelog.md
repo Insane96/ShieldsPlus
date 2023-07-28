@@ -1,5 +1,10 @@
 # Changelog
 
+## 1.6.2
+* Added `blockingDamageOverride`
+  * Can be used by mods to change the blocking damage of a SPShieldItem
+* Now requires MC 1.20.1
+* 
 ## 1.6.1
 * Fixed Netherite Shield recipe erroring
 
