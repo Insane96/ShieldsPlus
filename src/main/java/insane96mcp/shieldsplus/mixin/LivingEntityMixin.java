@@ -8,8 +8,8 @@ import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.level.Level;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.Shadow;
-import org.spongepowered.asm.mixin.Unique;
-import org.spongepowered.asm.mixin.injection.*;
+import org.spongepowered.asm.mixin.injection.Constant;
+import org.spongepowered.asm.mixin.injection.ModifyConstant;
 
 @Mixin(value = LivingEntity.class)
 public abstract class LivingEntityMixin extends Entity {
@@ -25,7 +25,8 @@ public abstract class LivingEntityMixin extends Entity {
         return BaseFeature.shouldRemoveShieldWindup() ? BaseFeature.shieldWindup : ticks;
     }
 
-    @Unique private boolean hasBlocked;
+    //TODO It's missing the amount of damage taken
+    /*@Unique private boolean hasBlocked;
     @Unique private float amount;
 
     @ModifyVariable(at = @At(value = "STORE", ordinal = 1), method = "hurt", ordinal = 0)
@@ -40,5 +41,5 @@ public abstract class LivingEntityMixin extends Entity {
             return;
 
         this.playHurtSound(damageSource);
-    }
+    }*/
 }
