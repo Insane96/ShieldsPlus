@@ -1,5 +1,8 @@
 # Changelog
 
+## 1.6.4
+* Fixed disabling "Shields Block Fixed Damage Amount" not hiding the tooltip on shields
+
 ## 1.6.3
 * Fixed hurt sound no longer played
 

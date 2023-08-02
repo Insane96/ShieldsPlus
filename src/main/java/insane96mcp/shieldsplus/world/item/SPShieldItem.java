@@ -1,5 +1,6 @@
 package insane96mcp.shieldsplus.world.item;
 
+import insane96mcp.shieldsplus.module.base.feature.BaseFeature;
 import insane96mcp.shieldsplus.render.ShieldBlockEntityWithoutLevelRenderer;
 import insane96mcp.shieldsplus.setup.SPEnchantments;
 import insane96mcp.shieldsplus.setup.Strings;
@@ -68,6 +69,8 @@ public class SPShieldItem extends ShieldItem {
     }
 
     public static void addDamageBlockedText(ItemStack itemStack, List<Component> components, double blockedDamage) {
+        if (!BaseFeature.shieldBlockFixedDamageAmount)
+            return;
         int reinforced = itemStack.getEnchantmentLevel(SPEnchantments.REINFORCED.get());
         float finalBlockedDamage = (float) (blockedDamage + ShieldReinforcedEnchantment.getDamageBlocked(reinforced));
         int reflection = itemStack.getEnchantmentLevel(SPEnchantments.REFLECTION.get());
