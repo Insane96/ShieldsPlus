@@ -1,5 +1,8 @@
 # Changelog
 
+## 1.5.2
+* Fixed disabling "Shields Block Fixed Damage Amount" not hiding the tooltip on shields
+
 ## 1.5.1
 * Added `SPShieldItem#blockingDamageOverride`
 
