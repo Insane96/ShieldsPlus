@@ -1,5 +1,6 @@
 package insane96mcp.shieldsplus.world.item.enchantment;
 
+import insane96mcp.insanelib.util.MCUtils;
 import insane96mcp.shieldsplus.setup.SPEnchantments;
 import insane96mcp.shieldsplus.world.item.SPShieldItem;
 import net.minecraft.world.entity.EquipmentSlot;
@@ -13,7 +14,7 @@ import java.util.UUID;
 
 public class ShieldLightweightEnchantment extends Enchantment {
 
-	public static final double BONUS_SPEED = 1d;
+	public static final double BONUS_SPEED = 3d;
 	public static final UUID BONUS_SPEED_UUID = UUID.fromString("bf9ce34a-a825-4b22-a050-f6f752879332");
 
 	public ShieldLightweightEnchantment() {
@@ -33,20 +34,13 @@ public class ShieldLightweightEnchantment extends Enchantment {
 	}
 
 	public static void onTick(Player player) {
-		AttributeInstance attribute = player.getAttribute(Attributes.MOVEMENT_SPEED);
-		if (attribute == null)
-			return;
-
 		if (player.isBlocking()) {
 			int lightweight = player.getUseItem().getEnchantmentLevel(SPEnchantments.LIGHTWEIGHT.get());
-			if (lightweight > 0) {
-
-				if (attribute.getModifier(ShieldLightweightEnchantment.BONUS_SPEED_UUID) == null) {
-					attribute.addTransientModifier(new AttributeModifier(BONUS_SPEED_UUID, "Lightweight bonus speed", BONUS_SPEED * lightweight, AttributeModifier.Operation.MULTIPLY_BASE));
-				}
-			}
+			if (lightweight > 0)
+				MCUtils.applyModifier(player, Attributes.MOVEMENT_SPEED, BONUS_SPEED_UUID, "Lightweight bonus speed", BONUS_SPEED * lightweight, AttributeModifier.Operation.MULTIPLY_BASE, false);
 		}
-		else if (attribute.getModifier(ShieldLightweightEnchantment.BONUS_SPEED_UUID) != null) {
+		else {
+			AttributeInstance attribute = player.getAttribute(Attributes.MOVEMENT_SPEED);
 			attribute.removeModifier(ShieldLightweightEnchantment.BONUS_SPEED_UUID);
 		}
 	}

@@ -1,5 +1,8 @@
 # Changelog
 
+## 1.6.5
+* Buffed lightweight speed bonus (~~+100%~~ -> +300%)
+
 ## 1.6.4
 * Fixed disabling "Shields Block Fixed Damage Amount" not hiding the tooltip on shields
 
