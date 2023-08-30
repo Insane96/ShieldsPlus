@@ -11,7 +11,7 @@ import net.minecraft.world.item.enchantment.Enchantment;
 
 public class ShieldRecoilEnchantment extends Enchantment {
 
-	public static final double KNOCKBACK = 0.5d;
+	public static final double KNOCKBACK = 0.65d;
 	public static final double PROJECTILE_KNOCKBACK = 5d;
 
 	public ShieldRecoilEnchantment() {

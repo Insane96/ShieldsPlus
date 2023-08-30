@@ -1,5 +1,8 @@
 # Changelog
 
+## 1.6.6
+* Increased Recoil knockback per level (~~0.5~~ -> 0.65)
+
 ## 1.6.5
 * Buffed lightweight speed bonus (~~+100%~~ -> +300%)
 
@@ -10,7 +13,7 @@
 * Fixed hurt sound no longer played
 
 ## 1.6.2
-* Added `blockingDamageOverride`
+* Added `blockingDamageOverride` in `SPShieldItem`
   * Can be used by mods to change the blocking damage of a SPShieldItem
 * Now requires MC 1.20.1
 
