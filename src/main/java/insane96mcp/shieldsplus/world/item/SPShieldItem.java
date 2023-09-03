@@ -13,6 +13,7 @@ import net.minecraft.client.renderer.Sheets;
 import net.minecraft.client.resources.model.Material;
 import net.minecraft.network.chat.Component;
 import net.minecraft.resources.ResourceLocation;
+import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.ShieldItem;
 import net.minecraft.world.item.TooltipFlag;
@@ -41,7 +42,7 @@ public class SPShieldItem extends ShieldItem {
         this.material = material;
     }
 
-    public double getBlockedDamage() {
+    public double getBlockedDamage(ItemStack stack, @Nullable LivingEntity entity, Level level) {
         if (this.blockingDamageOverride != null)
             return blockingDamageOverride;
         return this.material.damageBlocked;
@@ -65,7 +66,7 @@ public class SPShieldItem extends ShieldItem {
     @Override
     public void appendHoverText(@NotNull ItemStack itemStack, @Nullable Level level, @NotNull List<Component> components, @NotNull TooltipFlag tooltipFlag) {
         super.appendHoverText(itemStack, level, components, tooltipFlag);
-        addDamageBlockedText(itemStack, components, this.getBlockedDamage());
+        addDamageBlockedText(itemStack, components, this.getBlockedDamage(itemStack, null, level));
     }
 
     public static void addDamageBlockedText(ItemStack itemStack, List<Component> components, double blockedDamage) {
@@ -76,10 +77,6 @@ public class SPShieldItem extends ShieldItem {
         int reflection = itemStack.getEnchantmentLevel(SPEnchantments.REFLECTION.get());
         float reflectedDamage = ShieldReflectionEnchantment.getReflectedDamage(reflection);
         components.add(Component.translatable(Strings.Translatable.DAMAGE_BLOCKED, new DecimalFormat("#.#").format(finalBlockedDamage)).withStyle(ChatFormatting.BLUE));
-        /*if (reinforced > 0) {
-            components.add(Component.translatable(Strings.Translatable.REINFORCED_BONUS, new DecimalFormat("#.#").format(ShieldReinforcedEnchantment.getDamageBlocked(reinforced))).withStyle(ChatFormatting.DARK_GRAY));
-        }*/
-        //Add here more blocking damage modifiers
 
         if (reflection > 0) {
             components.add(Component.translatable(Strings.Translatable.DAMAGE_REFLECTED, new DecimalFormat("#.#").format(reflectedDamage * 100)).withStyle(ChatFormatting.BLUE));

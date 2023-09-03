@@ -1,5 +1,8 @@
 # Changelog
 
+# 1.6.7
+* SPShieldItem.getBlockedDamage now accepts an ItemStack, @Nullable LivingEntity and Level
+
 ## 1.6.6
 * Increased Recoil knockback per level (~~0.5~~ -> 0.65)
 

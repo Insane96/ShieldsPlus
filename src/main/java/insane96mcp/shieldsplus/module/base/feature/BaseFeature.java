@@ -49,7 +49,7 @@ public class BaseFeature extends Feature {
                 baseBlockedDamage = SPShieldMaterials.IRON.damageBlocked;
             }
             else if (event.getEntity().getUseItem().getItem() instanceof SPShieldItem) {
-                baseBlockedDamage = ((SPShieldItem) event.getEntity().getUseItem().getItem()).getBlockedDamage();
+                baseBlockedDamage = ((SPShieldItem) event.getEntity().getUseItem().getItem()).getBlockedDamage(event.getEntity().getUseItem(), event.getEntity(), event.getEntity().level());
             }
             else
                 return;
