@@ -3,38 +3,35 @@ package insane96mcp.shieldsplus.network;
 import insane96mcp.shieldsplus.data.ShieldDefinition;
 import insane96mcp.shieldsplus.data.ShieldDefinitionReloader;
 import net.minecraft.network.FriendlyByteBuf;
-import net.minecraft.resources.ResourceLocation;
+import net.minecraft.server.level.ServerPlayer;
+import net.minecraftforge.network.NetworkDirection;
 import net.minecraftforge.network.NetworkEvent;
 
-import java.util.Map;
+import java.util.List;
 import java.util.function.Supplier;
 
 public class ClientUpdateShieldDefinitionMessage {
-    Map<ResourceLocation, ShieldDefinition> map;
+    List<ShieldDefinition> shieldDefinitions;
 
-    public ClientUpdateShieldDefinitionMessage(Map<ResourceLocation, ShieldDefinition> map) {
-        this.map = map;
+    public ClientUpdateShieldDefinitionMessage(List<ShieldDefinition> shieldDefinitions) {
+        this.shieldDefinitions = shieldDefinitions;
     }
 
     public static void encode(ClientUpdateShieldDefinitionMessage msg, FriendlyByteBuf buf) {
-        buf.writeMap(msg.map, ClientUpdateShieldDefinitionMessage::resourceLocationToNetwork, ShieldDefinition::toNetwork);
-    }
-
-    private static void resourceLocationToNetwork(FriendlyByteBuf buf, ResourceLocation resourceLocation) {
-        buf.writeUtf(resourceLocation.toString());
+        buf.writeCollection(msg.shieldDefinitions, ShieldDefinition::toNetwork);
     }
 
     public static ClientUpdateShieldDefinitionMessage decode(FriendlyByteBuf buf) {
-        return new ClientUpdateShieldDefinitionMessage(buf.readMap(ClientUpdateShieldDefinitionMessage::resourceLocationFromNetwork, ShieldDefinition::fromNetwork));
+        return new ClientUpdateShieldDefinitionMessage(buf.readList(ShieldDefinition::fromNetwork));
     }
-
-    private static ResourceLocation resourceLocationFromNetwork(FriendlyByteBuf buf) {
-        return ResourceLocation.tryParse(buf.readUtf());
-    }
-
 
     public static void handle(final ClientUpdateShieldDefinitionMessage message, Supplier<NetworkEvent.Context> ctx) {
-        ctx.get().enqueueWork(() -> ShieldDefinitionReloader.apply(message.map));
+        ctx.get().enqueueWork(() -> ShieldDefinitionReloader.apply(message.shieldDefinitions));
         ctx.get().setPacketHandled(true);
+    }
+
+    public static void sync(List<ShieldDefinition> shieldDefinitions, ServerPlayer player) {
+        Object msg = new ClientUpdateShieldDefinitionMessage(shieldDefinitions);
+        NetworkHandler.CHANNEL.sendTo(msg, player.connection.connection, NetworkDirection.PLAY_TO_CLIENT);
     }
 }

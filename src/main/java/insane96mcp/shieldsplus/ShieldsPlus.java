@@ -1,6 +1,7 @@
 package insane96mcp.shieldsplus;
 
 import insane96mcp.shieldsplus.data.ShieldDefinitionReloader;
+import insane96mcp.shieldsplus.network.NetworkHandler;
 import insane96mcp.shieldsplus.setup.Config;
 import insane96mcp.shieldsplus.setup.SPEnchantments;
 import insane96mcp.shieldsplus.setup.SPItems;
@@ -13,6 +14,7 @@ import net.minecraftforge.eventbus.api.IEventBus;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.ModLoadingContext;
 import net.minecraftforge.fml.common.Mod;
+import net.minecraftforge.fml.event.lifecycle.FMLCommonSetupEvent;
 import net.minecraftforge.fml.javafmlmod.FMLJavaModLoadingContext;
 
 @Mod(ShieldsPlus.MOD_ID)
@@ -28,6 +30,7 @@ public class ShieldsPlus
         FMLJavaModLoadingContext.get().getModEventBus().addListener(Client::setup);
         FMLJavaModLoadingContext.get().getModEventBus().addListener(Client::creativeTabsBuildContents);
         final IEventBus modEventBus = FMLJavaModLoadingContext.get().getModEventBus();
+        modEventBus.addListener(this::commonSetup);
         SPItems.ITEMS.register(modEventBus);
         SPEnchantments.ENCHANTMENTS.register(modEventBus);
         SPRecipeSerializers.RECIPE_SERIALIZERS.register(modEventBus);
@@ -36,5 +39,9 @@ public class ShieldsPlus
     @SubscribeEvent(priority = EventPriority.LOW)
     public void onAddReloadListener(AddReloadListenerEvent event) {
         event.addListener(ShieldDefinitionReloader.INSTANCE);
+    }
+
+    private void commonSetup(final FMLCommonSetupEvent event) {
+        NetworkHandler.init();
     }
 }
