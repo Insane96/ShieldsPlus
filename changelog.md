@@ -3,6 +3,16 @@
 ## Upcoming
 * Added Aegis enchantment
   * Reduces damage taken when blocking. Incompatible with reinforced & reflection
+* Rebalanced shields blocked damage (mostly lowered)
+  * Blocked damage can now be customized via data packs by creating a shield_definitions folder in the mods namespace and adding a simple json with the name of the item  
+    Example: `shieldsplus/shield_definitions/golden_shield.json`  
+    ```json
+      {
+          "blocked_damage": 100
+      }
+    ```
+    This makes Golden Shields block 100 damage
+* Added an Iron shield that replaces the vanilla shield
 * Reinforced enchantment now increases blocked damage by 0.5 + (~~0.5~~ -> 0.25 per level)
 
 ## 1.6.7

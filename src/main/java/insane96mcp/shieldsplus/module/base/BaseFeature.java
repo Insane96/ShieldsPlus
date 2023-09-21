@@ -5,6 +5,7 @@ import insane96mcp.insanelib.base.Label;
 import insane96mcp.insanelib.base.Module;
 import insane96mcp.insanelib.base.config.Config;
 import insane96mcp.insanelib.base.config.LoadFeature;
+import insane96mcp.insanelib.data.IdTagValue;
 import insane96mcp.shieldsplus.ShieldsPlus;
 import insane96mcp.shieldsplus.setup.SPEnchantments;
 import insane96mcp.shieldsplus.setup.SPShieldMaterials;
@@ -17,6 +18,8 @@ import net.minecraftforge.event.entity.living.LivingHurtEvent;
 import net.minecraftforge.event.entity.living.ShieldBlockEvent;
 import net.minecraftforge.event.entity.player.ItemTooltipEvent;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
+
+import java.util.List;
 
 @Label(name = "Shields+")
 @LoadFeature(module = ShieldsPlus.RESOURCE_PREFIX + "base", canBeDisabled = false)
@@ -33,6 +36,19 @@ public class BaseFeature extends Feature {
     @Config
     @Label(name = "Combat Test shield disabling", description = "Makes shields always disable for 1.6 seconds like Combat Test snapshots.")
     public static Boolean combatTestShieldDisabling = true;
+
+    public static final List<IdTagValue> DEFAULT_BLOCKING_VALUES = List.of(
+            IdTagValue.newId("shieldsplus:wooden_shield", 1f),
+            IdTagValue.newId("shieldsplus:stone_shield", 1f),
+            IdTagValue.newId("shieldsplus:wooden_shield", 1f),
+            IdTagValue.newId("shieldsplus:wooden_shield", 1f),
+            IdTagValue.newId("shieldsplus:wooden_shield", 1f),
+            IdTagValue.newId("shieldsplus:wooden_shield", 1f),
+            IdTagValue.newId("shieldsplus:wooden_shield", 1f),
+            IdTagValue.newId("shieldsplus:wooden_shield", 1f),
+            IdTagValue.newId("shieldsplus:wooden_shield", 1f),
+            IdTagValue.newId("shieldsplus:wooden_shield", 1f)
+    );
 
     public BaseFeature(Module module, boolean enabledByDefault, boolean canBeDisabled) {
         super(module, enabledByDefault, canBeDisabled);

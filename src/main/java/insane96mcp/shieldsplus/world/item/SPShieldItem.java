@@ -35,7 +35,7 @@ public class SPShieldItem extends ShieldItem {
     public final SPShieldMaterial material;
     public ClientMaterials clientMaterials;
 
-    public Double blockingDamageOverride = null;
+    public Float blockingDamageOverride = null;
 
     public SPShieldItem(SPShieldMaterial material, Properties p_43089_) {
         super(p_43089_);

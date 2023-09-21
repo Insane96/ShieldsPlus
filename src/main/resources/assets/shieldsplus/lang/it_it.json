@@ -1,9 +1,8 @@
 {
     "item.shieldsplus.wooden_shield": "Scudo di legno",
     "item.shieldsplus.stone_shield": "Scudo di pietra",
-    "item.shieldsplus.copper_shield": "Scudo di rame",
     "item.shieldsplus.golden_shield": "Scudo d'oro",
-    "item.minecraft.shield": "Scudo di ferro",
+    "item.shieldsplus.iron_shield": "Scudo di ferro",
     "item.shieldsplus.diamond_shield": "Scudo di diamante",
     "item.shieldsplus.netherite_shield": "Scudo di netherite",
     "shieldsplus:damage_blocked": "%s danno bloccato",
