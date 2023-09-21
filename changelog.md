@@ -1,6 +1,6 @@
 # Changelog
 
-## Upcoming
+## 1.7.0
 * Added Aegis enchantment
   * Reduces damage taken when blocking. Incompatible with reinforced & reflection
 * Rebalanced shields blocked damage (mostly lowered)
@@ -33,7 +33,7 @@
 
 ## 1.6.2
 * Added `blockingDamageOverride` in `SPShieldItem`
-  * Can be used by mods to change the blocking damage of a SPShieldItem
+  * Can be used by mods to change the blocked damage of a SPShieldItem
 * Now requires MC 1.20.1
 
 ## 1.6.1

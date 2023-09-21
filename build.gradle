@@ -1,120 +1,115 @@
-buildscript {
-    repositories {
-        // These repositories are only for Gradle plugins, put any other repositories in the repository block further below
-        maven { url = 'https://maven.minecraftforge.net' }
-        maven { url = 'https://repo.spongepowered.org/repository/maven-public/' }
-        mavenCentral()
-    }
-    dependencies {
-        classpath group: 'net.minecraftforge.gradle', name: 'ForgeGradle', version: '5.1.+', changing: true
-        classpath group: 'org.spongepowered', name: 'mixingradle', version: '0.7-SNAPSHOT'
-    }
-}
-// Only edit below this line, the above code adds and enables the necessary things for Forge to be setup.
 plugins {
     id 'eclipse'
+    id 'idea'
     id 'maven-publish'
+    id 'net.neoforged.gradle' version '[6.0.18,6.2)'
+    id 'org.parchmentmc.librarian.forgegradle' version '1.+'
+    id 'org.spongepowered.mixin' version '0.7.+'
 }
-apply plugin: 'net.minecraftforge.gradle'
-apply plugin: 'org.spongepowered.mixin'
-
 
 version = "${mod_version}-mc${mc_version}"
-group = 'insane96mcp.shieldsplus'
-archivesBaseName = 'Shields+'
+group = "insane96mcp.${mod_id}"
+
+base {
+    archivesName = 'Shields+'
+}
 
 java.toolchain.languageVersion = JavaLanguageVersion.of(17)
 
 println "Java: ${System.getProperty 'java.version'}, JVM: ${System.getProperty 'java.vm.version'} (${System.getProperty 'java.vendor'}), Arch: ${System.getProperty 'os.arch'}"
 minecraft {
-    mappings channel: 'official', version: "${mc_version}"
+    mappings channel: 'parchment', version: '2023.07.23-1.20.1'
+    copyIdeResources = true
+    accessTransformer = file('src/main/resources/META-INF/accesstransformer.cfg')
 
-     accessTransformer = file('src/main/resources/META-INF/accesstransformer.cfg') // Currently, this location cannot be changed from the default.
     runs {
-        client {
-            workingDirectory project.file('run')
-
+        configureEach {
             property 'forge.logging.markers', 'REGISTRIES'
-
             property 'forge.logging.console.level', 'debug'
 
-            property 'forge.enabledGameTestNamespaces', 'shieldsplus'
+            args "-mixin.config=${mod_id}.mixins.json"
 
             mods {
-                shieldsplus {
+                "${mod_id}" {
                     source sourceSets.main
                 }
             }
         }
 
-        server {
+        client {
             workingDirectory project.file('run')
+            property 'forge.enabledGameTestNamespaces', mod_id
+        }
 
-            property 'forge.logging.markers', 'REGISTRIES'
+        server {
+            workingDirectory project.file('run-server')
+            property 'forge.enabledGameTestNamespaces', mod_id
+            args '--nogui'
+        }
 
-            property 'forge.logging.console.level', 'debug'
+        data {
+            workingDirectory project.file('run-data')
 
-            property 'forge.enabledGameTestNamespaces', 'shieldsplus'
-
-            mods {
-                shieldsplus {
-                    source sourceSets.main
-                }
-            }
+            args '--mod', mod_id, '--all', '--output', file('src/generated/resources/'), '--existing', file('src/main/resources/')
         }
     }
 }
 
 sourceSets.main.resources { srcDir 'src/generated/resources' }
 
-repositories {
-    flatDir {
-        dirs "libs"
-    }
-    maven { url "https://www.cursemaven.com" }
+mixin {
+    add sourceSets.main, "${mod_id}.refmap.json"
 }
 
-mixin {
-    add sourceSets.main, "shieldsplus.refmap.json"
-    config 'shieldsplus.mixins.json'
+repositories {
+    flatDir {
+        dir 'libs'
+    }
+    maven {
+        name = "CurseMaven"
+        url = "https://www.cursemaven.com/"
+        content {
+            includeGroup "curse.maven"
+        }
+    }
+    maven { url 'https://maven.blamejared.com' }
+}
+
+configurations {
+    shade
+    implementation.extendsFrom shade
 }
 
 dependencies {
-    minecraft "net.minecraftforge:forge:${mc_version}-${forge_version}"
+    minecraft "net.neoforged:forge:${mc_version}-${neo_version}"
     implementation fg.deobf("blank:InsaneLib:${lib_version}-mc${mc_version}")
-
     annotationProcessor "org.spongepowered:mixin:${mixin_version}:processor"
 }
 
-jar {
+// Example for how to get properties into the manifest for reading at runtime.
+tasks.named('jar', Jar).configure {
+    archiveClassifier = 'slim'
     manifest {
         attributes([
-                "Specification-Title"     : "shieldsplus",
-                "Specification-Vendor"    : "insane96mcp",
+                "Specification-Title"     : "${mod_id}",
+                "Specification-Vendor"    : "Insane96MCP",
                 "Specification-Version"   : "1", // We are version 1 of ourselves
                 "Implementation-Title"    : project.name,
                 "Implementation-Version"  : project.jar.archiveVersion,
-                "Implementation-Vendor"   : "insane96mcp",
+                "Implementation-Vendor"   : "Insane96MCP",
                 "Implementation-Timestamp": new Date().format("yyyy-MM-dd'T'HH:mm:ssZ"),
-                "MixinConfigs": "shieldsplus.mixins.json"
+                "MixinConfigs": "${mod_id}.mixins.json"
         ])
     }
+
+    // This is the preferred method to reobfuscate your jar file
+    finalizedBy 'reobfJar'
 }
 
-jar.finalizedBy('reobfJar')
-
-publishing {
-    publications {
-        mavenJava(MavenPublication) {
-            artifact jar
-        }
-    }
-    repositories {
-        maven {
-            url "file://${project.projectDir}/mcmodsrepo"
-        }
-    }
-}
+// However if you are in a multi-project build, dev time needs unobfed jar files, so you can delay the obfuscation until publishing by doing:
+// tasks.named('publish').configure {
+//     dependsOn 'reobfJar'
+// }
 
 tasks.withType(JavaCompile).configureEach {
     options.encoding = 'UTF-8' // Use the UTF-8 charset for Java compilation
