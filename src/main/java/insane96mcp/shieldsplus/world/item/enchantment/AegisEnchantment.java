@@ -7,11 +7,11 @@ import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.enchantment.Enchantment;
 import org.jetbrains.annotations.NotNull;
 
-public class ReinforcedEnchantment extends Enchantment {
+public class AegisEnchantment extends Enchantment {
 
-	public static final float DAMAGE_BLOCKED = 0.25f;
+	public static final float RESISTANCE = 0.1f;
 
-	public ReinforcedEnchantment() {
+	public AegisEnchantment() {
 		super(Rarity.COMMON, SPShieldItem.SHIELD, new EquipmentSlot[]{EquipmentSlot.MAINHAND, EquipmentSlot.OFFHAND});
 	}
 
@@ -29,14 +29,14 @@ public class ReinforcedEnchantment extends Enchantment {
 
 	@Override
 	public boolean checkCompatibility(@NotNull Enchantment enchantment) {
-		return !(enchantment instanceof ReflectionEnchantment) && super.checkCompatibility(enchantment);
+		return !(enchantment instanceof ReflectionEnchantment) && !(enchantment instanceof ReinforcedEnchantment) && super.checkCompatibility(enchantment);
 	}
 
-	public static float getDamageBlocked(int level) {
-		return DAMAGE_BLOCKED * level;
+	public static float getResistance(int level) {
+		return RESISTANCE * level;
 	}
 
-	public static float getDamageBlocked(ItemStack itemStack) {
-		return getDamageBlocked(itemStack.getEnchantmentLevel(SPEnchantments.REINFORCED.get()));
+	public static float getResistance(ItemStack itemStack) {
+		return getResistance(itemStack.getEnchantmentLevel(SPEnchantments.AEGIS.get()));
 	}
 }

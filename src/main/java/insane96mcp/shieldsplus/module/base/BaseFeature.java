@@ -6,14 +6,10 @@ import insane96mcp.insanelib.base.Module;
 import insane96mcp.insanelib.base.config.Config;
 import insane96mcp.insanelib.base.config.LoadFeature;
 import insane96mcp.shieldsplus.ShieldsPlus;
+import insane96mcp.shieldsplus.setup.SPEnchantments;
 import insane96mcp.shieldsplus.setup.SPShieldMaterials;
 import insane96mcp.shieldsplus.world.item.SPShieldItem;
-import insane96mcp.shieldsplus.world.item.enchantment.IBlockingEffect;
-import insane96mcp.shieldsplus.world.item.enchantment.LightweightEnchantment;
-import insane96mcp.shieldsplus.world.item.enchantment.ReinforcedEnchantment;
-import insane96mcp.shieldsplus.world.item.enchantment.ShieldBashEnchantment;
-import net.minecraft.world.damagesource.DamageSource;
-import net.minecraft.world.entity.LivingEntity;
+import insane96mcp.shieldsplus.world.item.enchantment.*;
 import net.minecraft.world.item.Items;
 import net.minecraft.world.item.ShieldItem;
 import net.minecraftforge.event.TickEvent;
@@ -58,16 +54,22 @@ public class BaseFeature extends Feature {
             event.setBlockedDamage(blockedDamage);
         }
 
-        processEnchantments(event.getEntity(), event.getDamageSource(), event.getOriginalBlockedDamage());
-    }
-
-    private void processEnchantments(LivingEntity blockingEntity, DamageSource source, float amount) {
-        if (blockingEntity.getUseItem().getItem() instanceof ShieldItem) {
-            blockingEntity.getUseItem().getAllEnchantments().forEach((enchantment, lvl) -> {
+        //Process blocking enchantments
+        if (event.getEntity().getUseItem().getItem() instanceof ShieldItem) {
+            event.getEntity().getUseItem().getAllEnchantments().forEach((enchantment, lvl) -> {
                 if (enchantment instanceof IBlockingEffect blockingEffectEnchantment)
-                    blockingEffectEnchantment.onBlocked(blockingEntity, source, amount, lvl);
+                    blockingEffectEnchantment.onBlocked(event.getEntity(), event.getDamageSource(), event.getBlockedDamage(), lvl);
             });
         }
+    }
+
+    @SubscribeEvent
+    public void onLivingHurt(LivingHurtEvent event) {
+        int lvl = event.getEntity().getUseItem().getEnchantmentLevel(SPEnchantments.AEGIS.get());
+        if (lvl <= 0)
+            return;
+
+        event.setAmount(event.getAmount() * (1f - AegisEnchantment.getResistance(lvl)));
     }
 
     @SubscribeEvent

@@ -1,6 +1,11 @@
 # Changelog
 
-# 1.6.7
+## Upcoming
+* Added Aegis enchantment
+  * Reduces damage taken when blocking. Incompatible with reinforced & reflection
+* Reinforced enchantment now increases blocked damage by 0.5 + (~~0.5~~ -> 0.25 per level)
+
+## 1.6.7
 * SPShieldItem.getBlockedDamage now accepts an ItemStack, @Nullable LivingEntity and Level
 
 ## 1.6.6
