@@ -1,5 +1,6 @@
 package insane96mcp.shieldsplus.world.item.enchantment;
 
+import insane96mcp.shieldsplus.module.base.BaseFeature;
 import insane96mcp.shieldsplus.setup.SPEnchantments;
 import insane96mcp.shieldsplus.world.item.SPShieldItem;
 import net.minecraft.world.entity.EquipmentSlot;
@@ -30,6 +31,31 @@ public class ReinforcedEnchantment extends Enchantment {
 	@Override
 	public boolean checkCompatibility(@NotNull Enchantment enchantment) {
 		return !(enchantment instanceof ReflectionEnchantment) && super.checkCompatibility(enchantment);
+	}
+
+	@Override
+	public boolean canEnchant(ItemStack pStack) {
+		return BaseFeature.shieldBlockFixedDamageAmount && super.canEnchant(pStack);
+	}
+
+	@Override
+	public boolean canApplyAtEnchantingTable(ItemStack stack) {
+		return BaseFeature.shieldBlockFixedDamageAmount && super.canApplyAtEnchantingTable(stack);
+	}
+
+	@Override
+	public boolean isTradeable() {
+		return BaseFeature.shieldBlockFixedDamageAmount && super.isTradeable();
+	}
+
+	@Override
+	public boolean isDiscoverable() {
+		return BaseFeature.shieldBlockFixedDamageAmount && super.isDiscoverable();
+	}
+
+	@Override
+	public boolean isAllowedOnBooks() {
+		return BaseFeature.shieldBlockFixedDamageAmount && super.isAllowedOnBooks();
 	}
 
 	public static float getDamageBlocked(int level) {

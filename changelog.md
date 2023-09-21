@@ -1,5 +1,8 @@
 # Changelog
 
+## Upcoming
+* Aegis and Reinforced enchantments are now disabled if Shields Block Fixed Damage Amount is disabled
+
 ## 1.7.0
 * Added Aegis enchantment
   * Reduces damage taken when blocking. Incompatible with reinforced & reflection
