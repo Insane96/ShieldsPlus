@@ -13,6 +13,7 @@
     ```
     This makes Golden Shields block 100 damage
 * Added an Iron shield that replaces the vanilla shield
+* Removed Copper Shield
 * Reinforced enchantment now increases blocked damage by 0.5 + (~~0.5~~ -> 0.25 per level)
 
 ## 1.6.7
