@@ -12,12 +12,12 @@ import net.minecraft.world.item.enchantment.Enchantment;
 
 import java.util.UUID;
 
-public class ShieldLightweightEnchantment extends Enchantment {
+public class LightweightEnchantment extends Enchantment {
 
 	public static final double BONUS_SPEED = 3d;
 	public static final UUID BONUS_SPEED_UUID = UUID.fromString("bf9ce34a-a825-4b22-a050-f6f752879332");
 
-	public ShieldLightweightEnchantment() {
+	public LightweightEnchantment() {
 		super(Rarity.RARE, SPShieldItem.SHIELD, new EquipmentSlot[]{EquipmentSlot.MAINHAND, EquipmentSlot.OFFHAND});
 	}
 
@@ -41,7 +41,7 @@ public class ShieldLightweightEnchantment extends Enchantment {
 		}
 		else {
 			AttributeInstance attribute = player.getAttribute(Attributes.MOVEMENT_SPEED);
-			attribute.removeModifier(ShieldLightweightEnchantment.BONUS_SPEED_UUID);
+			attribute.removeModifier(LightweightEnchantment.BONUS_SPEED_UUID);
 		}
 	}
 }

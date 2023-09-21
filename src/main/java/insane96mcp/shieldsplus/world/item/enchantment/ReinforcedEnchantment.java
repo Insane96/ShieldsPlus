@@ -7,11 +7,11 @@ import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.enchantment.Enchantment;
 import org.jetbrains.annotations.NotNull;
 
-public class ShieldReinforcedEnchantment extends Enchantment {
+public class ReinforcedEnchantment extends Enchantment {
 
-	public static final double DAMAGE_BLOCKED = 0.5d;
+	public static final double DAMAGE_BLOCKED = 0.25d;
 
-	public ShieldReinforcedEnchantment() {
+	public ReinforcedEnchantment() {
 		super(Rarity.COMMON, SPShieldItem.SHIELD, new EquipmentSlot[]{EquipmentSlot.MAINHAND, EquipmentSlot.OFFHAND});
 	}
 
@@ -29,11 +29,11 @@ public class ShieldReinforcedEnchantment extends Enchantment {
 
 	@Override
 	public boolean checkCompatibility(@NotNull Enchantment enchantment) {
-		return !(enchantment instanceof ShieldReflectionEnchantment) && super.checkCompatibility(enchantment);
+		return !(enchantment instanceof ReflectionEnchantment) && super.checkCompatibility(enchantment);
 	}
 
 	public static double getDamageBlocked(int level) {
-		return (DAMAGE_BLOCKED * level) + (level > 0 ? 0.5d : 0d);
+		return DAMAGE_BLOCKED * level;
 	}
 
 	public static double getDamageBlocked(ItemStack itemStack) {

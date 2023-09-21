@@ -1,12 +1,12 @@
 package insane96mcp.shieldsplus.world.item;
 
-import insane96mcp.shieldsplus.module.base.feature.BaseFeature;
+import insane96mcp.shieldsplus.module.base.BaseFeature;
 import insane96mcp.shieldsplus.render.ShieldBlockEntityWithoutLevelRenderer;
 import insane96mcp.shieldsplus.setup.SPEnchantments;
 import insane96mcp.shieldsplus.setup.Strings;
 import insane96mcp.shieldsplus.setup.client.ClientMaterials;
-import insane96mcp.shieldsplus.world.item.enchantment.ShieldReflectionEnchantment;
-import insane96mcp.shieldsplus.world.item.enchantment.ShieldReinforcedEnchantment;
+import insane96mcp.shieldsplus.world.item.enchantment.ReflectionEnchantment;
+import insane96mcp.shieldsplus.world.item.enchantment.ReinforcedEnchantment;
 import net.minecraft.ChatFormatting;
 import net.minecraft.client.renderer.BlockEntityWithoutLevelRenderer;
 import net.minecraft.client.renderer.Sheets;
@@ -73,14 +73,14 @@ public class SPShieldItem extends ShieldItem {
         if (!BaseFeature.shieldBlockFixedDamageAmount)
             return;
         int reinforced = itemStack.getEnchantmentLevel(SPEnchantments.REINFORCED.get());
-        float finalBlockedDamage = (float) (blockedDamage + ShieldReinforcedEnchantment.getDamageBlocked(reinforced));
+        float finalBlockedDamage = (float) (blockedDamage + ReinforcedEnchantment.getDamageBlocked(reinforced));
         int reflection = itemStack.getEnchantmentLevel(SPEnchantments.REFLECTION.get());
-        float reflectedDamage = ShieldReflectionEnchantment.getReflectedDamage(reflection);
+        float reflectedDamage = ReflectionEnchantment.getReflectedDamage(reflection);
         components.add(Component.translatable(Strings.Translatable.DAMAGE_BLOCKED, new DecimalFormat("#.#").format(finalBlockedDamage)).withStyle(ChatFormatting.BLUE));
 
         if (reflection > 0) {
             components.add(Component.translatable(Strings.Translatable.DAMAGE_REFLECTED, new DecimalFormat("#.#").format(reflectedDamage * 100)).withStyle(ChatFormatting.BLUE));
-            components.add(Component.translatable(Strings.Translatable.CAPPED_DAMAGE_REFLECTED, new DecimalFormat("#.#").format(ShieldReflectionEnchantment.getCappedReflectedDamage(reflection))).withStyle(ChatFormatting.DARK_GRAY));
+            components.add(Component.translatable(Strings.Translatable.CAPPED_DAMAGE_REFLECTED, new DecimalFormat("#.#").format(ReflectionEnchantment.getCappedReflectedDamage(reflection))).withStyle(ChatFormatting.DARK_GRAY));
         }
     }
 

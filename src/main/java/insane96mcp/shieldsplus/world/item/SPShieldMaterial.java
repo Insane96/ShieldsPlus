@@ -1,7 +1,6 @@
 package insane96mcp.shieldsplus.world.item;
 
 import net.minecraft.tags.TagKey;
-import net.minecraft.util.LazyLoadedValue;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.Rarity;
 
@@ -11,7 +10,7 @@ public class SPShieldMaterial {
     public String materialName;
     public double damageBlocked;
     public int durability;
-    public LazyLoadedValue<Item> repairItem;
+    public Supplier<Item> repairItem;
     public TagKey<Item> repairTag;
     public int enchantmentValue;
     public Rarity rarity;
@@ -20,7 +19,7 @@ public class SPShieldMaterial {
         this.materialName = materialName;
         this.damageBlocked = damageBlocked;
         this.durability = durability;
-        this.repairItem = new LazyLoadedValue<>(repairItem);
+        this.repairItem = repairItem;
         this.enchantmentValue = enchantmentValue;
         this.rarity = rarity;
     }

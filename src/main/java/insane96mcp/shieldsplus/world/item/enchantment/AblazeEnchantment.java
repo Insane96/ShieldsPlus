@@ -9,11 +9,11 @@ import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.enchantment.Enchantment;
 
-public class ShieldAblazeEnchantment extends Enchantment {
+public class AblazeEnchantment extends Enchantment implements IBlockingEffect {
 
 	public static final int SECONDS_ON_FIRE = 3;
 
-	public ShieldAblazeEnchantment() {
+	public AblazeEnchantment() {
 		super(Rarity.UNCOMMON, SPShieldItem.SHIELD, new EquipmentSlot[]{EquipmentSlot.MAINHAND, EquipmentSlot.OFFHAND});
 	}
 
@@ -29,7 +29,7 @@ public class ShieldAblazeEnchantment extends Enchantment {
 		return 2;
 	}
 
-	public static void onBlocked(LivingEntity blockingEntity, DamageSource source) {
+	public void onBlocked(LivingEntity blockingEntity, DamageSource source, float amount, int lvl) {
 		if (source.getDirectEntity() != null)
 			apply(blockingEntity, source.getDirectEntity());
 	}
@@ -38,6 +38,6 @@ public class ShieldAblazeEnchantment extends Enchantment {
 		ItemStack shield = attacker.getUseItem();
 		int ablaze = shield.getEnchantmentLevel(SPEnchantments.ABLAZE.get());
 		if (ablaze > 0)
-			other.setSecondsOnFire(ablaze * ShieldAblazeEnchantment.SECONDS_ON_FIRE);
+			other.setSecondsOnFire(ablaze * AblazeEnchantment.SECONDS_ON_FIRE);
 	}
 }

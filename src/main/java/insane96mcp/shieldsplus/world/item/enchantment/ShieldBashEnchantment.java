@@ -44,7 +44,7 @@ public class ShieldBashEnchantment extends Enchantment {
 
 	@Override
 	public boolean checkCompatibility(@NotNull Enchantment enchantment) {
-		return !(enchantment instanceof ShieldReflectionEnchantment) && !(enchantment instanceof ShieldRecoilEnchantment) && super.checkCompatibility(enchantment);
+		return !(enchantment instanceof ReflectionEnchantment) && !(enchantment instanceof RecoilEnchantment) && super.checkCompatibility(enchantment);
 	}
 
 	public static double getForce(byte level) {
@@ -134,9 +134,9 @@ public class ShieldBashEnchantment extends Enchantment {
 			if (entity.isDeadOrDying() || entity.invulnerableTime > 10)
 				continue;
 			entity.knockback(1d + (0.4d * level), player.getX() - entity.getX(), player.getZ() - entity.getZ());
-			//TODO Send knockback packet to player
+			entity.hurtMarked = true;
 			if (entity.hurt(player.damageSources().playerAttack(player), 3 + (3 * level))) {
-				ShieldAblazeEnchantment.apply(player, entity);
+				AblazeEnchantment.apply(player, entity);
 				player.playSound(SoundEvents.SHIELD_BLOCK, 1.0f, 0.5f);
 			}
 		}

@@ -1,20 +1,18 @@
 package insane96mcp.shieldsplus.world.item.enchantment;
 
-import insane96mcp.shieldsplus.setup.SPEnchantments;
 import insane96mcp.shieldsplus.world.item.SPShieldItem;
 import net.minecraft.world.damagesource.DamageSource;
 import net.minecraft.world.entity.EquipmentSlot;
 import net.minecraft.world.entity.LivingEntity;
-import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.enchantment.Enchantment;
 import org.jetbrains.annotations.NotNull;
 
-public class ShieldReflectionEnchantment extends Enchantment {
+public class ReflectionEnchantment extends Enchantment implements IBlockingEffect {
 
 	public static final float REFLECTED_DAMAGE = 0.125f;
 	public static final float CAPPED_REFLECTED_DAMAGE = 2f;
 
-	public ShieldReflectionEnchantment() {
+	public ReflectionEnchantment() {
 		super(Rarity.RARE, SPShieldItem.SHIELD, new EquipmentSlot[]{EquipmentSlot.MAINHAND, EquipmentSlot.OFFHAND});
 	}
 
@@ -32,7 +30,7 @@ public class ShieldReflectionEnchantment extends Enchantment {
 
 	@Override
 	public boolean checkCompatibility(@NotNull Enchantment enchantment) {
-		return !(enchantment instanceof ShieldReinforcedEnchantment) && super.checkCompatibility(enchantment);
+		return !(enchantment instanceof ReinforcedEnchantment) && super.checkCompatibility(enchantment);
 	}
 
 	public static float getReflectedDamage(int level) {
@@ -43,12 +41,11 @@ public class ShieldReflectionEnchantment extends Enchantment {
 		return level * CAPPED_REFLECTED_DAMAGE;
 	}
 
-	public static void onBlocked(LivingEntity blockingEntity, DamageSource source, float amount) {
-		if (!(source.getEntity() instanceof LivingEntity sourceEntity && source.getEntity() == source.getDirectEntity()))
+	public void onBlocked(LivingEntity blockingEntity, DamageSource source, float amount, int lvl) {
+		if ((!(source.getEntity() instanceof LivingEntity sourceEntity && source.getEntity() == source.getDirectEntity()))
+				|| lvl <= 0)
 			return;
-		ItemStack shield = blockingEntity.getUseItem();
-		int reflection = shield.getEnchantmentLevel(SPEnchantments.REFLECTION.get());
-		if (reflection > 0)
-			sourceEntity.hurt(blockingEntity.damageSources().thorns(blockingEntity), Math.min(ShieldReflectionEnchantment.getReflectedDamage(reflection) * amount, ShieldReflectionEnchantment.getCappedReflectedDamage(reflection)));
+
+		sourceEntity.hurt(blockingEntity.damageSources().thorns(blockingEntity), Math.min(ReflectionEnchantment.getReflectedDamage(lvl) * amount, ReflectionEnchantment.getCappedReflectedDamage(lvl)));
 	}
 }

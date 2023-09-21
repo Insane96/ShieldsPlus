@@ -4,11 +4,11 @@ import insane96mcp.shieldsplus.world.item.SPShieldItem;
 import net.minecraft.world.entity.EquipmentSlot;
 import net.minecraft.world.item.enchantment.Enchantment;
 
-public class ShieldFastRecoveryEnchantment extends Enchantment {
+public class FastRecoveryEnchantment extends Enchantment {
 
 	public static final int TICKS = 12;
 
-	public ShieldFastRecoveryEnchantment() {
+	public FastRecoveryEnchantment() {
 		super(Rarity.RARE, SPShieldItem.SHIELD, new EquipmentSlot[]{EquipmentSlot.MAINHAND, EquipmentSlot.OFFHAND});
 	}
 
