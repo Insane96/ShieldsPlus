@@ -1,7 +1,10 @@
 # Changelog
 
-## Upcoming
+* Make enchantments configurable
+
+## 1.7.1
 * Aegis and Reinforced enchantments are now disabled if Shields Block Fixed Damage Amount is disabled
+* Sorted shields in the creative tab
 
 ## 1.7.0
 * Added Aegis enchantment
