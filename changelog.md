@@ -1,6 +1,10 @@
 # Changelog
 
+* Make shields go on cooldown if parrying too much
 * Make enchantments configurable
+
+## 1.7.2
+* Fixed Stone Shield requiring cobblestone and not using `stone_tool_materials` item tag
 
 ## 1.7.1
 * Aegis and Reinforced enchantments are now disabled if Shields Block Fixed Damage Amount is disabled
