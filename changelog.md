@@ -1,7 +1,16 @@
 # Changelog
 
-* Make shields go on cooldown if parrying too much
 * Make enchantments configurable
+
+## 1.8.0
+* Shields now can be lifted only for a certain amount of time and will go into cooldown
+* Shields stats are now defined in a file instead of hardcoded
+  * blocked damage, lifted time and cooldown must now be defined in the `shield_definitions` folder
+* Adjusted Shield Bash
+  * Decreased damage (~~6/9/12~~ -> 4/7/10 at I/II/III)
+  * Increased upward force
+  * Reduced forward force
+* Vanilla shield is no longer affected by the mod
 
 ## 1.7.2
 * Fixed Stone Shield requiring cobblestone and not using `stone_tool_materials` item tag
@@ -14,7 +23,7 @@
 * Added Aegis enchantment
   * Reduces damage taken when blocking. Incompatible with reinforced & reflection
 * Rebalanced shields blocked damage (mostly lowered)
-  * Blocked damage can now be customized via data packs by creating a shield_definitions folder in the mods namespace and adding a simple json with the name of the item  
+  * Blocked damage can now be customized via data packs by creating a `shield_definitions` folder in the mods namespace and adding a simple json with the name of the item  
     Example: `shieldsplus/shield_definitions/golden_shield.json`  
     ```json
       {

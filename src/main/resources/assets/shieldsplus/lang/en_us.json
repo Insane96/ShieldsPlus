@@ -9,6 +9,8 @@
     "shieldsplus:reinforced_bonus": "(+%s from Reinforced)",
     "shieldsplus:damage_reflected": "%s%% damage reflected",
     "shieldsplus:capped_damage_reflected": "(up to %s damage reflected)",
+    "shieldsplus:blocking_time": "%ss lifted",
+    "shieldsplus:cooldown": "%ss cooldown",
 
     "enchantment.shieldsplus.recoil": "Recoil",
     "enchantment.shieldsplus.reflection": "Reflection",

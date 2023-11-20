@@ -48,27 +48,27 @@ public class ShieldBashEnchantment extends Enchantment {
 	}
 
 	public static double getForce(byte level) {
-		return 3d + (0.5d * (level - 1));
+		return 2.5d + (0.5d * (level - 1));
 	}
 
 	public static void onTick(Player player) {
-		byte shieldBash = (byte) player.getUseItem().getEnchantmentLevel(SPEnchantments.SHIELD_BASH.get());
+		byte lvl = (byte) player.getUseItem().getEnchantmentLevel(SPEnchantments.SHIELD_BASH.get());
 
 		cooldownTickChargeUpTimer(player);
 
-		if (player.isBlocking() && getBashingTimer(player) <= 0 && shieldBash > 0) {
+		if (player.isBlocking() && getBashingTimer(player) <= 0 && lvl > 0) {
 			if (getChargeUpTimer(player) < 30) {
 				incrementChargeUpTimer(player);
 				if (getChargeUpTimer(player) >= 30)
-					player.playSound(SoundEvents.SHIELD_BLOCK, 1f, 1.65f);
+					player.playSound(SoundEvents.SHIELD_BLOCK, 0.85f, 1.65f);
 			}
 			else if (player.isCrouching() && player.onGround()) {
 				setBashingTimer(player, (byte) 12);
-				setBashingLevel(player, shieldBash);
+				setBashingLevel(player, lvl);
 				float x = -Mth.sin(player.getYRot() * ((float) Math.PI / 180F));
 				float z = Mth.cos(player.getYRot() * ((float) Math.PI / 180F));
-				player.playSound(SoundEvents.SHIELD_BLOCK, 1f, 1.3f);
-				player.setDeltaMovement(player.getDeltaMovement().add(x * getForce(shieldBash), 0.45d, z * getForce(shieldBash)));
+				player.playSound(SoundEvents.SHIELD_BLOCK, 0.85f, 1.3f);
+				player.setDeltaMovement(player.getDeltaMovement().add(x * getForce(lvl), 0.45d + (0.05d * (lvl - 1)), z * getForce(lvl)));
 				for (int i = 0; i < 50; i++) {
 					player.level().addParticle(ParticleTypes.CLOUD, player.getX() + Mth.nextDouble(player.getRandom(), -0.5d, 0.5d), player.getY() + Mth.nextDouble(player.getRandom(), -0.5d, 0.5d) + 0.9d, player.getZ() + Mth.nextDouble(player.getRandom(), -0.5d, 0.5d), 0.1, 0, 0.1);
 				}
@@ -131,11 +131,9 @@ public class ShieldBashEnchantment extends Enchantment {
 		AABB aabb = player.getBoundingBox().inflate(0.6d, 0.2d, 0.6d);
 		List<LivingEntity> entities = player.level().getEntitiesOfClass(LivingEntity.class, aabb, entity -> entity != player);
 		for (LivingEntity entity : entities) {
-			if (entity.isDeadOrDying() || entity.invulnerableTime > 10)
-				continue;
-			entity.knockback(1d + (0.4d * level), player.getX() - entity.getX(), player.getZ() - entity.getZ());
-			entity.hurtMarked = true;
-			if (entity.hurt(player.damageSources().playerAttack(player), 3 + (3 * level))) {
+			if (entity.hurt(player.damageSources().playerAttack(player), 1 + (3 * level))) {
+				entity.knockback(1d + (0.4d * level), player.getX() - entity.getX(), player.getZ() - entity.getZ());
+				entity.hurtMarked = true;
 				AblazeEnchantment.apply(player, entity);
 				player.playSound(SoundEvents.SHIELD_BLOCK, 1.0f, 0.5f);
 			}

@@ -65,7 +65,7 @@ public class ShieldDefinitionReloader extends SimpleJsonResourceReloadListener {
         if (!(item instanceof SPShieldItem spShieldItem))
             return;
 
-        spShieldItem.blockingDamageOverride = shieldDefinition.blockedDamage;
+        spShieldItem.shieldDefinition = shieldDefinition;
     }
 
     @SubscribeEvent

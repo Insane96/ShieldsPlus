@@ -9,6 +9,8 @@
     "shieldsplus:reinforced_bonus": "(+%s da Rinfrorzato)",
     "shieldsplus:damage_reflected": "%s%% danno riflesso",
     "shieldsplus:capped_damage_reflected": "(fino a %s danno riflesso)",
+    "shieldsplus:blocking_time": "%ss alzato",
+    "shieldsplus:cooldown": "Tempo di ricarica: %ss",
 
     "enchantment.shieldsplus.recoil": "Rinculo",
     "enchantment.shieldsplus.reflection": "Riflesso",

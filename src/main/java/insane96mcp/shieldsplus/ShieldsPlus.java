@@ -17,12 +17,15 @@ import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.fml.event.lifecycle.FMLCommonSetupEvent;
 import net.minecraftforge.fml.javafmlmod.FMLJavaModLoadingContext;
 
+import java.text.DecimalFormat;
+
 @Mod(ShieldsPlus.MOD_ID)
 public class ShieldsPlus
 {
     public static final String MOD_ID = "shieldsplus";
     public static final String RESOURCE_PREFIX = MOD_ID + ":";
 
+    public static DecimalFormat ONE_DECIMAL_FORMATTER;
     public ShieldsPlus()
     {
         ModLoadingContext.get().registerConfig(net.minecraftforge.fml.config.ModConfig.Type.COMMON, Config.COMMON_SPEC);
