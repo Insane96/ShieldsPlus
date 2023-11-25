@@ -2,7 +2,7 @@ package insane96mcp.shieldsplus.world.item;
 
 import insane96mcp.shieldsplus.ShieldsPlus;
 import insane96mcp.shieldsplus.data.ShieldDefinition;
-import insane96mcp.shieldsplus.module.base.BaseFeature;
+import insane96mcp.shieldsplus.module.BaseFeature;
 import insane96mcp.shieldsplus.render.ShieldBlockEntityWithoutLevelRenderer;
 import insane96mcp.shieldsplus.setup.SPEnchantments;
 import insane96mcp.shieldsplus.setup.client.ClientMaterials;

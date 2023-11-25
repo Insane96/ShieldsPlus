@@ -13,6 +13,7 @@ import net.minecraft.server.packs.resources.ResourceManager;
 import net.minecraft.server.packs.resources.SimpleJsonResourceReloadListener;
 import net.minecraft.util.profiling.ProfilerFiller;
 import net.minecraft.world.item.Item;
+import net.minecraft.world.item.ItemStack;
 import net.minecraftforge.event.OnDatapackSyncEvent;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.common.Mod;
@@ -21,6 +22,7 @@ import net.minecraftforge.registries.ForgeRegistries;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
+import java.util.Optional;
 
 @Mod.EventBusSubscriber(modid = ShieldsPlus.MOD_ID)
 public class ShieldDefinitionReloader extends SimpleJsonResourceReloadListener {
@@ -66,6 +68,14 @@ public class ShieldDefinitionReloader extends SimpleJsonResourceReloadListener {
             return;
 
         spShieldItem.shieldDefinition = shieldDefinition;
+    }
+
+    public static Optional<ShieldDefinition> getShieldDefinition(ItemStack itemStack) {
+        for (ShieldDefinition shieldDefinition : SHIELD_DEFINITIONS) {
+            if (shieldDefinition.id.equals(ForgeRegistries.ITEMS.getKey(itemStack.getItem())))
+                return Optional.of(shieldDefinition);
+        }
+        return Optional.empty();
     }
 
     @SubscribeEvent

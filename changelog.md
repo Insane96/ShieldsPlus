@@ -2,10 +2,11 @@
 
 * Make enchantments configurable
 
-## 1.8.0
+## Upcoming
 * Shields now can be lifted only for a certain amount of time and will go into cooldown
 * Shields stats are now defined in a file instead of hardcoded
   * blocked damage, lifted time and cooldown must now be defined in the `shield_definitions` folder
+  * blocked damage can now be applied to other mod's shields too
 * Adjusted Shield Bash
   * Decreased damage (~~6/9/12~~ -> 4/7/10 at I/II/III)
   * Increased upward force

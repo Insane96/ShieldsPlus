@@ -1,6 +1,6 @@
 package insane96mcp.shieldsplus.world.item.enchantment;
 
-import insane96mcp.shieldsplus.module.base.BaseFeature;
+import insane96mcp.shieldsplus.module.BaseFeature;
 import insane96mcp.shieldsplus.setup.SPEnchantments;
 import insane96mcp.shieldsplus.world.item.SPShieldItem;
 import net.minecraft.world.entity.EquipmentSlot;

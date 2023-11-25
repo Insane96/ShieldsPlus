@@ -1,6 +1,6 @@
 package insane96mcp.shieldsplus.mixin;
 
-import insane96mcp.shieldsplus.module.base.BaseFeature;
+import insane96mcp.shieldsplus.module.BaseFeature;
 import net.minecraft.world.damagesource.DamageSource;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.EntityType;
