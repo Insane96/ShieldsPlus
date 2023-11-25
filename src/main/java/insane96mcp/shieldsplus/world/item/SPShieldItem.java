@@ -50,6 +50,11 @@ public class SPShieldItem extends ShieldItem {
         this.material = material;
     }
 
+    @Override
+    public String getDescriptionId(ItemStack pStack) {
+        return this.getDescriptionId();
+    }
+
     public double getBlockedDamage(ItemStack stack, @Nullable LivingEntity entity, Level level) {
         return this.shieldDefinition.blockedDamage;
     }

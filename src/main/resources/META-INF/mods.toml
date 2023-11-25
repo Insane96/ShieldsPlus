@@ -1,5 +1,5 @@
 modLoader="javafml"
-loaderVersion="[46,)"
+loaderVersion="[47,)"
 license="All rights reserved"
 issueTrackerURL="https://github.com/Insane96/ShieldsPlus/issues"
 [[mods]]
@@ -16,18 +16,18 @@ issueTrackerURL="https://github.com/Insane96/ShieldsPlus/issues"
     [[dependencies.shieldsplus]]
         modId="forge"
         mandatory=true
-        versionRange="[46,)"
+        versionRange="[47,)"
         ordering="AFTER"
         side="BOTH"
     [[dependencies.shieldsplus]]
         modId="minecraft"
         mandatory=true
-        versionRange="[1.20,)"
+        versionRange="[1.20.1,)"
         ordering="AFTER"
         side="BOTH"
     [[dependencies.shieldsplus]]
         modId="insanelib"
         mandatory=true
-        versionRange="[1.10.0,)"
+        versionRange="[1.12.1,)"
         ordering="AFTER"
         side="BOTH"
