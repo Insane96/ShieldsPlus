@@ -1,6 +1,8 @@
 # Changelog
 
 * Make enchantments configurable
+## Upcoming
+* Shield Bash enchantment is no longer "very rare"
 
 ## 1.8.0
 * Shields now can be lifted only for a certain amount of time and will go into cooldown

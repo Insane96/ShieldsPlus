@@ -22,7 +22,7 @@ public class ShieldBashEnchantment extends Enchantment {
 	public static final String CHARGE_UP_TIMER = ShieldsPlus.RESOURCE_PREFIX + "charge_up_timer";
 
 	public ShieldBashEnchantment() {
-		super(Rarity.VERY_RARE, SPShieldItem.SHIELD, new EquipmentSlot[]{EquipmentSlot.MAINHAND, EquipmentSlot.OFFHAND});
+		super(Rarity.RARE, SPShieldItem.SHIELD, new EquipmentSlot[]{EquipmentSlot.MAINHAND, EquipmentSlot.OFFHAND});
 	}
 
 	public int getMinCost(int level) {
