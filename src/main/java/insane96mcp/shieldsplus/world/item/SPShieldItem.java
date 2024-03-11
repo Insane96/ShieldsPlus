@@ -6,7 +6,6 @@ import insane96mcp.shieldsplus.module.BaseFeature;
 import insane96mcp.shieldsplus.render.ShieldBlockEntityWithoutLevelRenderer;
 import insane96mcp.shieldsplus.setup.SPEnchantments;
 import insane96mcp.shieldsplus.setup.client.ClientMaterials;
-import insane96mcp.shieldsplus.world.item.enchantment.ReinforcedEnchantment;
 import net.minecraft.ChatFormatting;
 import net.minecraft.client.renderer.BlockEntityWithoutLevelRenderer;
 import net.minecraft.client.renderer.Sheets;
@@ -54,7 +53,7 @@ public class SPShieldItem extends ShieldItem {
         return this.getDescriptionId();
     }
 
-    public double getBlockedDamage(ItemStack stack, @Nullable LivingEntity entity, Level level) {
+    public float getBlockedDamage(ItemStack stack, @Nullable LivingEntity entity, Level level) {
         return this.shieldDefinition.blockedDamage;
     }
 
@@ -122,8 +121,8 @@ public class SPShieldItem extends ShieldItem {
         if (!BaseFeature.shieldBlockFixedDamageAmount)
             return;
         int reinforced = itemStack.getEnchantmentLevel(SPEnchantments.REINFORCED.get());
-        float finalBlockedDamage = (float) (blockedDamage + ReinforcedEnchantment.getDamageBlocked(reinforced));
-        components.add(Component.translatable(DAMAGE_BLOCKED, ShieldsPlus.ONE_DECIMAL_FORMATTER.format(finalBlockedDamage)).withStyle(ChatFormatting.BLUE));
+        /*float finalBlockedDamage = (float) (blockedDamage + ReinforcedEnchantment.getDamageBlocked(reinforced));*/
+        components.add(Component.translatable(DAMAGE_BLOCKED, ShieldsPlus.ONE_DECIMAL_FORMATTER.format(blockedDamage)).withStyle(ChatFormatting.BLUE));
     }
 
     @Override

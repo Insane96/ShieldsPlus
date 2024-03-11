@@ -10,7 +10,9 @@
     "shieldsplus:cooldown": "%ss cooldown",
 
     "enchantment.shieldsplus.recoil": "Recoil",
+    "enchantment.shieldsplus.recoil.tooltip": "Knocks back entities and projectiles blocked",
     "enchantment.shieldsplus.reflection": "Reflection",
+    "enchantment.shieldsplus.reflection.tooltip": "Reflects back %s%% of damage, up to %s",
     "enchantment.shieldsplus.reinforced": "Reinforced",
     "enchantment.shieldsplus.reinforced.tooltip": "+%s%% damage blocked",
     "enchantment.shieldsplus.aegis": "Aegis",
@@ -18,7 +20,8 @@
     "enchantment.shieldsplus.ablaze": "Ablaze",
     "enchantment.shieldsplus.ablaze.tooltip": "Sets attackers on fire for %d seconds",
     "enchantment.shieldsplus.lightweight": "Lightweight",
-    "enchantment.shieldsplus.lightweight.tooltip": "Reduced cooldown by 40%",
+    "enchantment.shieldsplus.lightweight.tooltip": "Reduced slowdown when blocking",
     "enchantment.shieldsplus.fast_recovery": "Fast Recovery",
+    "enchantment.shieldsplus.fast_recovery.tooltip": "Reduced cooldown by %s%%",
     "enchantment.shieldsplus.shield_bash": "Shield Bash"
 }

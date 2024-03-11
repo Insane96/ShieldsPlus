@@ -1,15 +1,19 @@
 package insane96mcp.shieldsplus.world.item.enchantment;
 
+import insane96mcp.insanelib.world.enchantments.IEnchantmentTooltip;
 import insane96mcp.shieldsplus.world.item.SPShieldItem;
+import net.minecraft.ChatFormatting;
+import net.minecraft.network.chat.Component;
 import net.minecraft.world.damagesource.DamageSource;
 import net.minecraft.world.entity.EquipmentSlot;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.projectile.Projectile;
+import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.enchantment.Enchantment;
 
-public class RecoilEnchantment extends Enchantment implements IBlockingEffect {
+public class RecoilEnchantment extends Enchantment implements IBlockingEffect, IEnchantmentTooltip {
 
-	public static final double KNOCKBACK = 0.65d;
+	public static final double KNOCKBACK = 0.6d;
 	public static final double PROJECTILE_KNOCKBACK = 5d;
 
 	public RecoilEnchantment() {
@@ -32,11 +36,14 @@ public class RecoilEnchantment extends Enchantment implements IBlockingEffect {
         if (lvl <= 0)
             return;
 
-        if (source.getEntity() instanceof LivingEntity sourceEntity && source.getEntity() == source.getDirectEntity()) {
+        if (source.getEntity() instanceof LivingEntity sourceEntity && source.getEntity() == source.getDirectEntity())
             sourceEntity.knockback(lvl * RecoilEnchantment.KNOCKBACK, blockingEntity.getX() - sourceEntity.getX(), blockingEntity.getZ() - sourceEntity.getZ());
-        }
-        else if (source.getDirectEntity() instanceof Projectile projectile) {
+        else if (source.getDirectEntity() instanceof Projectile projectile)
             projectile.setDeltaMovement(projectile.getDeltaMovement().scale(lvl * RecoilEnchantment.PROJECTILE_KNOCKBACK));
-        }
     }
+
+	@Override
+	public Component getTooltip(ItemStack itemStack, int lvl) {
+		return Component.translatable(this.getDescriptionId() + ".tooltip").withStyle(ChatFormatting.DARK_PURPLE);
+	}
 }

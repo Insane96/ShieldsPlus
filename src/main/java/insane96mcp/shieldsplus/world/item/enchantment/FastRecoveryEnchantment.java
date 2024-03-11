@@ -1,5 +1,6 @@
 package insane96mcp.shieldsplus.world.item.enchantment;
 
+import insane96mcp.insanelib.InsaneLib;
 import insane96mcp.insanelib.world.enchantments.IEnchantmentTooltip;
 import insane96mcp.shieldsplus.world.item.SPShieldItem;
 import net.minecraft.ChatFormatting;
@@ -21,8 +22,12 @@ public class FastRecoveryEnchantment extends Enchantment implements IEnchantment
 		return this.getMinCost(p_44600_) + 22;
 	}
 
+	public static float getCooldownReduction(int lvl) {
+		return 0.35f;
+	}
+
 	@Override
 	public Component getTooltip(ItemStack itemStack, int lvl) {
-		return Component.translatable(this.getDescriptionId() + ".tooltip").withStyle(ChatFormatting.DARK_PURPLE);
+		return Component.translatable(this.getDescriptionId() + ".tooltip", InsaneLib.ONE_DECIMAL_FORMATTER.format(getCooldownReduction(lvl) * 100f)).withStyle(ChatFormatting.DARK_PURPLE);
 	}
 }

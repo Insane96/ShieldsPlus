@@ -49,14 +49,14 @@ public class BaseFeature extends Feature {
     public void onShieldBlock(ShieldBlockEvent event) {
         if (shieldBlockFixedDamageAmount) {
             if (event.getEntity().getUseItem().getItem() instanceof SPShieldItem spShieldItem) {
-                double baseBlockedDamage = spShieldItem.getBlockedDamage(event.getEntity().getUseItem(), event.getEntity(), event.getEntity().level());
-                float blockedDamage = (float) (baseBlockedDamage + ReinforcedEnchantment.getDamageBlocked(event.getEntity().getUseItem()));
+                float baseBlockedDamage = spShieldItem.getBlockedDamage(event.getEntity().getUseItem(), event.getEntity(), event.getEntity().level());
+                float blockedDamage = ReinforcedEnchantment.increaseDamageBlocked(event.getEntity().getUseItem(), baseBlockedDamage);
                 event.setBlockedDamage(blockedDamage);
             }
             else {
                 Optional<ShieldDefinition> shieldDefinition = ShieldDefinitionReloader.getShieldDefinition(event.getEntity().getUseItem());
                 shieldDefinition.ifPresent(def -> {
-                    float blockedDamage = (def.blockedDamage + ReinforcedEnchantment.getDamageBlocked(event.getEntity().getUseItem()));
+                    float blockedDamage = ReinforcedEnchantment.increaseDamageBlocked(event.getEntity().getUseItem(), def.blockedDamage);
                     event.setBlockedDamage(blockedDamage);
                 });
             }

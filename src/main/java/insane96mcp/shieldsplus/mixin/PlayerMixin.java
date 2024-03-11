@@ -2,6 +2,7 @@ package insane96mcp.shieldsplus.mixin;
 
 import insane96mcp.shieldsplus.module.BaseFeature;
 import insane96mcp.shieldsplus.setup.SPEnchantments;
+import insane96mcp.shieldsplus.world.item.enchantment.FastRecoveryEnchantment;
 import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.player.Player;
@@ -36,7 +37,7 @@ public abstract class PlayerMixin extends LivingEntity {
             int ticks = 32;
             int fastRecovery = this.getUseItem().getEnchantmentLevel(SPEnchantments.FAST_RECOVERY.get());
             if (fastRecovery > 0)
-                ticks = (int) (ticks * 0.6f);
+                ticks = (int) (ticks * (1 - FastRecoveryEnchantment.getCooldownReduction(fastRecovery)));
             this.getCooldowns().addCooldown(this.getUseItem().getItem(), ticks);
             this.stopUsingItem();
             this.level().broadcastEntityEvent(this, (byte)30);
