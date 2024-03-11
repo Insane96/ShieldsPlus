@@ -2,6 +2,7 @@
 
 * Make enchantments configurable
 ## Upcoming
+* Rebalanced shields
 * Shield Bash enchantment is no longer "very rare"
 
 ## 1.8.0
