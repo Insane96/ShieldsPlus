@@ -1,7 +1,9 @@
 # Changelog
 
 * Make enchantments configurable
+
 ## Upcoming
+* Fast recovery now reduces the cooldown of shields (both when disabled with an axe and with natural cooldown) by 40%
 * Rebalanced shields
 * Shield Bash enchantment is no longer "very rare"
 

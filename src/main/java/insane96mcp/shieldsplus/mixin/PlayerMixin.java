@@ -2,7 +2,6 @@ package insane96mcp.shieldsplus.mixin;
 
 import insane96mcp.shieldsplus.module.BaseFeature;
 import insane96mcp.shieldsplus.setup.SPEnchantments;
-import insane96mcp.shieldsplus.world.item.enchantment.FastRecoveryEnchantment;
 import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.player.Player;
@@ -19,6 +18,8 @@ import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 @Mixin(Player.class)
 public abstract class PlayerMixin extends LivingEntity {
 
+    @Shadow public abstract void tick();
+
     protected PlayerMixin(EntityType<? extends LivingEntity> p_20966_, Level p_20967_) {
         super(p_20966_, p_20967_);
     }
@@ -34,7 +35,9 @@ public abstract class PlayerMixin extends LivingEntity {
             callbackInfo.cancel();
             int ticks = 32;
             int fastRecovery = this.getUseItem().getEnchantmentLevel(SPEnchantments.FAST_RECOVERY.get());
-            this.getCooldowns().addCooldown(this.getUseItem().getItem(), ticks - (fastRecovery * FastRecoveryEnchantment.TICKS));
+            if (fastRecovery > 0)
+                ticks = (int) (ticks * 0.6f);
+            this.getCooldowns().addCooldown(this.getUseItem().getItem(), ticks);
             this.stopUsingItem();
             this.level().broadcastEntityEvent(this, (byte)30);
         }

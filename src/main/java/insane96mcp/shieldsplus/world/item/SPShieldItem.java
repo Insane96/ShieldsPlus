@@ -86,9 +86,11 @@ public class SPShieldItem extends ShieldItem {
         if (!BaseFeature.liftedAndCooldown)
             return;
         int cooldown = this.getCooldown(stack, entity, entity.level());
-        if (cooldown > 0 && entity instanceof Player player) {
+        int fastRecovery = stack.getEnchantmentLevel(SPEnchantments.FAST_RECOVERY.get());
+        if (fastRecovery > 0)
+            cooldown = (int) (cooldown * 0.6f);
+        if (cooldown > 0 && entity instanceof Player player)
             player.getCooldowns().addCooldown(stack.getItem(), cooldown);
-        }
     }
 
     @Override

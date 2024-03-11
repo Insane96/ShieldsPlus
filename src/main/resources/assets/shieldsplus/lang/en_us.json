@@ -18,6 +18,7 @@
     "enchantment.shieldsplus.aegis": "Aegis",
     "enchantment.shieldsplus.ablaze": "Ablaze",
     "enchantment.shieldsplus.lightweight": "Lightweight",
+    "enchantment.shieldsplus.lightweight.tooltip": "Reduced cooldown by 40%",
     "enchantment.shieldsplus.fast_recovery": "Fast Recovery",
     "enchantment.shieldsplus.shield_bash": "Shield Bash"
 }
