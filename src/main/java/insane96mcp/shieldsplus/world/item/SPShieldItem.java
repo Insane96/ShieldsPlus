@@ -6,7 +6,6 @@ import insane96mcp.shieldsplus.module.BaseFeature;
 import insane96mcp.shieldsplus.render.ShieldBlockEntityWithoutLevelRenderer;
 import insane96mcp.shieldsplus.setup.SPEnchantments;
 import insane96mcp.shieldsplus.setup.client.ClientMaterials;
-import insane96mcp.shieldsplus.world.item.enchantment.ReflectionEnchantment;
 import insane96mcp.shieldsplus.world.item.enchantment.ReinforcedEnchantment;
 import net.minecraft.ChatFormatting;
 import net.minecraft.client.renderer.BlockEntityWithoutLevelRenderer;
@@ -124,14 +123,7 @@ public class SPShieldItem extends ShieldItem {
             return;
         int reinforced = itemStack.getEnchantmentLevel(SPEnchantments.REINFORCED.get());
         float finalBlockedDamage = (float) (blockedDamage + ReinforcedEnchantment.getDamageBlocked(reinforced));
-        int reflection = itemStack.getEnchantmentLevel(SPEnchantments.REFLECTION.get());
-        float reflectedDamage = ReflectionEnchantment.getReflectedDamage(reflection);
         components.add(Component.translatable(DAMAGE_BLOCKED, ShieldsPlus.ONE_DECIMAL_FORMATTER.format(finalBlockedDamage)).withStyle(ChatFormatting.BLUE));
-
-        if (reflection > 0) {
-            components.add(Component.translatable(DAMAGE_REFLECTED, ShieldsPlus.ONE_DECIMAL_FORMATTER.format(reflectedDamage * 100)).withStyle(ChatFormatting.BLUE));
-            components.add(Component.translatable(CAPPED_DAMAGE_REFLECTED, ShieldsPlus.ONE_DECIMAL_FORMATTER.format(ReflectionEnchantment.getCappedReflectedDamage(reflection))).withStyle(ChatFormatting.DARK_GRAY));
-        }
     }
 
     @Override
