@@ -6,14 +6,20 @@ import insane96mcp.shieldsplus.world.item.SPShieldItem;
 import net.minecraft.core.particles.ParticleTypes;
 import net.minecraft.sounds.SoundEvents;
 import net.minecraft.util.Mth;
+import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.EquipmentSlot;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.enchantment.Enchantment;
 import net.minecraft.world.phys.AABB;
+import net.minecraft.world.phys.EntityHitResult;
+import net.minecraft.world.phys.Vec3;
 import org.jetbrains.annotations.NotNull;
 
+import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
+import java.util.function.Predicate;
 
 public class ShieldBashEnchantment extends Enchantment {
 
@@ -45,6 +51,11 @@ public class ShieldBashEnchantment extends Enchantment {
 	@Override
 	public boolean checkCompatibility(@NotNull Enchantment enchantment) {
 		return !(enchantment instanceof ReflectionEnchantment) && !(enchantment instanceof RecoilEnchantment) && super.checkCompatibility(enchantment);
+	}
+
+	@Override
+	public boolean isDiscoverable() {
+		return false;
 	}
 
 	public static double getForce(byte level) {
@@ -138,5 +149,24 @@ public class ShieldBashEnchantment extends Enchantment {
 				player.playSound(SoundEvents.SHIELD_BLOCK, 1.0f, 0.5f);
 			}
 		}
+	}
+
+	public static List<EntityHitResult> getEntitiesHit(Entity pShooter, Vec3 pStartVec, Vec3 pEndVec, AABB pBoundingBox, Predicate<Entity> pFilter, double pDistance) {
+		List<EntityHitResult> entityHitResults = new ArrayList<>();
+
+		for (Entity entity : pShooter.level().getEntities(pShooter, pBoundingBox, pFilter)) {
+			if (entity == pShooter)
+				continue;
+			AABB aabb = entity.getBoundingBox().inflate(entity.getPickRadius());
+			Optional<Vec3> optional = aabb.clip(pStartVec, pEndVec);
+			if (optional.isEmpty())
+				continue;
+			Vec3 clipVec = optional.get();
+			double d1 = pStartVec.distanceToSqr(clipVec);
+			if (d1 < pDistance)
+				entityHitResults.add(new EntityHitResult(entity, clipVec));
+		}
+
+		return entityHitResults;
 	}
 }

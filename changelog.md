@@ -5,13 +5,14 @@
 ## Upcoming
 * Reinforced now increases base blocking by a percentage instead of +0.25
 * Fast recovery now reduces the cooldown of shields (both when disabled with an axe and with natural cooldown) by 40%
-* Ablaze 
+* Ablaze
   * Fire is now applied with 1 tick delay to prevent mobs like zombies from setting the blocker on fire
   * Also setting a mob on fire will now account for the kill
   * Reduced time on fire from 3 to 2 seconds per level
 * Reduced Lightweight speed when blocking
 * Rebalanced shields
-* Shield Bash enchantment is no longer "very rare"
+* Removed Shield Bash
+  * Shields with the enchantment already on it will not lose it
 
 ## 1.8.0
 * Shields now can be lifted only for a certain amount of time and will go into cooldown
