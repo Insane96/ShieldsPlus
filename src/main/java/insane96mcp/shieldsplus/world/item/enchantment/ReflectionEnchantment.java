@@ -2,6 +2,7 @@ package insane96mcp.shieldsplus.world.item.enchantment;
 
 import insane96mcp.insanelib.InsaneLib;
 import insane96mcp.insanelib.world.enchantments.IEnchantmentTooltip;
+import insane96mcp.shieldsplus.module.BaseFeature;
 import insane96mcp.shieldsplus.world.item.SPShieldItem;
 import net.minecraft.ChatFormatting;
 import net.minecraft.network.chat.Component;
@@ -14,10 +15,6 @@ import net.minecraftforge.event.entity.living.ShieldBlockEvent;
 import org.jetbrains.annotations.NotNull;
 
 public class ReflectionEnchantment extends Enchantment implements IBlockingEffect, IEnchantmentTooltip {
-
-	public static final float REFLECTED_DAMAGE = 0.125f;
-	public static final float CAPPED_REFLECTED_DAMAGE = 2f;
-
 	public ReflectionEnchantment() {
 		super(Rarity.RARE, SPShieldItem.SHIELD, new EquipmentSlot[]{EquipmentSlot.MAINHAND, EquipmentSlot.OFFHAND});
 	}
@@ -40,11 +37,7 @@ public class ReflectionEnchantment extends Enchantment implements IBlockingEffec
 	}
 
 	public static float getReflectedDamage(int level) {
-		return level * REFLECTED_DAMAGE;
-	}
-
-	public static float getCappedReflectedDamage(int level) {
-		return level * CAPPED_REFLECTED_DAMAGE;
+		return level * BaseFeature.enchantmentsReflectionReflectedDamage.floatValue();
 	}
 
 	public void onBlocked(LivingEntity blockingEntity, DamageSource source, float amount, int lvl, ShieldBlockEvent event) {
@@ -52,11 +45,11 @@ public class ReflectionEnchantment extends Enchantment implements IBlockingEffec
 				|| lvl <= 0)
 			return;
 
-		sourceEntity.hurt(blockingEntity.damageSources().thorns(blockingEntity), Math.min(ReflectionEnchantment.getReflectedDamage(lvl) * amount, ReflectionEnchantment.getCappedReflectedDamage(lvl)));
+		sourceEntity.hurt(blockingEntity.damageSources().thorns(blockingEntity), ReflectionEnchantment.getReflectedDamage(lvl) * amount);
 	}
 
 	@Override
 	public Component getTooltip(ItemStack itemStack, int lvl) {
-		return Component.translatable(this.getDescriptionId() + ".tooltip", InsaneLib.ONE_DECIMAL_FORMATTER.format(getReflectedDamage(lvl) * 100f), InsaneLib.ONE_DECIMAL_FORMATTER.format(getCappedReflectedDamage(lvl) * 100f)).withStyle(ChatFormatting.DARK_PURPLE);
+		return Component.translatable(this.getDescriptionId() + ".tooltip", InsaneLib.ONE_DECIMAL_FORMATTER.format(getReflectedDamage(lvl) * 100f)).withStyle(ChatFormatting.DARK_PURPLE);
 	}
 }

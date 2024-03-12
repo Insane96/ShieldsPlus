@@ -2,6 +2,7 @@ package insane96mcp.shieldsplus.world.item.enchantment;
 
 import insane96mcp.insanelib.InsaneLib;
 import insane96mcp.insanelib.world.enchantments.IEnchantmentTooltip;
+import insane96mcp.shieldsplus.module.BaseFeature;
 import insane96mcp.shieldsplus.world.item.SPShieldItem;
 import net.minecraft.ChatFormatting;
 import net.minecraft.network.chat.Component;
@@ -23,7 +24,7 @@ public class FastRecoveryEnchantment extends Enchantment implements IEnchantment
 	}
 
 	public static float getCooldownReduction(int lvl) {
-		return 0.35f;
+		return BaseFeature.enchantmentsFastRecoveryCooldownReduction.floatValue();
 	}
 
 	@Override

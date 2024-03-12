@@ -39,6 +39,33 @@ public class BaseFeature extends Feature {
     @Config
     @Label(name = "Lifted and Cooldown", description = "If true, shields can be lifted only for a certain amount of time and will go on cooldown.")
     public static Boolean liftedAndCooldown = true;
+    @Config(min = 1)
+    @Label(name = "Enchantments.Ablaze Time on fire", description = "How many seconds will ablaze set entities on fire per level.")
+    public static Integer enchantmentsAblazeTimeOnFire = 2;
+    @Config(min = 0, max = 1)
+    @Label(name = "Enchantments.Aegis percentage damage reduction", description = "How much damage will the aegis enchantment negate per level.")
+    public static Double enchantmentsAegisPercentageDamageReduction = 0.1d;
+    @Config(min = 0, max = 1)
+    @Label(name = "Enchantments.Fast Recovery cooldown reduction", description = "Percentage cooldown reduction with the Fast Recovery enchantment.")
+    public static Double enchantmentsFastRecoveryCooldownReduction = 0.35d;
+    @Config(min = 0)
+    @Label(name = "Enchantments.Lightweight bonus speed", description = "Percentage increase of speed when blocking with the Lightweight enchantment.")
+    public static Double enchantmentsLightweightBonusSpeed = 2d;
+    @Config(min = 0, max = 10)
+    @Label(name = "Enchantments.Perfect Parry tick window", description = "Max ticks for a perfect parry.")
+    public static Integer enchantmentsPerfectParryTickWindow = 2;
+    @Config(min = 0)
+    @Label(name = "Enchantments.Recoil entities knockback", description = "Amount of knockback given to entities per level.")
+    public static Double enchantmentsRecoilEntitiesKnockback = 0.6d;
+    @Config(min = 0)
+    @Label(name = "Enchantments.Recoil projectiles knockback", description = "Amount of knockback given to projectiles per level.")
+    public static Double enchantmentsRecoilProjectilesKnockback = 5d;
+    @Config(min = 0, max = 1)
+    @Label(name = "Enchantments.Reflection reflected damage", description = "Percentage amount of damage reflected.")
+    public static Double enchantmentsReflectionReflectedDamage = 0.08d;
+    @Config(min = 0, max = 1)
+    @Label(name = "Enchantments.Reinforced blocked damage bonus", description = "Percentage bonus amount of damage blocked.")
+    public static Double enchantmentsReinforcedBlockedDamageBonus = 0.1d;
 
     public BaseFeature(Module module, boolean enabledByDefault, boolean canBeDisabled) {
         super(module, enabledByDefault, canBeDisabled);

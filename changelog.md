@@ -1,17 +1,17 @@
 # Changelog
 
-* Make enchantments configurable
-
-## Upcoming
+## 1.9.0
 * Added Perfect Parry enchantment
   * Blocking at the same time as taking damage completely negates the damage
 * Reinforced now increases base blocking by a percentage instead of +0.25
+* Reflection no longer has a damage cap and reflected damage has been reduced to 8% (from 12.5%)
 * Fast recovery now reduces the cooldown of shields (both when disabled with an axe and with natural cooldown) by 40%
 * Ablaze
   * Fire is now applied with 1 tick delay to prevent mobs like zombies from setting the blocker on fire
   * Also setting a mob on fire should now account for the kill
   * Reduced time on fire from 3 to 2 seconds per level
 * Reduced Lightweight speed when blocking
+* Enchantments are now configurable
 * Rebalanced shields
 * Removed Shield Bash
   * Shields with the enchantment already on it will not lose it

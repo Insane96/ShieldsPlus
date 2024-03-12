@@ -14,9 +14,6 @@ import net.minecraftforge.event.entity.living.LivingDamageEvent;
 import org.jetbrains.annotations.NotNull;
 
 public class AegisEnchantment extends Enchantment implements IEnchantmentTooltip {
-
-	public static final float RESISTANCE = 0.1f;
-
 	public AegisEnchantment() {
 		super(Rarity.COMMON, SPShieldItem.SHIELD, new EquipmentSlot[]{EquipmentSlot.MAINHAND, EquipmentSlot.OFFHAND});
 	}
@@ -64,7 +61,7 @@ public class AegisEnchantment extends Enchantment implements IEnchantmentTooltip
 	}
 
 	public static float getResistance(int level) {
-		return RESISTANCE * level;
+		return BaseFeature.enchantmentsAegisPercentageDamageReduction.floatValue() * level;
 	}
 
 	public static float getResistance(ItemStack itemStack) {

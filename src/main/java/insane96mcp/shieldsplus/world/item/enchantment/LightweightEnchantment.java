@@ -2,6 +2,7 @@ package insane96mcp.shieldsplus.world.item.enchantment;
 
 import insane96mcp.insanelib.util.MCUtils;
 import insane96mcp.insanelib.world.enchantments.IEnchantmentTooltip;
+import insane96mcp.shieldsplus.module.BaseFeature;
 import insane96mcp.shieldsplus.setup.SPEnchantments;
 import insane96mcp.shieldsplus.world.item.SPShieldItem;
 import net.minecraft.ChatFormatting;
@@ -17,8 +18,6 @@ import net.minecraft.world.item.enchantment.Enchantment;
 import java.util.UUID;
 
 public class LightweightEnchantment extends Enchantment implements IEnchantmentTooltip {
-
-	public static final double BONUS_SPEED = 2d;
 	public static final UUID BONUS_SPEED_UUID = UUID.fromString("bf9ce34a-a825-4b22-a050-f6f752879332");
 
 	public LightweightEnchantment() {
@@ -35,9 +34,9 @@ public class LightweightEnchantment extends Enchantment implements IEnchantmentT
 
 	public static void onTick(Player player) {
 		if (player.isBlocking()) {
-			int lightweight = player.getUseItem().getEnchantmentLevel(SPEnchantments.LIGHTWEIGHT.get());
-			if (lightweight > 0)
-				MCUtils.applyModifier(player, Attributes.MOVEMENT_SPEED, BONUS_SPEED_UUID, "Lightweight bonus speed", BONUS_SPEED * lightweight, AttributeModifier.Operation.MULTIPLY_BASE, false);
+			int lvl = player.getUseItem().getEnchantmentLevel(SPEnchantments.LIGHTWEIGHT.get());
+			if (lvl > 0)
+				MCUtils.applyModifier(player, Attributes.MOVEMENT_SPEED, BONUS_SPEED_UUID, "Lightweight bonus speed", BaseFeature.enchantmentsLightweightBonusSpeed * lvl, AttributeModifier.Operation.MULTIPLY_BASE, false);
 		}
 		else {
 			AttributeInstance attribute = player.getAttribute(Attributes.MOVEMENT_SPEED);

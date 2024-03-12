@@ -1,6 +1,7 @@
 package insane96mcp.shieldsplus.world.item.enchantment;
 
 import insane96mcp.insanelib.world.enchantments.IEnchantmentTooltip;
+import insane96mcp.shieldsplus.module.BaseFeature;
 import insane96mcp.shieldsplus.world.item.SPShieldItem;
 import net.minecraft.ChatFormatting;
 import net.minecraft.network.chat.Component;
@@ -30,7 +31,7 @@ public class PerfectParryEnchantment extends Enchantment implements IBlockingEff
             return;
 
         int ticksSinceBlocking = blockingEntity.getUseItem().getUseDuration() - blockingEntity.getUseItemRemainingTicks();
-		if (ticksSinceBlocking <= 2) {
+		if (ticksSinceBlocking <= BaseFeature.enchantmentsPerfectParryTickWindow) {
 			//event.getEntity().level().broadcastEntityEvent(event.getEntity(), EntityEvent.ATTACK_BLOCKED);
 			event.setBlockedDamage(1024f);
 		}

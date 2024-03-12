@@ -14,8 +14,6 @@ import org.jetbrains.annotations.NotNull;
 
 public class ReinforcedEnchantment extends Enchantment implements IEnchantmentTooltip {
 
-	public static final float DAMAGE_BLOCKED = 0.1f;
-
 	public ReinforcedEnchantment() {
 		super(Rarity.COMMON, SPShieldItem.SHIELD, new EquipmentSlot[]{EquipmentSlot.MAINHAND, EquipmentSlot.OFFHAND});
 	}
@@ -63,7 +61,7 @@ public class ReinforcedEnchantment extends Enchantment implements IEnchantmentTo
 	}
 
 	public static float getDamageBlocked(int level) {
-		return DAMAGE_BLOCKED * level;
+		return BaseFeature.enchantmentsReinforcedBlockedDamageBonus.floatValue() * level;
 	}
 
 	public static float getDamageBlocked(ItemStack itemStack) {

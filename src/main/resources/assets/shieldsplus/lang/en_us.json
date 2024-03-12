@@ -12,7 +12,7 @@
     "enchantment.shieldsplus.recoil": "Recoil",
     "enchantment.shieldsplus.recoil.tooltip": "Knocks back entities and projectiles blocked",
     "enchantment.shieldsplus.reflection": "Reflection",
-    "enchantment.shieldsplus.reflection.tooltip": "Reflects back %s%% of damage, up to %s",
+    "enchantment.shieldsplus.reflection.tooltip": "Reflects back %s%% of damage",
     "enchantment.shieldsplus.reinforced": "Reinforced",
     "enchantment.shieldsplus.reinforced.tooltip": "+%s%% damage blocked",
     "enchantment.shieldsplus.aegis": "Aegis",

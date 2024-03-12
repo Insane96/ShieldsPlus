@@ -1,6 +1,7 @@
 package insane96mcp.shieldsplus.world.item.enchantment;
 
 import insane96mcp.insanelib.world.enchantments.IEnchantmentTooltip;
+import insane96mcp.shieldsplus.module.BaseFeature;
 import insane96mcp.shieldsplus.world.item.SPShieldItem;
 import net.minecraft.ChatFormatting;
 import net.minecraft.network.chat.Component;
@@ -13,9 +14,6 @@ import net.minecraft.world.item.enchantment.Enchantment;
 import net.minecraftforge.event.entity.living.ShieldBlockEvent;
 
 public class RecoilEnchantment extends Enchantment implements IBlockingEffect, IEnchantmentTooltip {
-
-	public static final double KNOCKBACK = 0.6d;
-	public static final double PROJECTILE_KNOCKBACK = 5d;
 
 	public RecoilEnchantment() {
 		super(Rarity.UNCOMMON, SPShieldItem.SHIELD, new EquipmentSlot[]{EquipmentSlot.MAINHAND, EquipmentSlot.OFFHAND});
@@ -38,9 +36,9 @@ public class RecoilEnchantment extends Enchantment implements IBlockingEffect, I
             return;
 
         if (source.getEntity() instanceof LivingEntity sourceEntity && source.getEntity() == source.getDirectEntity())
-            sourceEntity.knockback(lvl * RecoilEnchantment.KNOCKBACK, blockingEntity.getX() - sourceEntity.getX(), blockingEntity.getZ() - sourceEntity.getZ());
+            sourceEntity.knockback(lvl * BaseFeature.enchantmentsRecoilEntitiesKnockback, blockingEntity.getX() - sourceEntity.getX(), blockingEntity.getZ() - sourceEntity.getZ());
         else if (source.getDirectEntity() instanceof Projectile projectile)
-            projectile.setDeltaMovement(projectile.getDeltaMovement().scale(lvl * RecoilEnchantment.PROJECTILE_KNOCKBACK));
+            projectile.setDeltaMovement(projectile.getDeltaMovement().scale(lvl * BaseFeature.enchantmentsRecoilProjectilesKnockback));
     }
 
 	@Override
