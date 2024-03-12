@@ -7,18 +7,14 @@ import net.minecraft.network.chat.Component;
 import net.minecraft.world.damagesource.DamageSource;
 import net.minecraft.world.entity.EquipmentSlot;
 import net.minecraft.world.entity.LivingEntity;
-import net.minecraft.world.entity.projectile.Projectile;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.enchantment.Enchantment;
 import net.minecraftforge.event.entity.living.ShieldBlockEvent;
 
-public class RecoilEnchantment extends Enchantment implements IBlockingEffect, IEnchantmentTooltip {
+public class PerfectParryEnchantment extends Enchantment implements IBlockingEffect, IEnchantmentTooltip {
 
-	public static final double KNOCKBACK = 0.6d;
-	public static final double PROJECTILE_KNOCKBACK = 5d;
-
-	public RecoilEnchantment() {
-		super(Rarity.UNCOMMON, SPShieldItem.SHIELD, new EquipmentSlot[]{EquipmentSlot.MAINHAND, EquipmentSlot.OFFHAND});
+	public PerfectParryEnchantment() {
+		super(Rarity.VERY_RARE, SPShieldItem.SHIELD, new EquipmentSlot[]{EquipmentSlot.MAINHAND, EquipmentSlot.OFFHAND});
 	}
 
 	public int getMinCost(int p_44598_) {
@@ -29,18 +25,15 @@ public class RecoilEnchantment extends Enchantment implements IBlockingEffect, I
 		return this.getMinCost(p_44600_) + 25;
 	}
 
-	public int getMaxLevel() {
-		return 2;
-	}
-
 	public void onBlocked(LivingEntity blockingEntity, DamageSource source, float amount, int lvl, ShieldBlockEvent event) {
         if (lvl <= 0)
             return;
 
-        if (source.getEntity() instanceof LivingEntity sourceEntity && source.getEntity() == source.getDirectEntity())
-            sourceEntity.knockback(lvl * RecoilEnchantment.KNOCKBACK, blockingEntity.getX() - sourceEntity.getX(), blockingEntity.getZ() - sourceEntity.getZ());
-        else if (source.getDirectEntity() instanceof Projectile projectile)
-            projectile.setDeltaMovement(projectile.getDeltaMovement().scale(lvl * RecoilEnchantment.PROJECTILE_KNOCKBACK));
+        int ticksSinceBlocking = blockingEntity.getUseItem().getUseDuration() - blockingEntity.getUseItemRemainingTicks();
+		if (ticksSinceBlocking <= 2) {
+			//event.getEntity().level().broadcastEntityEvent(event.getEntity(), EntityEvent.ATTACK_BLOCKED);
+			event.setBlockedDamage(1024f);
+		}
     }
 
 	@Override

@@ -18,4 +18,5 @@ public class SPEnchantments {
     public static final RegistryObject<Enchantment> LIGHTWEIGHT = ENCHANTMENTS.register("lightweight", LightweightEnchantment::new);
     public static final RegistryObject<Enchantment> FAST_RECOVERY = ENCHANTMENTS.register("fast_recovery", FastRecoveryEnchantment::new);
     public static final RegistryObject<Enchantment> SHIELD_BASH = ENCHANTMENTS.register("shield_bash", ShieldBashEnchantment::new);
+    public static final RegistryObject<Enchantment> PERFECT_PARRY = ENCHANTMENTS.register("perfect_parry", PerfectParryEnchantment::new);
 }

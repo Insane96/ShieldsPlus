@@ -10,6 +10,7 @@ import net.minecraft.world.entity.EquipmentSlot;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.enchantment.Enchantment;
+import net.minecraftforge.event.entity.living.ShieldBlockEvent;
 import org.jetbrains.annotations.NotNull;
 
 public class ReflectionEnchantment extends Enchantment implements IBlockingEffect, IEnchantmentTooltip {
@@ -46,7 +47,7 @@ public class ReflectionEnchantment extends Enchantment implements IBlockingEffec
 		return level * CAPPED_REFLECTED_DAMAGE;
 	}
 
-	public void onBlocked(LivingEntity blockingEntity, DamageSource source, float amount, int lvl) {
+	public void onBlocked(LivingEntity blockingEntity, DamageSource source, float amount, int lvl, ShieldBlockEvent event) {
 		if ((!(source.getEntity() instanceof LivingEntity sourceEntity && source.getEntity() == source.getDirectEntity()))
 				|| lvl <= 0)
 			return;

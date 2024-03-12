@@ -23,5 +23,7 @@
     "enchantment.shieldsplus.lightweight.tooltip": "Reduced slowdown when blocking",
     "enchantment.shieldsplus.fast_recovery": "Fast Recovery",
     "enchantment.shieldsplus.fast_recovery.tooltip": "Reduced cooldown by %s%%",
-    "enchantment.shieldsplus.shield_bash": "Shield Bash"
+    "enchantment.shieldsplus.shield_bash": "Shield Bash",
+    "enchantment.shieldsplus.perfect_parry": "Perfect Parry",
+    "enchantment.shieldsplus.perfect_parry.tooltip": "Blocking at the same time as taking damage completely negates the damage"
 }

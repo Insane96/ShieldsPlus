@@ -8,7 +8,6 @@ import insane96mcp.insanelib.base.config.LoadFeature;
 import insane96mcp.shieldsplus.ShieldsPlus;
 import insane96mcp.shieldsplus.data.ShieldDefinition;
 import insane96mcp.shieldsplus.data.ShieldDefinitionReloader;
-import insane96mcp.shieldsplus.setup.SPEnchantments;
 import insane96mcp.shieldsplus.world.item.SPShieldItem;
 import insane96mcp.shieldsplus.world.item.enchantment.*;
 import net.minecraft.world.item.ShieldItem;
@@ -66,18 +65,14 @@ public class BaseFeature extends Feature {
         if (event.getEntity().getUseItem().getItem() instanceof ShieldItem) {
             event.getEntity().getUseItem().getAllEnchantments().forEach((enchantment, lvl) -> {
                 if (enchantment instanceof IBlockingEffect blockingEffectEnchantment)
-                    blockingEffectEnchantment.onBlocked(event.getEntity(), event.getDamageSource(), event.getBlockedDamage(), lvl);
+                    blockingEffectEnchantment.onBlocked(event.getEntity(), event.getDamageSource(), event.getBlockedDamage(), lvl, event);
             });
         }
     }
 
     @SubscribeEvent
-    public void onLivingHurt(LivingDamageEvent event) {
-        int lvl = event.getEntity().getUseItem().getEnchantmentLevel(SPEnchantments.AEGIS.get());
-        if (lvl <= 0)
-            return;
-
-        event.setAmount(event.getAmount() * (1f - AegisEnchantment.getResistance(lvl)));
+    public void onLivingDamage(LivingDamageEvent event) {
+        AegisEnchantment.reduceDamage(event);
     }
 
     @SubscribeEvent

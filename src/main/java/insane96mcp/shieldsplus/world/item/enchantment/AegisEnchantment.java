@@ -10,6 +10,7 @@ import net.minecraft.network.chat.Component;
 import net.minecraft.world.entity.EquipmentSlot;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.enchantment.Enchantment;
+import net.minecraftforge.event.entity.living.LivingDamageEvent;
 import org.jetbrains.annotations.NotNull;
 
 public class AegisEnchantment extends Enchantment implements IEnchantmentTooltip {
@@ -68,6 +69,14 @@ public class AegisEnchantment extends Enchantment implements IEnchantmentTooltip
 
 	public static float getResistance(ItemStack itemStack) {
 		return getResistance(itemStack.getEnchantmentLevel(SPEnchantments.AEGIS.get()));
+	}
+
+	public static void reduceDamage(LivingDamageEvent event) {
+		int lvl = event.getEntity().getUseItem().getEnchantmentLevel(SPEnchantments.AEGIS.get());
+		if (lvl <= 0)
+			return;
+
+		event.setAmount(event.getAmount() * (1f - AegisEnchantment.getResistance(lvl)));
 	}
 
 	@Override
