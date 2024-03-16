@@ -15,7 +15,7 @@ import net.minecraftforge.event.entity.living.ShieldBlockEvent;
 public class PerfectParryEnchantment extends Enchantment implements IBlockingEffect, IEnchantmentTooltip {
 
 	public PerfectParryEnchantment() {
-		super(Rarity.VERY_RARE, SPShieldItem.SHIELD, new EquipmentSlot[]{EquipmentSlot.MAINHAND, EquipmentSlot.OFFHAND});
+		super(Rarity.VERY_RARE, SPShieldItem.ENCHANTMENT_CATEGORY, new EquipmentSlot[]{EquipmentSlot.MAINHAND, EquipmentSlot.OFFHAND});
 	}
 
 	public int getMinCost(int p_44598_) {

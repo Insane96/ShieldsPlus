@@ -1,5 +1,8 @@
 # Changelog
 
+## Upcoming
+* Added Celestial Guardian treasure enchantment
+
 ## 1.9.0
 * Added Perfect Parry enchantment
   * Blocking at the same time as taking damage completely negates the damage

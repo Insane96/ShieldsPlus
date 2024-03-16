@@ -36,7 +36,7 @@ public class SPShieldItem extends ShieldItem {
     public static final String DAMAGE_REFLECTED = ShieldsPlus.RESOURCE_PREFIX + "damage_reflected";
     public static final String CAPPED_DAMAGE_REFLECTED = ShieldsPlus.RESOURCE_PREFIX + "capped_damage_reflected";
 
-    public static final EnchantmentCategory SHIELD = EnchantmentCategory.create("shield", s -> s instanceof ShieldItem);
+    public static final EnchantmentCategory ENCHANTMENT_CATEGORY = EnchantmentCategory.create("shield", s -> s instanceof ShieldItem);
     public static final ResourceLocation BLOCKING = new ResourceLocation("minecraft:blocking");
     public final SPShieldMaterial material;
     public ClientMaterials clientMaterials;

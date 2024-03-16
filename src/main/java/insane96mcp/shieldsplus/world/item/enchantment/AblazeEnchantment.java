@@ -20,7 +20,7 @@ import net.minecraftforge.event.entity.living.ShieldBlockEvent;
 public class AblazeEnchantment extends Enchantment implements IBlockingEffect, IEnchantmentTooltip {
 
 	public AblazeEnchantment() {
-		super(Rarity.UNCOMMON, SPShieldItem.SHIELD, new EquipmentSlot[]{EquipmentSlot.MAINHAND, EquipmentSlot.OFFHAND});
+		super(Rarity.UNCOMMON, SPShieldItem.ENCHANTMENT_CATEGORY, new EquipmentSlot[]{EquipmentSlot.MAINHAND, EquipmentSlot.OFFHAND});
 	}
 
 	public int getMinCost(int p_44598_) {

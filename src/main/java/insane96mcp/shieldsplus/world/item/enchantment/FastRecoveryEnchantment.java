@@ -12,7 +12,7 @@ import net.minecraft.world.item.enchantment.Enchantment;
 
 public class FastRecoveryEnchantment extends Enchantment implements IEnchantmentTooltip {
 	public FastRecoveryEnchantment() {
-		super(Rarity.RARE, SPShieldItem.SHIELD, new EquipmentSlot[]{EquipmentSlot.MAINHAND, EquipmentSlot.OFFHAND});
+		super(Rarity.RARE, SPShieldItem.ENCHANTMENT_CATEGORY, new EquipmentSlot[]{EquipmentSlot.MAINHAND, EquipmentSlot.OFFHAND});
 	}
 
 	public int getMinCost(int p_44598_) {

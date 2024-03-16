@@ -15,7 +15,7 @@ import org.jetbrains.annotations.NotNull;
 public class ReinforcedEnchantment extends Enchantment implements IEnchantmentTooltip {
 
 	public ReinforcedEnchantment() {
-		super(Rarity.COMMON, SPShieldItem.SHIELD, new EquipmentSlot[]{EquipmentSlot.MAINHAND, EquipmentSlot.OFFHAND});
+		super(Rarity.COMMON, SPShieldItem.ENCHANTMENT_CATEGORY, new EquipmentSlot[]{EquipmentSlot.MAINHAND, EquipmentSlot.OFFHAND});
 	}
 
 	public int getMinCost(int p_44598_) {

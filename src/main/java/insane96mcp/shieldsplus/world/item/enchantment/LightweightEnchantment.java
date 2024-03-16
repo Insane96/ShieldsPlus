@@ -21,7 +21,7 @@ public class LightweightEnchantment extends Enchantment implements IEnchantmentT
 	public static final UUID BONUS_SPEED_UUID = UUID.fromString("bf9ce34a-a825-4b22-a050-f6f752879332");
 
 	public LightweightEnchantment() {
-		super(Rarity.RARE, SPShieldItem.SHIELD, new EquipmentSlot[]{EquipmentSlot.MAINHAND, EquipmentSlot.OFFHAND});
+		super(Rarity.RARE, SPShieldItem.ENCHANTMENT_CATEGORY, new EquipmentSlot[]{EquipmentSlot.MAINHAND, EquipmentSlot.OFFHAND});
 	}
 
 	public int getMinCost(int p_44598_) {

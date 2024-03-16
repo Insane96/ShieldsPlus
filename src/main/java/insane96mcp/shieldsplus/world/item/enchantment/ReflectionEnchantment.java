@@ -16,7 +16,7 @@ import org.jetbrains.annotations.NotNull;
 
 public class ReflectionEnchantment extends Enchantment implements IBlockingEffect, IEnchantmentTooltip {
 	public ReflectionEnchantment() {
-		super(Rarity.RARE, SPShieldItem.SHIELD, new EquipmentSlot[]{EquipmentSlot.MAINHAND, EquipmentSlot.OFFHAND});
+		super(Rarity.RARE, SPShieldItem.ENCHANTMENT_CATEGORY, new EquipmentSlot[]{EquipmentSlot.MAINHAND, EquipmentSlot.OFFHAND});
 	}
 
 	public int getMinCost(int p_44598_) {

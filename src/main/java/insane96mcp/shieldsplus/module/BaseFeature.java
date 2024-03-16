@@ -15,6 +15,7 @@ import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.api.distmarker.OnlyIn;
 import net.minecraftforge.event.TickEvent;
 import net.minecraftforge.event.entity.living.LivingDamageEvent;
+import net.minecraftforge.event.entity.living.LivingDeathEvent;
 import net.minecraftforge.event.entity.living.ShieldBlockEvent;
 import net.minecraftforge.event.entity.player.ItemTooltipEvent;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
@@ -100,6 +101,15 @@ public class BaseFeature extends Feature {
     @SubscribeEvent
     public void onLivingDamage(LivingDamageEvent event) {
         AegisEnchantment.reduceDamage(event);
+        CelestialGuardianEnchantment.trySaveAmount(event.getEntity(), event.getAmount());
+    }
+
+    @SubscribeEvent
+    public void onLivingDeath(LivingDeathEvent event) {
+        if (CelestialGuardianEnchantment.tryApply(event.getEntity())) {
+            event.getEntity().setHealth(1f);
+            event.setCanceled(true);
+        }
     }
 
     @SubscribeEvent
