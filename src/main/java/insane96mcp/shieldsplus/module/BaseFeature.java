@@ -54,7 +54,7 @@ public class BaseFeature extends Feature {
     public static Double enchantmentsLightweightBonusSpeed = 2d;
     @Config(min = 0, max = 10)
     @Label(name = "Enchantments.Perfect Parry tick window", description = "Max ticks for a perfect parry.")
-    public static Integer enchantmentsPerfectParryTickWindow = 2;
+    public static Integer enchantmentsPerfectParryTickWindow = 1;
     @Config(min = 0)
     @Label(name = "Enchantments.Recoil entities knockback", description = "Amount of knockback given to entities per level.")
     public static Double enchantmentsRecoilEntitiesKnockback = 0.6d;
