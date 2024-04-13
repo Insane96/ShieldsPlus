@@ -6,6 +6,7 @@
   * The attacking entity (if melee) now gets "stunned"
   * Reduced window to activate to 1 tick (from 2)
 * Added support for IguanaTweaks Reborn enchantments descriptions
+* Lowered shields blocked damage
 
 ## 1.9.0
 * Added Perfect Parry enchantment
