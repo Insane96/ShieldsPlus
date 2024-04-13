@@ -1,6 +1,6 @@
 # Changelog
 
-## Upcoming
+## 1.10.0
 * Added Celestial Guardian treasure enchantment
 * Perfect parry
   * The attacking entity (if melee) now gets "stunned"
