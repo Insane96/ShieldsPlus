@@ -1,18 +1,14 @@
 package insane96mcp.shieldsplus.world.item.enchantment;
 
-import insane96mcp.insanelib.InsaneLib;
-import insane96mcp.insanelib.world.enchantments.IEnchantmentTooltip;
 import insane96mcp.shieldsplus.module.BaseFeature;
 import insane96mcp.shieldsplus.setup.SPEnchantments;
 import insane96mcp.shieldsplus.world.item.SPShieldItem;
-import net.minecraft.ChatFormatting;
-import net.minecraft.network.chat.Component;
 import net.minecraft.world.entity.EquipmentSlot;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.enchantment.Enchantment;
 import org.jetbrains.annotations.NotNull;
 
-public class ReinforcedEnchantment extends Enchantment implements IEnchantmentTooltip {
+public class ReinforcedEnchantment extends Enchantment {
 
 	public ReinforcedEnchantment() {
 		super(Rarity.COMMON, SPShieldItem.ENCHANTMENT_CATEGORY, new EquipmentSlot[]{EquipmentSlot.MAINHAND, EquipmentSlot.OFFHAND});
@@ -70,10 +66,5 @@ public class ReinforcedEnchantment extends Enchantment implements IEnchantmentTo
 
 	public static float increaseDamageBlocked(ItemStack itemStack, float damageBlocked) {
 		return damageBlocked + (damageBlocked * getDamageBlocked(itemStack));
-	}
-
-	@Override
-	public Component getTooltip(ItemStack itemStack, int lvl) {
-		return Component.translatable(this.getDescriptionId() + ".tooltip", InsaneLib.ONE_DECIMAL_FORMATTER.format(getDamageBlocked(lvl) * 100f)).withStyle(ChatFormatting.DARK_PURPLE);
 	}
 }

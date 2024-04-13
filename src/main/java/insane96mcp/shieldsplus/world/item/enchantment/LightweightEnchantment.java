@@ -1,23 +1,19 @@
 package insane96mcp.shieldsplus.world.item.enchantment;
 
 import insane96mcp.insanelib.util.MCUtils;
-import insane96mcp.insanelib.world.enchantments.IEnchantmentTooltip;
 import insane96mcp.shieldsplus.module.BaseFeature;
 import insane96mcp.shieldsplus.setup.SPEnchantments;
 import insane96mcp.shieldsplus.world.item.SPShieldItem;
-import net.minecraft.ChatFormatting;
-import net.minecraft.network.chat.Component;
 import net.minecraft.world.entity.EquipmentSlot;
 import net.minecraft.world.entity.ai.attributes.AttributeInstance;
 import net.minecraft.world.entity.ai.attributes.AttributeModifier;
 import net.minecraft.world.entity.ai.attributes.Attributes;
 import net.minecraft.world.entity.player.Player;
-import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.enchantment.Enchantment;
 
 import java.util.UUID;
 
-public class LightweightEnchantment extends Enchantment implements IEnchantmentTooltip {
+public class LightweightEnchantment extends Enchantment {
 	public static final UUID BONUS_SPEED_UUID = UUID.fromString("bf9ce34a-a825-4b22-a050-f6f752879332");
 
 	public LightweightEnchantment() {
@@ -43,10 +39,5 @@ public class LightweightEnchantment extends Enchantment implements IEnchantmentT
 			//noinspection DataFlowIssue
 			attribute.removeModifier(LightweightEnchantment.BONUS_SPEED_UUID);
 		}
-	}
-
-	@Override
-	public Component getTooltip(ItemStack itemStack, int lvl) {
-		return Component.translatable(this.getDescriptionId() + ".tooltip").withStyle(ChatFormatting.DARK_PURPLE);
 	}
 }

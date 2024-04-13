@@ -1,11 +1,8 @@
 package insane96mcp.shieldsplus.world.item.enchantment;
 
-import insane96mcp.insanelib.world.enchantments.IEnchantmentTooltip;
 import insane96mcp.shieldsplus.ShieldsPlus;
 import insane96mcp.shieldsplus.setup.SPSoundEvents;
 import insane96mcp.shieldsplus.world.item.SPShieldItem;
-import net.minecraft.ChatFormatting;
-import net.minecraft.network.chat.Component;
 import net.minecraft.sounds.SoundSource;
 import net.minecraft.world.damagesource.DamageSource;
 import net.minecraft.world.effect.MobEffectInstance;
@@ -13,11 +10,10 @@ import net.minecraft.world.effect.MobEffects;
 import net.minecraft.world.entity.EquipmentSlot;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.player.Player;
-import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.enchantment.Enchantment;
 import net.minecraftforge.event.entity.living.ShieldBlockEvent;
 
-public class CelestialGuardianEnchantment extends Enchantment implements IBlockingEffect, IEnchantmentTooltip {
+public class CelestialGuardianEnchantment extends Enchantment implements IBlockingEffect {
 
 	public static String LAST_TRIGGER_TAG = ShieldsPlus.RESOURCE_PREFIX + "celestial_guardian_last_trigger";
 	public static String SHOULD_APPLY_TAG = ShieldsPlus.RESOURCE_PREFIX + "celestial_guardian";
@@ -71,10 +67,5 @@ public class CelestialGuardianEnchantment extends Enchantment implements IBlocki
 			return true;
 		}
 		return false;
-	}
-
-	@Override
-	public Component getTooltip(ItemStack itemStack, int lvl) {
-		return Component.translatable(this.getDescriptionId() + ".tooltip").withStyle(ChatFormatting.DARK_PURPLE);
 	}
 }
