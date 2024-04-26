@@ -1,8 +1,5 @@
 # Changelog
 
-## 1.10.1
-* Compatibility with InsaneLib 1.13.3
-
 ## 1.10.0
 * Added Celestial Guardian treasure enchantment
 * Perfect parry
