@@ -1,5 +1,8 @@
 # Changelog
 
+## 1.10.1
+* Fixed Celestial guardian triggering when not blocking
+
 ## 1.10.0
 * Added Celestial Guardian treasure enchantment
 * Perfect parry

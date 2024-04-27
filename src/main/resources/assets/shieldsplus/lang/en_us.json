@@ -28,5 +28,5 @@
     "enchantment.shieldsplus.perfect_parry": "Perfect Parry",
     "enchantment.shieldsplus.perfect_parry.info": "Blocking at the same time as taking damage completely negates the damage and stuns the attacker",
     "enchantment.shieldsplus.celestial_guardian": "Celestial Guardian",
-    "enchantment.shieldsplus.celestial_guardian.info": "Getting below 25% health while blocking will give an absorption effect"
+    "enchantment.shieldsplus.celestial_guardian.info": "Getting killed while blocking will give an absorption effect and keep you alive"
 }

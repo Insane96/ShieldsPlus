@@ -50,7 +50,8 @@ public class CelestialGuardianEnchantment extends Enchantment implements IBlocki
 	}
 
 	public static boolean tryApply(LivingEntity entity) {
-		if (!entity.getPersistentData().contains(SHOULD_APPLY_TAG))
+		if (!entity.isBlocking()
+				|| !entity.getPersistentData().contains(SHOULD_APPLY_TAG))
 			return false;
 		float amount = entity.getPersistentData().getFloat(SHOULD_APPLY_TAG);
 		entity.getPersistentData().remove(SHOULD_APPLY_TAG);
@@ -61,8 +62,8 @@ public class CelestialGuardianEnchantment extends Enchantment implements IBlocki
 		health -= maxAmount;
 		amount -= maxAmount;
 		entity.level().playSound(null, entity, SPSoundEvents.CELESTIAL_GUARDIAN.get(), entity instanceof Player ? SoundSource.PLAYERS : SoundSource.HOSTILE, 1f, 1f);
-		entity.addEffect(new MobEffectInstance(MobEffects.ABSORPTION, 60 * 20, 2));
-		if (health <= 0f && amount < 12f) {
+		entity.addEffect(new MobEffectInstance(MobEffects.ABSORPTION, 60 * 20, 4));
+		if (health <= 0f && amount < 20f) {
 			entity.setAbsorptionAmount(entity.getAbsorptionAmount() - amount);
 			return true;
 		}
