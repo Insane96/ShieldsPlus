@@ -1,5 +1,8 @@
 # Changelog
 
+## Upcoming
+* Minor rebalancements
+
 ## 1.10.1
 * Fixed Celestial guardian triggering when not blocking
 
