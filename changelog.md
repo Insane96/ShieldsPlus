@@ -1,6 +1,7 @@
 # Changelog
 
-## Upcoming
+## 1.10.2
+* Requires InsaneLib 1.15.0
 * Minor rebalancements
 
 ## 1.10.1

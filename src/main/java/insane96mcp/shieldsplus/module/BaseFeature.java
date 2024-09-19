@@ -2,9 +2,9 @@ package insane96mcp.shieldsplus.module;
 
 import insane96mcp.insanelib.base.Feature;
 import insane96mcp.insanelib.base.Label;
+import insane96mcp.insanelib.base.LoadFeature;
 import insane96mcp.insanelib.base.Module;
 import insane96mcp.insanelib.base.config.Config;
-import insane96mcp.insanelib.base.config.LoadFeature;
 import insane96mcp.shieldsplus.ShieldsPlus;
 import insane96mcp.shieldsplus.data.ShieldDefinition;
 import insane96mcp.shieldsplus.data.ShieldDefinitionReloader;
