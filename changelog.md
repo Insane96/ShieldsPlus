@@ -1,6 +1,6 @@
 # Changelog
 
-## Upcoming
+## 1.11.1
 * You can attack, break and place blocks while block-crouching
 * Rebalanced shields
   * More blocked damage and blocking time
