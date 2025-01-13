@@ -2,6 +2,8 @@
 
 ## Upcoming
 * You can attack while block-crouching
+* Rebalanced shields
+  * More blocked damage and blocking time
 
 ## 1.11.0
 * You can now block when crouching
