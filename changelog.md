@@ -4,6 +4,7 @@
 * You can attack, break and place blocks while block-crouching
 * Rebalanced shields
   * More blocked damage and blocking time
+* Fixed blocking sound not playing if the damage wasn't fully blocked
 
 ## 1.11.0
 * You can now block when crouching

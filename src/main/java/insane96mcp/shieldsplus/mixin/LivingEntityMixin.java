@@ -1,6 +1,9 @@
 package insane96mcp.shieldsplus.mixin;
 
+import com.llamalad7.mixinextras.expression.Definition;
+import com.llamalad7.mixinextras.expression.Expression;
 import com.llamalad7.mixinextras.injector.ModifyExpressionValue;
+import com.llamalad7.mixinextras.sugar.Local;
 import insane96mcp.shieldsplus.module.BaseFeature;
 import net.minecraft.world.damagesource.DamageSource;
 import net.minecraft.world.entity.Entity;
@@ -10,6 +13,7 @@ import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.Level;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.Shadow;
+import org.spongepowered.asm.mixin.Unique;
 import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
@@ -21,6 +25,8 @@ public abstract class LivingEntityMixin extends Entity {
     @Shadow protected abstract void playHurtSound(DamageSource p_21160_);
 
     @Shadow public abstract ItemStack getOffhandItem();
+
+    @Shadow public abstract void remove(RemovalReason pReason);
 
     public LivingEntityMixin(EntityType<?> p_19870_, Level p_19871_) {
         super(p_19870_, p_19871_);
@@ -47,21 +53,22 @@ public abstract class LivingEntityMixin extends Entity {
         ci.cancel();
     }
 
-    //TODO It's missing the amount of damage taken
-    /*@Unique private boolean hasBlocked;
-    @Unique private float amount;
+    @Unique
+    private boolean shieldsPlus$hasBlocked;
 
-    @ModifyVariable(at = @At(value = "STORE", ordinal = 1), method = "hurt", ordinal = 0)
-    private boolean onBlockedFlagSet(boolean hasBlocked) {
-        this.hasBlocked = hasBlocked;
-        return hasBlocked;
+    @Definition(id = "flag", local = @Local(type = boolean.class, ordinal = 0))
+    @Expression("flag")
+    @ModifyExpressionValue(method = "hurt", at = @At(value = "MIXINEXTRAS:EXPRESSION", ordinal = 0))
+    public boolean shieldsPlus$onHurt(boolean original, DamageSource source, float amount) {
+        if (shieldsPlus$hasBlocked && amount > 0) {
+            this.level().broadcastEntityEvent(this, (byte)29);
+        }
+        shieldsPlus$hasBlocked = false;
+        return original;
     }
 
-    @Redirect(at = @At(value = "INVOKE", target = "Lnet/minecraft/world/entity/LivingEntity;playHurtSound(Lnet/minecraft/world/damagesource/DamageSource;)V"), method = "hurt")
-    private void onHurtSound(LivingEntity instance, DamageSource damageSource) {
-        if (hasBlocked || amount == 0f)
-            return;
-
-        this.playHurtSound(damageSource);
-    }*/
+    @Inject(method = "hurt", at = @At(value = "INVOKE", target = "Lnet/minecraftforge/event/entity/living/ShieldBlockEvent;getBlockedDamage()F", ordinal = 1, shift = At.Shift.AFTER))
+    private void shieldsPlus$onBlocked(DamageSource pSource, float pAmount, CallbackInfoReturnable<Boolean> cir) {
+        this.shieldsPlus$hasBlocked = true;
+    }
 }
