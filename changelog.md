@@ -1,5 +1,9 @@
 # Changelog
 
+## Upcoming
+* You can now block when crouching
+  * Only when the shield is in the off-hand
+
 ## 1.10.2
 * Requires InsaneLib 1.15.0
 * Minor rebalancements

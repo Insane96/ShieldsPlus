@@ -10,9 +10,13 @@ import insane96mcp.shieldsplus.data.ShieldDefinition;
 import insane96mcp.shieldsplus.data.ShieldDefinitionReloader;
 import insane96mcp.shieldsplus.world.item.SPShieldItem;
 import insane96mcp.shieldsplus.world.item.enchantment.*;
+import net.minecraft.world.InteractionHand;
+import net.minecraft.world.entity.LivingEntity;
+import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.ShieldItem;
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.api.distmarker.OnlyIn;
+import net.minecraftforge.common.ToolActions;
 import net.minecraftforge.event.TickEvent;
 import net.minecraftforge.event.entity.living.LivingDamageEvent;
 import net.minecraftforge.event.entity.living.LivingDeathEvent;
@@ -27,7 +31,7 @@ import java.util.Optional;
 public class BaseFeature extends Feature {
     @Config(min = 0)
     @Label(name = "Shield Windup", description = "In vanilla when you start blocking with a shield, there's a 0.25 seconds (5 ticks) window where you are still not blocking. By default the windup is removed.")
-    public static Integer shieldWindup = 0;
+    public static Integer shieldWindup = 1;
     @Config
     @Label(name = "Shields Block Fixed Damage Amount", description = "If true shields will block only a certain amount of damage. If false the vanilla behaviour is used.")
     public static Boolean shieldBlockFixedDamageAmount = true;
@@ -38,8 +42,12 @@ public class BaseFeature extends Feature {
     @Label(name = "Combat Test shield disabling", description = "Makes shields always disable for 1.6 seconds like Combat Test snapshots.")
     public static Boolean combatTestShieldDisabling = true;
     @Config
+    @Label(name = "Block with crouch", description = "If true, crouching will block with the shield.")
+    public static Boolean blockWithCrouch = true;
+    @Config
     @Label(name = "Lifted and Cooldown", description = "If true, shields can be lifted only for a certain amount of time and will go on cooldown.")
     public static Boolean liftedAndCooldown = true;
+
     @Config(min = 1)
     @Label(name = "Enchantments.Ablaze Time on fire", description = "How many seconds will ablaze set entities on fire per level.")
     public static Integer enchantmentsAblazeTimeOnFire = 2;
@@ -114,12 +122,26 @@ public class BaseFeature extends Feature {
 
     @SubscribeEvent
     public void onPlayerTick(TickEvent.PlayerTickEvent event) {
-        if (!this.isEnabled()
-                || event.phase != TickEvent.Phase.END)
+        if (!this.isEnabled())
             return;
 
-        LightweightEnchantment.onTick(event.player);
-        ShieldBashEnchantment.onTick(event.player);
+        if (event.phase == TickEvent.Phase.END) {
+            LightweightEnchantment.onTick(event.player);
+            ShieldBashEnchantment.onTick(event.player);
+        }
+
+        if (blockWithCrouch && !event.player.isUsingItem() && event.player.getOffhandItem().canPerformAction(ToolActions.SHIELD_BLOCK) && event.player.isCrouching() && !event.player.getCooldowns().isOnCooldown(event.player.getOffhandItem().getItem())) {
+            event.player.startUsingItem(InteractionHand.OFF_HAND);
+        }
+        if (blockWithCrouch && event.player.isUsingItem() && event.player.getOffhandItem().canPerformAction(ToolActions.SHIELD_BLOCK) && event.player.isCrouching() && event.player.getCooldowns().isOnCooldown(event.player.getOffhandItem().getItem())) {
+            event.player.stopUsingItem();
+        }
+    }
+
+    public static boolean blockWithCrouch(LivingEntity livingEntity) {
+        if (livingEntity instanceof Player player && player.getCooldowns().isOnCooldown(player.getOffhandItem().getItem()))
+            return false;
+        return blockWithCrouch && !livingEntity.getOffhandItem().isEmpty() && livingEntity.getOffhandItem().canPerformAction(ToolActions.SHIELD_BLOCK) && livingEntity.isCrouching();
     }
 
     @OnlyIn(Dist.CLIENT)
@@ -134,11 +156,6 @@ public class BaseFeature extends Feature {
         if (shieldDefinition.isEmpty())
             return;
         SPShieldItem.addDamageBlockedText(event.getItemStack(), event.getToolTip(), shieldDefinition.get().blockedDamage);
-        /*int useDuration = this.getUseDuration(itemStack);
-        if (useDuration < 72000) {
-            components.add(Component.translatable(BLOCKING_TIME, ShieldsPlus.ONE_DECIMAL_FORMATTER.format(useDuration / 20f)).withStyle(ChatFormatting.BLUE));
-            components.add(Component.translatable(COOLDOWN, ShieldsPlus.ONE_DECIMAL_FORMATTER.format(this.getCooldown(itemStack, null, level) / 20f)).withStyle(ChatFormatting.BLUE));
-        }*/
     }
 
     public static boolean shouldRemoveShieldWindup() {
