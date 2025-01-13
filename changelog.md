@@ -1,7 +1,7 @@
 # Changelog
 
 ## Upcoming
-* You can attack while block-crouching
+* You can attack, break and place blocks while block-crouching
 * Rebalanced shields
   * More blocked damage and blocking time
 

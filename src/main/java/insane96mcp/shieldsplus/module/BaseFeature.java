@@ -138,6 +138,9 @@ public class BaseFeature extends Feature {
         }
     }
 
+    /**
+     Returns true if the player can block while crouching
+     */
     public static boolean blockWithCrouch(LivingEntity livingEntity) {
         if (livingEntity instanceof Player player && player.getCooldowns().isOnCooldown(player.getOffhandItem().getItem()))
             return false;
