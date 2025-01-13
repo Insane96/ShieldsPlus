@@ -31,7 +31,7 @@ import java.util.Optional;
 public class BaseFeature extends Feature {
     @Config(min = 0)
     @Label(name = "Shield Windup", description = "In vanilla when you start blocking with a shield, there's a 0.25 seconds (5 ticks) window where you are still not blocking. By default the windup is removed.")
-    public static Integer shieldWindup = 1;
+    public static Integer shieldWindup = 0;
     @Config
     @Label(name = "Shields Block Fixed Damage Amount", description = "If true shields will block only a certain amount of damage. If false the vanilla behaviour is used.")
     public static Boolean shieldBlockFixedDamageAmount = true;
@@ -42,7 +42,7 @@ public class BaseFeature extends Feature {
     @Label(name = "Combat Test shield disabling", description = "Makes shields always disable for 1.6 seconds like Combat Test snapshots.")
     public static Boolean combatTestShieldDisabling = true;
     @Config
-    @Label(name = "Block with crouch", description = "If true, crouching will block with the shield.")
+    @Label(name = "Block with crouch", description = "If true, crouching will block with the shield and you can attack while blocking.")
     public static Boolean blockWithCrouch = true;
     @Config
     @Label(name = "Lifted and Cooldown", description = "If true, shields can be lifted only for a certain amount of time and will go on cooldown.")

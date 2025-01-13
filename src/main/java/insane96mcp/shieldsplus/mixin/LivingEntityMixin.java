@@ -1,5 +1,6 @@
 package insane96mcp.shieldsplus.mixin;
 
+import com.llamalad7.mixinextras.injector.ModifyExpressionValue;
 import insane96mcp.shieldsplus.module.BaseFeature;
 import net.minecraft.world.damagesource.DamageSource;
 import net.minecraft.world.entity.Entity;
@@ -10,9 +11,7 @@ import net.minecraft.world.level.Level;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.Shadow;
 import org.spongepowered.asm.mixin.injection.At;
-import org.spongepowered.asm.mixin.injection.Constant;
 import org.spongepowered.asm.mixin.injection.Inject;
-import org.spongepowered.asm.mixin.injection.ModifyConstant;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
 
@@ -27,13 +26,13 @@ public abstract class LivingEntityMixin extends Entity {
         super(p_19870_, p_19871_);
     }
 
-    @ModifyConstant(method = "isBlocking", constant = @Constant(intValue = 5))
-    private int blockingWindupTime(int ticks) {
+    @ModifyExpressionValue(method = "isBlocking", at = @At(value = "CONSTANT", args = "intValue=5"))
+    private int shieldsPlus$blockingWindupTime(int ticks) {
         return BaseFeature.shouldRemoveShieldWindup() ? BaseFeature.shieldWindup : ticks;
     }
 
     @Inject(method = "isBlocking", at = @At("HEAD"), cancellable = true)
-    public void isBlocking(CallbackInfoReturnable<Boolean> cir) {
+    public void shieldsPlus$isBlocking(CallbackInfoReturnable<Boolean> cir) {
         if (!BaseFeature.blockWithCrouch((LivingEntity) (Object) this))
             return;
 
@@ -41,7 +40,7 @@ public abstract class LivingEntityMixin extends Entity {
     }
 
     @Inject(method = "releaseUsingItem", at = @At("HEAD"), cancellable = true)
-    public void onReleaseUsing(CallbackInfo ci) {
+    public void shieldsPlus$onReleaseUsing(CallbackInfo ci) {
         if (!BaseFeature.blockWithCrouch((LivingEntity) (Object) this))
             return;
 

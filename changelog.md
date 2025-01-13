@@ -1,5 +1,8 @@
 # Changelog
 
+## Upcoming
+* You can attack while block-crouching
+
 ## 1.11.0
 * You can now block when crouching
   * Only when the shield is in the off-hand

@@ -13,7 +13,7 @@ import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
 public abstract class ItemMixin {
 
     @Inject(at = @At("RETURN"), method = "getEnchantmentValue", cancellable = true)
-    public void getEnchantmentValue(CallbackInfoReturnable<Integer> callbackInfo) {
+    public void shieldsPlus$getEnchantmentValue(CallbackInfoReturnable<Integer> callbackInfo) {
         //noinspection ConstantConditions
         if (((Object)this) instanceof ShieldItem
                 && !(((Object)this) instanceof SPShieldItem))
