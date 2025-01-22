@@ -1,5 +1,9 @@
 # Changelog
 
+## Upcoming
+* Blocking while crouching no longer slows down twice
+  * With this, Lightweight only works when blocking with right-click
+
 ## 1.11.1
 * You can attack, break and place blocks while block-crouching
 * Rebalanced shields
