@@ -1,6 +1,6 @@
 # Changelog
 
-## Upcoming
+## 1.11.2
 * Blocking while crouching no longer slows down twice
   * With this, Lightweight only works when blocking with right-click
 * Fixed [MC-147694](https://bugs.mojang.com/browse/MC-147694)
