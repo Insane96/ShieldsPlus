@@ -65,7 +65,7 @@ public class BaseFeature extends Feature {
     public static Integer enchantmentsPerfectParryTickWindow = 1;
     @Config(min = 0)
     @Label(name = "Enchantments.Recoil entities knockback", description = "Amount of knockback given to entities per level.")
-    public static Double enchantmentsRecoilEntitiesKnockback = 0.6d;
+    public static Double enchantmentsRecoilEntitiesKnockback = 0.5d;
     @Config(min = 0)
     @Label(name = "Enchantments.Recoil projectiles knockback", description = "Amount of knockback given to projectiles per level.")
     public static Double enchantmentsRecoilProjectilesKnockback = 5d;

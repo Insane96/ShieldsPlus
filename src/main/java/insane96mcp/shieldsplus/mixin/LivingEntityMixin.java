@@ -3,12 +3,15 @@ package insane96mcp.shieldsplus.mixin;
 import com.llamalad7.mixinextras.expression.Definition;
 import com.llamalad7.mixinextras.expression.Expression;
 import com.llamalad7.mixinextras.injector.ModifyExpressionValue;
+import com.llamalad7.mixinextras.injector.wrapoperation.Operation;
+import com.llamalad7.mixinextras.injector.wrapoperation.WrapOperation;
 import com.llamalad7.mixinextras.sugar.Local;
 import insane96mcp.shieldsplus.module.BaseFeature;
 import net.minecraft.world.damagesource.DamageSource;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.entity.LivingEntity;
+import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.Level;
 import org.spongepowered.asm.mixin.Mixin;
@@ -70,5 +73,13 @@ public abstract class LivingEntityMixin extends Entity {
     @Inject(method = "hurt", at = @At(value = "INVOKE", target = "Lnet/minecraftforge/event/entity/living/ShieldBlockEvent;getBlockedDamage()F", ordinal = 1, shift = At.Shift.AFTER))
     private void shieldsPlus$onBlocked(DamageSource pSource, float pAmount, CallbackInfoReturnable<Boolean> cir) {
         this.shieldsPlus$hasBlocked = true;
+    }
+
+    @WrapOperation(method = "blockUsingShield", at = @At(value = "INVOKE", target = "Lnet/minecraft/world/entity/LivingEntity;blockedByShield(Lnet/minecraft/world/entity/LivingEntity;)V"))
+    public void shieldsPlus$onBlockUsingShield(LivingEntity instance, LivingEntity pDefender, Operation<Void> original, LivingEntity pAttacker) {
+        pAttacker.knockback(0.5D, pDefender.getX() - pAttacker.getX(), pDefender.getZ() - pAttacker.getZ());
+        if (pAttacker instanceof Player)
+            pAttacker.hurtMarked = true;
+        original.call(pAttacker, pDefender);
     }
 }

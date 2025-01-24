@@ -3,6 +3,7 @@
 ## Upcoming
 * Blocking while crouching no longer slows down twice
   * With this, Lightweight only works when blocking with right-click
+* Fixed [MC-147694](https://bugs.mojang.com/browse/MC-147694)
 
 ## 1.11.1
 * You can attack, break and place blocks while block-crouching

@@ -5,6 +5,7 @@ import insane96mcp.shieldsplus.world.item.SPShieldItem;
 import net.minecraft.world.damagesource.DamageSource;
 import net.minecraft.world.entity.EquipmentSlot;
 import net.minecraft.world.entity.LivingEntity;
+import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.entity.projectile.Projectile;
 import net.minecraft.world.item.enchantment.Enchantment;
 import net.minecraftforge.event.entity.living.ShieldBlockEvent;
@@ -31,8 +32,11 @@ public class RecoilEnchantment extends Enchantment implements IBlockingEffect {
         if (lvl <= 0)
             return;
 
-        if (source.getEntity() instanceof LivingEntity sourceEntity && source.getEntity() == source.getDirectEntity())
-            sourceEntity.knockback(lvl * BaseFeature.enchantmentsRecoilEntitiesKnockback, blockingEntity.getX() - sourceEntity.getX(), blockingEntity.getZ() - sourceEntity.getZ());
+        if (source.getEntity() instanceof LivingEntity sourceEntity && source.getEntity() == source.getDirectEntity()) {
+			sourceEntity.knockback(lvl * BaseFeature.enchantmentsRecoilEntitiesKnockback, blockingEntity.getX() - sourceEntity.getX(), blockingEntity.getZ() - sourceEntity.getZ());
+			if (sourceEntity instanceof Player)
+				sourceEntity.hurtMarked = true;
+		}
         else if (source.getDirectEntity() instanceof Projectile projectile)
             projectile.setDeltaMovement(projectile.getDeltaMovement().scale(lvl * BaseFeature.enchantmentsRecoilProjectilesKnockback));
     }
