@@ -1,5 +1,8 @@
 # Changelog
 
+## 1.11.3
+* Changed shield recipes to require a log in the middle instead of a wooden shield
+
 ## 1.11.2
 * Blocking while crouching no longer slows down twice
   * With this, Lightweight only works when blocking with right-click

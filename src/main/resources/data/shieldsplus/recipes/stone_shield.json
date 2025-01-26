@@ -10,7 +10,7 @@
             "item": "minecraft:cobblestone"
         },
         "B": {
-            "item": "shieldsplus:wooden_shield"
+            "tag": "minecraft:logs"
         }
     },
     "result": {

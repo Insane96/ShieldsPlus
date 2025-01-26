@@ -10,7 +10,7 @@
             "item": "minecraft:diamond"
         },
         "B": {
-            "item": "shieldsplus:wooden_shield"
+            "tag": "minecraft:logs"
         }
     },
     "result": {

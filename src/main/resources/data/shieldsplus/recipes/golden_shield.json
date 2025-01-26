@@ -10,7 +10,7 @@
             "item": "minecraft:gold_ingot"
         },
         "B": {
-            "item": "shieldsplus:wooden_shield"
+            "tag": "minecraft:logs"
         }
     },
     "result": {

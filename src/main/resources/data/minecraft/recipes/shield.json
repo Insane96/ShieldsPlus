@@ -7,7 +7,7 @@
     ],
     "key": {
         "S": {
-            "item": "shieldsplus:wooden_shield"
+            "tag": "minecraft:logs"
         },
         "I": {
             "item": "minecraft:iron_ingot"
