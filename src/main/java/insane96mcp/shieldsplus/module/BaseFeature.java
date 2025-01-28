@@ -10,9 +10,13 @@ import insane96mcp.shieldsplus.data.ShieldDefinition;
 import insane96mcp.shieldsplus.data.ShieldDefinitionReloader;
 import insane96mcp.shieldsplus.world.item.SPShieldItem;
 import insane96mcp.shieldsplus.world.item.enchantment.*;
+import net.minecraft.core.registries.Registries;
+import net.minecraft.resources.ResourceLocation;
+import net.minecraft.tags.TagKey;
 import net.minecraft.world.InteractionHand;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.player.Player;
+import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ShieldItem;
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.api.distmarker.OnlyIn;
@@ -29,6 +33,8 @@ import java.util.Optional;
 @Label(name = "Shields+")
 @LoadFeature(module = ShieldsPlus.RESOURCE_PREFIX + "base", canBeDisabled = false)
 public class BaseFeature extends Feature {
+    public static final TagKey<Item> REQUIRE_TWO_HANDS_ITEM_TAG = TagKey.create(Registries.ITEM, new ResourceLocation(ShieldsPlus.MOD_ID, "requires_two_hands"));
+
     @Config(min = 0)
     @Label(name = "Shield Windup", description = "In vanilla when you start blocking with a shield, there's a 0.25 seconds (5 ticks) window where you are still not blocking. By default the windup is removed.")
     public static Integer shieldWindup = 0;
@@ -130,7 +136,12 @@ public class BaseFeature extends Feature {
             ShieldBashEnchantment.onTick(event.player);
         }
 
-        if (blockWithCrouch && !event.player.isUsingItem() && event.player.getOffhandItem().canPerformAction(ToolActions.SHIELD_BLOCK) && event.player.isCrouching() && !event.player.getCooldowns().isOnCooldown(event.player.getOffhandItem().getItem())) {
+        if (blockWithCrouch
+                && !event.player.isUsingItem()
+                && event.player.getOffhandItem().canPerformAction(ToolActions.SHIELD_BLOCK)
+                && event.player.isCrouching()
+                && !event.player.getCooldowns().isOnCooldown(event.player.getOffhandItem().getItem())
+                && !event.player.getMainHandItem().is(REQUIRE_TWO_HANDS_ITEM_TAG)) {
             event.player.startUsingItem(InteractionHand.OFF_HAND);
         }
         if (blockWithCrouch && event.player.isUsingItem() && event.player.getOffhandItem().canPerformAction(ToolActions.SHIELD_BLOCK) && event.player.isCrouching() && event.player.getCooldowns().isOnCooldown(event.player.getOffhandItem().getItem())) {
@@ -144,7 +155,7 @@ public class BaseFeature extends Feature {
     public static boolean blockWithCrouch(LivingEntity livingEntity) {
         if (livingEntity instanceof Player player && player.getCooldowns().isOnCooldown(player.getOffhandItem().getItem()))
             return false;
-        return blockWithCrouch && !livingEntity.getOffhandItem().isEmpty() && livingEntity.getOffhandItem().canPerformAction(ToolActions.SHIELD_BLOCK) && livingEntity.isCrouching();
+        return blockWithCrouch && livingEntity.getOffhandItem().canPerformAction(ToolActions.SHIELD_BLOCK) && livingEntity.isCrouching();
     }
 
     @OnlyIn(Dist.CLIENT)

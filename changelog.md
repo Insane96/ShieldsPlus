@@ -1,5 +1,9 @@
 # Changelog
 
+## 1.11.4
+* Fixed being able to crouch block with crossbow in hand
+  * Added a new item tag `shieldsplus:requires_two_hands` that contains the items that will prevent crouch blocking
+
 ## 1.11.3
 * Changed shield recipes to require a log in the middle instead of a wooden shield
 
