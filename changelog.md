@@ -1,8 +1,8 @@
 # Changelog
 
-## Upcoming
+## 1.11.5
 * Fixed not being able to charge items (e.g. bows and crossbows) when sneaking with a shield on cooldown
-* Only charged crossbows will now prevent crouch blocking. Item tag `shieldsplus:requires_two_hands` is now empty 
+* Only charged crossbows will now prevent crouch blocking. Item tag `shieldsplus:requires_two_hands` is now empty but still functional
 
 ## 1.11.4
 * Fixed being able to crouch block with crossbow in hand
