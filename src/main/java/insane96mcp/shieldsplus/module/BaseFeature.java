@@ -16,6 +16,7 @@ import net.minecraft.tags.TagKey;
 import net.minecraft.world.InteractionHand;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.player.Player;
+import net.minecraft.world.item.CrossbowItem;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ShieldItem;
 import net.minecraftforge.api.distmarker.Dist;
@@ -141,10 +142,11 @@ public class BaseFeature extends Feature {
                 && event.player.getOffhandItem().canPerformAction(ToolActions.SHIELD_BLOCK)
                 && event.player.isCrouching()
                 && !event.player.getCooldowns().isOnCooldown(event.player.getOffhandItem().getItem())
+                && !CrossbowItem.isCharged(event.player.getMainHandItem())
                 && !event.player.getMainHandItem().is(REQUIRE_TWO_HANDS_ITEM_TAG)) {
             event.player.startUsingItem(InteractionHand.OFF_HAND);
         }
-        if (blockWithCrouch && event.player.isUsingItem() && event.player.getOffhandItem().canPerformAction(ToolActions.SHIELD_BLOCK) && event.player.isCrouching() && event.player.getCooldowns().isOnCooldown(event.player.getOffhandItem().getItem())) {
+        if (blockWithCrouch && event.player.isUsingItem() && event.player.getUseItem().canPerformAction(ToolActions.SHIELD_BLOCK) && event.player.isCrouching() && event.player.getCooldowns().isOnCooldown(event.player.getOffhandItem().getItem())) {
             event.player.stopUsingItem();
         }
     }
