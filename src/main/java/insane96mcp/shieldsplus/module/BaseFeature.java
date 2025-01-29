@@ -137,24 +137,22 @@ public class BaseFeature extends Feature {
             ShieldBashEnchantment.onTick(event.player);
         }
 
-        if (blockWithCrouch
+        if (canBlockWithCrouch(event.player)
                 && !event.player.isUsingItem()
                 && event.player.getOffhandItem().canPerformAction(ToolActions.SHIELD_BLOCK)
-                && event.player.isCrouching()
-                && !event.player.getCooldowns().isOnCooldown(event.player.getOffhandItem().getItem())
                 && !CrossbowItem.isCharged(event.player.getMainHandItem())
                 && !event.player.getMainHandItem().is(REQUIRE_TWO_HANDS_ITEM_TAG)) {
             event.player.startUsingItem(InteractionHand.OFF_HAND);
         }
-        if (blockWithCrouch && event.player.isUsingItem() && event.player.getUseItem().canPerformAction(ToolActions.SHIELD_BLOCK) && event.player.isCrouching() && event.player.getCooldowns().isOnCooldown(event.player.getOffhandItem().getItem())) {
+        /*if (blockWithCrouch && event.player.isUsingItem() && event.player.getUseItem().canPerformAction(ToolActions.SHIELD_BLOCK) && event.player.isCrouching() && event.player.getCooldowns().isOnCooldown(event.player.getOffhandItem().getItem())) {
             event.player.stopUsingItem();
-        }
+        }*/
     }
 
     /**
      Returns true if the player can block while crouching
      */
-    public static boolean blockWithCrouch(LivingEntity livingEntity) {
+    public static boolean canBlockWithCrouch(LivingEntity livingEntity) {
         if (livingEntity instanceof Player player && player.getCooldowns().isOnCooldown(player.getOffhandItem().getItem()))
             return false;
         return blockWithCrouch && livingEntity.getOffhandItem().canPerformAction(ToolActions.SHIELD_BLOCK) && livingEntity.isCrouching();

@@ -31,7 +31,7 @@ public abstract class MinecraftMixin {
     @Expression("this.options.keyAttack.consumeClick()")
     @ModifyExpressionValue(method = "handleKeybinds", at = @At(value = "MIXINEXTRAS:EXPRESSION", ordinal = 0))
     public boolean shieldsPlus$onConsumeAttackClickWhenUsingItem(boolean original, @Local LocalBooleanRef flag2) {
-        if (original && BaseFeature.blockWithCrouch(this.player)) {
+        if (original && BaseFeature.canBlockWithCrouch(this.player)) {
             //this.gameMode.releaseUsingItem(this.player);
             flag2.set(flag2.get() | this.startAttack());
         }
@@ -44,7 +44,7 @@ public abstract class MinecraftMixin {
     @Expression("this.options.keyUse.consumeClick()")
     @ModifyExpressionValue(method = "handleKeybinds", at = @At(value = "MIXINEXTRAS:EXPRESSION", ordinal = 0))
     public boolean shieldsPlus$onConsumeUseClickWhenUsingItem(boolean original, @Local LocalBooleanRef flag2) {
-        if (original && BaseFeature.blockWithCrouch(this.player)) {
+        if (original && BaseFeature.canBlockWithCrouch(this.player)) {
             this.startUseItem();
         }
         return original;
@@ -57,6 +57,6 @@ public abstract class MinecraftMixin {
     public boolean shieldsPlus$onUsingItemCheckWhenContinueAttack(boolean original) {
         if (!original)
             return false;
-        return !BaseFeature.blockWithCrouch(this.player);
+        return !BaseFeature.canBlockWithCrouch(this.player);
     }
 }

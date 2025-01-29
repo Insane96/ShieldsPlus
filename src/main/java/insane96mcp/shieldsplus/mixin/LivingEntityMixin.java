@@ -14,6 +14,7 @@ import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.Level;
+import net.minecraftforge.common.ToolActions;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.Shadow;
 import org.spongepowered.asm.mixin.Unique;
@@ -31,6 +32,8 @@ public abstract class LivingEntityMixin extends Entity {
 
     @Shadow public abstract void remove(RemovalReason pReason);
 
+    @Shadow protected ItemStack useItem;
+
     public LivingEntityMixin(EntityType<?> p_19870_, Level p_19871_) {
         super(p_19870_, p_19871_);
     }
@@ -42,7 +45,7 @@ public abstract class LivingEntityMixin extends Entity {
 
     @Inject(method = "isBlocking", at = @At("HEAD"), cancellable = true)
     public void shieldsPlus$isBlocking(CallbackInfoReturnable<Boolean> cir) {
-        if (!BaseFeature.blockWithCrouch((LivingEntity) (Object) this))
+        if (!BaseFeature.canBlockWithCrouch((LivingEntity) (Object) this))
             return;
 
         cir.setReturnValue(true);
@@ -50,7 +53,8 @@ public abstract class LivingEntityMixin extends Entity {
 
     @Inject(method = "releaseUsingItem", at = @At("HEAD"), cancellable = true)
     public void shieldsPlus$onReleaseUsing(CallbackInfo ci) {
-        if (!BaseFeature.blockWithCrouch((LivingEntity) (Object) this))
+        if (!BaseFeature.canBlockWithCrouch((LivingEntity) (Object) this)
+                || !this.useItem.canPerformAction(ToolActions.SHIELD_BLOCK))
             return;
 
         ci.cancel();
