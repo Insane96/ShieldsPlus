@@ -2,7 +2,7 @@
 
 * Increase movement speed when blocking with right-click to the same as sneaking. (multiply impulse by 1.5)
 
-## Upcoming
+## 1.11.6
 * Added a new BlockWithCrouchEvent to cancel blocking while crouching
 * Blocking with a shield with right-click now slows down less (like when crouching)
 
