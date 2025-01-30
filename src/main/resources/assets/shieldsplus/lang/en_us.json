@@ -10,7 +10,7 @@
     "shieldsplus:cooldown": "%ss cooldown",
 
     "enchantment.shieldsplus.recoil": "Recoil",
-    "enchantment.shieldsplus.recoil.info": "Knocks back entities and projectiles blocked",
+    "enchantment.shieldsplus.recoil.info": "Increases knockback when blocking",
     "enchantment.shieldsplus.reflection": "Reflection",
     "enchantment.shieldsplus.reflection.info": "Reflects back a percentage of damage",
     "enchantment.shieldsplus.reinforced": "Reinforced",

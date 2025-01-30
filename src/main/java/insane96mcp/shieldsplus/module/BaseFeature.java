@@ -8,6 +8,7 @@ import insane96mcp.insanelib.base.config.Config;
 import insane96mcp.shieldsplus.ShieldsPlus;
 import insane96mcp.shieldsplus.data.ShieldDefinition;
 import insane96mcp.shieldsplus.data.ShieldDefinitionReloader;
+import insane96mcp.shieldsplus.event.SPEventFactory;
 import insane96mcp.shieldsplus.world.item.SPShieldItem;
 import insane96mcp.shieldsplus.world.item.enchantment.*;
 import net.minecraft.core.registries.Registries;
@@ -141,12 +142,10 @@ public class BaseFeature extends Feature {
                 && !event.player.isUsingItem()
                 && event.player.getOffhandItem().canPerformAction(ToolActions.SHIELD_BLOCK)
                 && !CrossbowItem.isCharged(event.player.getMainHandItem())
-                && !event.player.getMainHandItem().is(REQUIRE_TWO_HANDS_ITEM_TAG)) {
+                && !event.player.getMainHandItem().is(REQUIRE_TWO_HANDS_ITEM_TAG)
+                && SPEventFactory.canBlockWithCrouch(event.player, event.player.getOffhandItem())) {
             event.player.startUsingItem(InteractionHand.OFF_HAND);
         }
-        /*if (blockWithCrouch && event.player.isUsingItem() && event.player.getUseItem().canPerformAction(ToolActions.SHIELD_BLOCK) && event.player.isCrouching() && event.player.getCooldowns().isOnCooldown(event.player.getOffhandItem().getItem())) {
-            event.player.stopUsingItem();
-        }*/
     }
 
     /**

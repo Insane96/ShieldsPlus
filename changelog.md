@@ -1,5 +1,10 @@
 # Changelog
 
+* Increase movement speed when blocking with right-click to the same as sneaking. (multiply impulse by 1.5)
+
+## Upcoming
+* Added a new BlockWithCrouchEvent to cancel blocking while crouching
+
 ## 1.11.5
 * Fixed not being able to charge items (e.g. bows and crossbows) when sneaking with a shield on cooldown
 * Only charged crossbows will now prevent crouch blocking. Item tag `shieldsplus:requires_two_hands` is now empty but still functional
