@@ -45,4 +45,11 @@ public abstract class LocalPlayerMixin extends LivingEntity {
             return;
         original.call(instance);
     }
+
+    @ModifyExpressionValue(method = "aiStep", at = @At(value = "CONSTANT", args = "floatValue=0.2f"))
+    public float onUsingItemSlowdown(float original) {
+        if (this.isBlocking())
+            return 0.3f;
+        return original;
+    }
 }

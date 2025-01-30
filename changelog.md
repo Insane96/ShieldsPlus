@@ -4,6 +4,7 @@
 
 ## Upcoming
 * Added a new BlockWithCrouchEvent to cancel blocking while crouching
+* Blocking with a shield with right-click now slows down less (like when crouching)
 
 ## 1.11.5
 * Fixed not being able to charge items (e.g. bows and crossbows) when sneaking with a shield on cooldown
