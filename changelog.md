@@ -1,6 +1,7 @@
 # Changelog
 
-* Increase movement speed when blocking with right-click to the same as sneaking. (multiply impulse by 1.5)
+## Upcoming
+* You can now pick-block when block crouching
 
 ## 1.11.6
 * Added a new BlockWithCrouchEvent to cancel blocking while crouching

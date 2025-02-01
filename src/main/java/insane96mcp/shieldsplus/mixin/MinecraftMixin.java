@@ -25,6 +25,8 @@ public abstract class MinecraftMixin {
 
     @Shadow protected abstract void startUseItem();
 
+    @Shadow protected abstract void pickBlock();
+
     @Definition(id = "options", field = "Lnet/minecraft/client/Minecraft;options:Lnet/minecraft/client/Options;")
     @Definition(id = "keyAttack", field = "Lnet/minecraft/client/Options;keyAttack:Lnet/minecraft/client/KeyMapping;")
     @Definition(id = "consumeClick", method = "Lnet/minecraft/client/KeyMapping;consumeClick()Z")
@@ -46,6 +48,18 @@ public abstract class MinecraftMixin {
     public boolean shieldsPlus$onConsumeUseClickWhenUsingItem(boolean original, @Local LocalBooleanRef flag2) {
         if (original && BaseFeature.canBlockWithCrouch(this.player)) {
             this.startUseItem();
+        }
+        return original;
+    }
+
+    @Definition(id = "options", field = "Lnet/minecraft/client/Minecraft;options:Lnet/minecraft/client/Options;")
+    @Definition(id = "keyPickItem", field = "Lnet/minecraft/client/Options;keyPickItem:Lnet/minecraft/client/KeyMapping;")
+    @Definition(id = "consumeClick", method = "Lnet/minecraft/client/KeyMapping;consumeClick()Z")
+    @Expression("this.options.keyPickItem.consumeClick()")
+    @ModifyExpressionValue(method = "handleKeybinds", at = @At(value = "MIXINEXTRAS:EXPRESSION", ordinal = 0))
+    public boolean shieldsPlus$onConsumePickItemClickWhenUsingItem(boolean original, @Local LocalBooleanRef flag2) {
+        if (original && BaseFeature.canBlockWithCrouch(this.player)) {
+            this.pickBlock();
         }
         return original;
     }
