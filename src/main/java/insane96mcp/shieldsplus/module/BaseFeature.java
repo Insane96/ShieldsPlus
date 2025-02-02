@@ -153,7 +153,7 @@ public class BaseFeature extends Feature {
     public static boolean canBlockWithCrouch(LivingEntity livingEntity) {
         if (livingEntity instanceof Player player && player.getCooldowns().isOnCooldown(player.getOffhandItem().getItem()))
             return false;
-        return blockWithCrouch && livingEntity.getOffhandItem().canPerformAction(ToolActions.SHIELD_BLOCK) && livingEntity.isCrouching() && SPEventFactory.canBlockWithCrouch(event.player, event.player.getOffhandItem());
+        return blockWithCrouch && livingEntity.getOffhandItem().canPerformAction(ToolActions.SHIELD_BLOCK) && livingEntity.isCrouching() && SPEventFactory.canBlockWithCrouch(livingEntity, livingEntity.getOffhandItem());
     }
 
     @OnlyIn(Dist.CLIENT)
