@@ -2,6 +2,7 @@
 
 ## Upcoming
 * You can now pick-block when block crouching
+* Fixed crouch block event not working correctly
 
 ## 1.11.6
 * Added a new BlockWithCrouchEvent to cancel blocking while crouching

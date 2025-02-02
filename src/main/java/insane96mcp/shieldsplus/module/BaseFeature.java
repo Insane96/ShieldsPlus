@@ -142,8 +142,7 @@ public class BaseFeature extends Feature {
                 && !event.player.isUsingItem()
                 && event.player.getOffhandItem().canPerformAction(ToolActions.SHIELD_BLOCK)
                 && !CrossbowItem.isCharged(event.player.getMainHandItem())
-                && !event.player.getMainHandItem().is(REQUIRE_TWO_HANDS_ITEM_TAG)
-                && SPEventFactory.canBlockWithCrouch(event.player, event.player.getOffhandItem())) {
+                && !event.player.getMainHandItem().is(REQUIRE_TWO_HANDS_ITEM_TAG)) {
             event.player.startUsingItem(InteractionHand.OFF_HAND);
         }
     }
@@ -154,7 +153,7 @@ public class BaseFeature extends Feature {
     public static boolean canBlockWithCrouch(LivingEntity livingEntity) {
         if (livingEntity instanceof Player player && player.getCooldowns().isOnCooldown(player.getOffhandItem().getItem()))
             return false;
-        return blockWithCrouch && livingEntity.getOffhandItem().canPerformAction(ToolActions.SHIELD_BLOCK) && livingEntity.isCrouching();
+        return blockWithCrouch && livingEntity.getOffhandItem().canPerformAction(ToolActions.SHIELD_BLOCK) && livingEntity.isCrouching() && SPEventFactory.canBlockWithCrouch(event.player, event.player.getOffhandItem());
     }
 
     @OnlyIn(Dist.CLIENT)
