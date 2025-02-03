@@ -1,5 +1,8 @@
 # Changelog
 
+## Upcoming
+* Slightly increased shields cooldown
+
 ## 1.11.7
 * You can now pick-block when block crouching
 * Fixed crouch block event not working correctly
