@@ -1,6 +1,6 @@
 # Changelog
 
-## Upcoming
+## 1.11.8
 * Slightly increased shields cooldown
 
 ## 1.11.7
