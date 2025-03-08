@@ -1,5 +1,8 @@
 # Changelog
 
+## Upcoming
+* Definitely removed Shield Bash enchantment
+
 ## 1.11.8
 * Slightly increased shields cooldown
 

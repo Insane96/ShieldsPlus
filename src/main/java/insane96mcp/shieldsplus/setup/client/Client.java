@@ -19,7 +19,6 @@ import java.text.DecimalFormatSymbols;
 @Mod.EventBusSubscriber(value = Dist.CLIENT, bus = Mod.EventBusSubscriber.Bus.MOD, modid = ShieldsPlus.MOD_ID)
 public class Client {
 
-    @SuppressWarnings("unused")
     public static void setup(final FMLClientSetupEvent event) {
         initShields();
 

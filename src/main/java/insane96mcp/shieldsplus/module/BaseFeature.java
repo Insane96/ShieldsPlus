@@ -135,7 +135,6 @@ public class BaseFeature extends Feature {
 
         if (event.phase == TickEvent.Phase.END) {
             LightweightEnchantment.onTick(event.player);
-            ShieldBashEnchantment.onTick(event.player);
         }
 
         if (canBlockWithCrouch(event.player)
