@@ -45,10 +45,10 @@ public abstract class LivingEntityMixin extends Entity {
 
     @Inject(method = "isBlocking", at = @At("HEAD"), cancellable = true)
     public void shieldsPlus$isBlocking(CallbackInfoReturnable<Boolean> cir) {
-        if (!BaseFeature.canBlockWithCrouch((LivingEntity) (Object) this))
+        /*if (!BaseFeature.canBlockWithCrouch((LivingEntity) (Object) this))
             return;
 
-        cir.setReturnValue(true);
+        cir.setReturnValue(true);*/
     }
 
     @Inject(method = "releaseUsingItem", at = @At("HEAD"), cancellable = true)

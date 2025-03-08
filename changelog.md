@@ -3,6 +3,7 @@
 ## Upcoming
 * Definitely removed Shield Bash enchantment
 * Fixed italian translation being outdated
+* Fixed being able to block with a charged crossbow in hand
 
 ## 1.11.8
 * Slightly increased shields cooldown
