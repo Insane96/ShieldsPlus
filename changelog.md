@@ -2,6 +2,7 @@
 
 ## Upcoming
 * Definitely removed Shield Bash enchantment
+* Fixed italian translation being outdated
 
 ## 1.11.8
 * Slightly increased shields cooldown
