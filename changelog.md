@@ -1,6 +1,6 @@
 # Changelog
 
-## Upcoming
+## 1.11.9
 * Definitely removed Shield Bash enchantment
 * Fixed italian translation being outdated
 * Fixed being able to block with a charged crossbow in hand
