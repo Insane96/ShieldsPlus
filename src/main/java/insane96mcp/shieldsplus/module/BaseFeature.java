@@ -55,6 +55,9 @@ public class BaseFeature extends Feature {
     @Config
     @Label(name = "Lifted and Cooldown", description = "If true, shields can be lifted only for a certain amount of time and will go on cooldown.")
     public static Boolean liftedAndCooldown = true;
+    @Config(min = 0, max = 1)
+    @Label(name = "Min cooldown", description = "When shields go on cooldown, the time is given by how much time the shield has been blocking. This defines the minimum cooldown in percentage for the shield to go on cooldown (e.g. if you just block for a few ticks, the cooldown will be 30% of the max cooldown).")
+    public static Double minCooldown = 0.3d;
 
     @Config(min = 1)
     @Label(name = "Enchantments.Ablaze Time on fire", description = "How many seconds will ablaze set entities on fire per level.")

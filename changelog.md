@@ -1,5 +1,11 @@
 # Changelog
 
+* increase back torches from crafting
+
+## Upcoming
+* Enhanced the cooldown mechanic
+  * The cooldown of a shield is now based on the time it has been lifted
+
 ## 1.11.9
 * Definitely removed Shield Bash enchantment
 * Fixed italian translation being outdated

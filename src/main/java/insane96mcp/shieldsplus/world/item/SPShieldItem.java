@@ -68,11 +68,25 @@ public class SPShieldItem extends ShieldItem {
         return this.shieldDefinition.cooldownTicks;
     }
 
+    public int calculateCooldownFromTimeLifted(ItemStack stack, @Nullable LivingEntity entity, Level level, int timeLifted) {
+        double maxCooldown = this.getCooldown(stack, entity, level);
+        double cooldown = maxCooldown;
+        int useDuration = this.getUseDuration(stack);
+        timeLifted = useDuration - timeLifted;
+        cooldown *= ((double)timeLifted / useDuration);
+        if (cooldown / maxCooldown < BaseFeature.minCooldown)
+            cooldown = maxCooldown * BaseFeature.minCooldown;
+        int fastRecovery = stack.getEnchantmentLevel(SPEnchantments.FAST_RECOVERY.get());
+        if (fastRecovery > 0)
+            cooldown = (int) (cooldown * 0.6f);
+        return (int) cooldown;
+    }
+
     @Override
     public @NotNull ItemStack finishUsingItem(@NotNull ItemStack stack, @NotNull Level level, @NotNull LivingEntity livingEntity) {
         if (!BaseFeature.liftedAndCooldown)
             return stack;
-        int cooldown = this.getCooldown(stack, livingEntity, level);
+        int cooldown = this.calculateCooldownFromTimeLifted(stack, livingEntity, level, livingEntity.getUseItemRemainingTicks());
         if (cooldown > 0 && livingEntity instanceof Player player) {
             player.getCooldowns().addCooldown(stack.getItem(), cooldown);
         }
@@ -83,10 +97,7 @@ public class SPShieldItem extends ShieldItem {
     public void onStopUsing(ItemStack stack, LivingEntity entity, int count) {
         if (!BaseFeature.liftedAndCooldown)
             return;
-        int cooldown = this.getCooldown(stack, entity, entity.level());
-        int fastRecovery = stack.getEnchantmentLevel(SPEnchantments.FAST_RECOVERY.get());
-        if (fastRecovery > 0)
-            cooldown = (int) (cooldown * 0.6f);
+        int cooldown = this.calculateCooldownFromTimeLifted(stack, entity, entity.level(), entity.getUseItemRemainingTicks());
         if (cooldown > 0 && entity instanceof Player player)
             player.getCooldowns().addCooldown(stack.getItem(), cooldown);
     }
@@ -111,7 +122,7 @@ public class SPShieldItem extends ShieldItem {
         super.appendHoverText(itemStack, level, components, tooltipFlag);
         addDamageBlockedText(itemStack, components, this.getBlockedDamage(itemStack, null, level));
         int useDuration = this.getUseDuration(itemStack);
-        if (useDuration < 72000) {
+        if (useDuration < 72000 && BaseFeature.liftedAndCooldown) {
             components.add(Component.translatable(BLOCKING_TIME, ShieldsPlus.ONE_DECIMAL_FORMATTER.format(useDuration / 20f)).withStyle(ChatFormatting.BLUE));
             components.add(Component.translatable(COOLDOWN, ShieldsPlus.ONE_DECIMAL_FORMATTER.format(this.getCooldown(itemStack, null, level) / 20f)).withStyle(ChatFormatting.BLUE));
         }
