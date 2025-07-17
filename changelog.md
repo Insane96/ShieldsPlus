@@ -1,6 +1,6 @@
 # Changelog
 
-## Upcoming
+## 1.12.0
 Now requires InsaneLib 1.21.13
 * Enhanced the cooldown mechanic
   * The cooldown of a shield is now based on the time it has been lifted
