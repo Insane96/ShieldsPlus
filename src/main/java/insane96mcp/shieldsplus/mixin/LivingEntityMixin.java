@@ -43,14 +43,6 @@ public abstract class LivingEntityMixin extends Entity {
         return BaseFeature.shouldRemoveShieldWindup() ? BaseFeature.shieldWindup : ticks;
     }
 
-    @Inject(method = "isBlocking", at = @At("HEAD"), cancellable = true)
-    public void shieldsPlus$isBlocking(CallbackInfoReturnable<Boolean> cir) {
-        /*if (!BaseFeature.canBlockWithCrouch((LivingEntity) (Object) this))
-            return;
-
-        cir.setReturnValue(true);*/
-    }
-
     @Inject(method = "releaseUsingItem", at = @At("HEAD"), cancellable = true)
     public void shieldsPlus$onReleaseUsing(CallbackInfo ci) {
         if (!BaseFeature.canBlockWithCrouch((LivingEntity) (Object) this)
@@ -85,5 +77,12 @@ public abstract class LivingEntityMixin extends Entity {
         if (pAttacker instanceof Player)
             pAttacker.hurtMarked = true;
         original.call(pAttacker, pDefender);
+    }
+
+    @Definition(id = "flag1", local = @Local(type = boolean.class, ordinal = 1))
+    @Expression("flag1")
+    @ModifyExpressionValue(method = "hurt", at = @At(value = "MIXINEXTRAS:EXPRESSION", ordinal = 2))
+    public boolean shieldsPlus$onPlayHurtSound(boolean original, @Local(name = "flag") boolean hasFullyBlocked) {
+        return original && !hasFullyBlocked;
     }
 }
