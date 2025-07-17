@@ -1,8 +1,10 @@
 # Changelog
 
 ## Upcoming
+Now requires InsaneLib 1.21.13
 * Enhanced the cooldown mechanic
   * The cooldown of a shield is now based on the time it has been lifted
+* Fixed shield cooldown ignoring Fast Recovery enchantment config option
 
 ## 1.11.9
 * Definitely removed Shield Bash enchantment

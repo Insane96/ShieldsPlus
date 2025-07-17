@@ -32,7 +32,7 @@ public class LightweightEnchantment extends Enchantment {
 		if (player.isBlocking() && !BaseFeature.canBlockWithCrouch(player)) {
 			int lvl = player.getUseItem().getEnchantmentLevel(SPEnchantments.LIGHTWEIGHT.get());
 			if (lvl > 0)
-				MCUtils.applyModifier(player, Attributes.MOVEMENT_SPEED, BONUS_SPEED_UUID, "Lightweight bonus speed", BaseFeature.enchantmentsLightweightBonusSpeed * lvl, AttributeModifier.Operation.MULTIPLY_BASE, false);
+				MCUtils.applyModifier(player, Attributes.MOVEMENT_SPEED, BONUS_SPEED_UUID, "Lightweight bonus speed", BaseFeature.enchantments$lightweightBonusSpeed * lvl, AttributeModifier.Operation.MULTIPLY_BASE, false);
 		}
 		else {
 			AttributeInstance attribute = player.getAttribute(Attributes.MOVEMENT_SPEED);

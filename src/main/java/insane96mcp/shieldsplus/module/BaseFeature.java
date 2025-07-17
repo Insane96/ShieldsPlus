@@ -1,9 +1,7 @@
 package insane96mcp.shieldsplus.module;
 
 import insane96mcp.insanelib.base.Feature;
-import insane96mcp.insanelib.base.Label;
 import insane96mcp.insanelib.base.LoadFeature;
-import insane96mcp.insanelib.base.Module;
 import insane96mcp.insanelib.base.config.Config;
 import insane96mcp.shieldsplus.ShieldsPlus;
 import insane96mcp.shieldsplus.data.ShieldDefinition;
@@ -12,7 +10,6 @@ import insane96mcp.shieldsplus.event.SPEventFactory;
 import insane96mcp.shieldsplus.world.item.SPShieldItem;
 import insane96mcp.shieldsplus.world.item.enchantment.*;
 import net.minecraft.core.registries.Registries;
-import net.minecraft.resources.ResourceLocation;
 import net.minecraft.tags.TagKey;
 import net.minecraft.world.InteractionHand;
 import net.minecraft.world.entity.LivingEntity;
@@ -32,64 +29,43 @@ import net.minecraftforge.eventbus.api.SubscribeEvent;
 
 import java.util.Optional;
 
-@Label(name = "Shields+")
-@LoadFeature(module = ShieldsPlus.RESOURCE_PREFIX + "base", canBeDisabled = false)
+@LoadFeature(module = ShieldsPlus.RESOURCE_PREFIX + "base", canBeDisabled = false, name = "Shields+")
 public class BaseFeature extends Feature {
-    public static final TagKey<Item> REQUIRE_TWO_HANDS_ITEM_TAG = TagKey.create(Registries.ITEM, new ResourceLocation(ShieldsPlus.MOD_ID, "requires_two_hands"));
+    public static final TagKey<Item> REQUIRE_TWO_HANDS_ITEM_TAG = TagKey.create(Registries.ITEM, ShieldsPlus.location("requires_two_hands"));
 
-    @Config(min = 0)
-    @Label(name = "Shield Windup", description = "In vanilla when you start blocking with a shield, there's a 0.25 seconds (5 ticks) window where you are still not blocking. By default the windup is removed.")
+    @Config(min = 0, description = "In vanilla when you start blocking with a shield, there's a 0.25 seconds (5 ticks) window where you are still not blocking. By default the windup is removed.")
     public static Integer shieldWindup = 0;
-    @Config
-    @Label(name = "Shields Block Fixed Damage Amount", description = "If true shields will block only a certain amount of damage. If false the vanilla behaviour is used.")
+    @Config(description = "If true shields will block only a certain amount of damage. If false the vanilla behaviour is used.")
     public static Boolean shieldBlockFixedDamageAmount = true;
-    @Config(min = 0d, max = Float.MAX_VALUE)
-    @Label(name = "Min Shield Hurt Damage", description = "The minimum damage dealt to the player for the shield to take damage. Vanilla is 3. E.g. With this set to 3, the shield will not be damaged if damage received is lower than.")
+    @Config(min = 0d, max = Float.MAX_VALUE, description = "The minimum damage dealt to the player for the shield to take damage. Vanilla is 3. E.g. With this set to 3, the shield will not be damaged if damage received is lower than 3.")
     public static Double minShieldHurtDamage = 0d;
-    @Config
-    @Label(name = "Combat Test shield disabling", description = "Makes shields always disable for 1.6 seconds like Combat Test snapshots.")
+    @Config(description = "Makes shields always disable for 1.6 seconds like Combat Test snapshots.")
     public static Boolean combatTestShieldDisabling = true;
-    @Config
-    @Label(name = "Block with crouch", description = "If true, crouching will block with the shield and you can attack while blocking.")
+    @Config(description = "If true, crouching will block with the shield and you can attack while blocking.")
     public static Boolean blockWithCrouch = true;
-    @Config
-    @Label(name = "Lifted and Cooldown", description = "If true, shields can be lifted only for a certain amount of time and will go on cooldown.")
+    @Config(description = "If true, shields can be lifted only for a certain amount of time and will go on cooldown.")
     public static Boolean liftedAndCooldown = true;
-    @Config(min = 0, max = 1)
-    @Label(name = "Min cooldown", description = "When shields go on cooldown, the time is given by how much time the shield has been blocking. This defines the minimum cooldown in percentage for the shield to go on cooldown (e.g. if you just block for a few ticks, the cooldown will be 30% of the max cooldown).")
+    @Config(min = 0, max = 1, description = "When shields go on cooldown, the time is given by how much time the shield has been blocking. This defines the minimum cooldown in percentage for the shield to go on cooldown (e.g. if you just block for a few ticks, the cooldown will be 30% of the max cooldown).")
     public static Double minCooldown = 0.3d;
 
-    @Config(min = 1)
-    @Label(name = "Enchantments.Ablaze Time on fire", description = "How many seconds will ablaze set entities on fire per level.")
-    public static Integer enchantmentsAblazeTimeOnFire = 2;
-    @Config(min = 0, max = 1)
-    @Label(name = "Enchantments.Aegis percentage damage reduction", description = "How much damage will the aegis enchantment negate per level.")
-    public static Double enchantmentsAegisPercentageDamageReduction = 0.1d;
-    @Config(min = 0, max = 1)
-    @Label(name = "Enchantments.Fast Recovery cooldown reduction", description = "Percentage cooldown reduction with the Fast Recovery enchantment.")
-    public static Double enchantmentsFastRecoveryCooldownReduction = 0.35d;
-    @Config(min = 0)
-    @Label(name = "Enchantments.Lightweight bonus speed", description = "Percentage increase of speed when blocking with the Lightweight enchantment.")
-    public static Double enchantmentsLightweightBonusSpeed = 2d;
-    @Config(min = 0, max = 10)
-    @Label(name = "Enchantments.Perfect Parry tick window", description = "Max ticks for a perfect parry.")
-    public static Integer enchantmentsPerfectParryTickWindow = 1;
-    @Config(min = 0)
-    @Label(name = "Enchantments.Recoil entities knockback", description = "Amount of knockback given to entities per level.")
-    public static Double enchantmentsRecoilEntitiesKnockback = 0.5d;
-    @Config(min = 0)
-    @Label(name = "Enchantments.Recoil projectiles knockback", description = "Amount of knockback given to projectiles per level.")
-    public static Double enchantmentsRecoilProjectilesKnockback = 5d;
-    @Config(min = 0, max = 1)
-    @Label(name = "Enchantments.Reflection reflected damage", description = "Percentage amount of damage reflected.")
-    public static Double enchantmentsReflectionReflectedDamage = 0.08d;
-    @Config(min = 0, max = 1)
-    @Label(name = "Enchantments.Reinforced blocked damage bonus", description = "Percentage bonus amount of damage blocked.")
-    public static Double enchantmentsReinforcedBlockedDamageBonus = 0.1d;
-
-    public BaseFeature(Module module, boolean enabledByDefault, boolean canBeDisabled) {
-        super(module, enabledByDefault, canBeDisabled);
-    }
+    @Config(min = 1, description = "How many seconds will ablaze set entities on fire per level.")
+    public static Integer enchantments$ablazeTimeOnFire = 2;
+    @Config(min = 0, max = 1, description = "How much damage will the aegis enchantment negate per level.")
+    public static Double enchantments$aegisPercentageDamageReduction = 0.1d;
+    @Config(min = 0, max = 1, description = "Percentage cooldown reduction with the Fast Recovery enchantment.")
+    public static Double enchantments$fastRecoveryCooldownReduction = 0.35d;
+    @Config(min = 0, description = "Percentage increase of speed when blocking with the Lightweight enchantment.")
+    public static Double enchantments$lightweightBonusSpeed = 2d;
+    @Config(min = 0, max = 10, description = "Max ticks for a perfect parry.")
+    public static Integer enchantments$perfectParryTickWindow = 1;
+    @Config(min = 0, description = "Amount of knockback given to entities per level.")
+    public static Double enchantments$recoilEntitiesKnockback = 0.5d;
+    @Config(min = 0, description = "Amount of knockback given to projectiles per level.")
+    public static Double enchantments$recoilProjectilesKnockback = 5d;
+    @Config(min = 0, max = 1, description = "Percentage amount of damage reflected.")
+    public static Double enchantments$reflectionReflectedDamage = 0.08d;
+    @Config(min = 0, max = 1, description = "Percentage bonus amount of damage blocked.")
+    public static Double enchantments$reinforcedBlockedDamageBonus = 0.1d;
 
     @SubscribeEvent
     public void onShieldBlock(ShieldBlockEvent event) {

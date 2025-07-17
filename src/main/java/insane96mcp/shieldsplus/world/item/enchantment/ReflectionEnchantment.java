@@ -32,7 +32,7 @@ public class ReflectionEnchantment extends Enchantment implements IBlockingEffec
 	}
 
 	public static float getReflectedDamage(int level) {
-		return level * BaseFeature.enchantmentsReflectionReflectedDamage.floatValue();
+		return level * BaseFeature.enchantments$reflectionReflectedDamage.floatValue();
 	}
 
 	public void onBlocked(LivingEntity blockingEntity, DamageSource source, float amount, int lvl, ShieldBlockEvent event) {

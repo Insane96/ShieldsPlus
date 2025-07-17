@@ -57,7 +57,7 @@ public class AegisEnchantment extends Enchantment {
 	}
 
 	public static float getResistance(int level) {
-		return BaseFeature.enchantmentsAegisPercentageDamageReduction.floatValue() * level;
+		return BaseFeature.enchantments$aegisPercentageDamageReduction.floatValue() * level;
 	}
 
 	public static float getResistance(ItemStack itemStack) {

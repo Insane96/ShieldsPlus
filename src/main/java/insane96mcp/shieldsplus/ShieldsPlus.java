@@ -4,6 +4,7 @@ import insane96mcp.shieldsplus.data.ShieldDefinitionReloader;
 import insane96mcp.shieldsplus.network.NetworkHandler;
 import insane96mcp.shieldsplus.setup.*;
 import insane96mcp.shieldsplus.setup.client.Client;
+import net.minecraft.resources.ResourceLocation;
 import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.event.AddReloadListenerEvent;
 import net.minecraftforge.eventbus.api.EventPriority;
@@ -44,5 +45,13 @@ public class ShieldsPlus
 
     private void commonSetup(final FMLCommonSetupEvent event) {
         NetworkHandler.init();
+    }
+
+    public static ResourceLocation location(String path) {
+        return ResourceLocation.fromNamespaceAndPath(MOD_ID, path);
+    }
+
+    public static String lang(String key) {
+        return ShieldsPlus.MOD_ID + "." + key;
     }
 }

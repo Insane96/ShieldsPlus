@@ -44,7 +44,7 @@ public class AblazeEnchantment extends Enchantment implements IBlockingEffect {
 			ScheduledTasks.schedule(new ScheduledTickTask(1) {
 				@Override
 				public void run() {
-					other.setSecondsOnFire(ablaze * BaseFeature.enchantmentsAblazeTimeOnFire);
+					other.setSecondsOnFire(ablaze * BaseFeature.enchantments$ablazeTimeOnFire);
 					if (other instanceof LivingEntity livingEntity) {
 						livingEntity.setLastHurtByMob(attacker);
 						if (livingEntity instanceof Player player)

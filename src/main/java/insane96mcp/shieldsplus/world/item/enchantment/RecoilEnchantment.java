@@ -33,11 +33,11 @@ public class RecoilEnchantment extends Enchantment implements IBlockingEffect {
             return;
 
         if (source.getEntity() instanceof LivingEntity sourceEntity && source.getEntity() == source.getDirectEntity()) {
-			sourceEntity.knockback(lvl * BaseFeature.enchantmentsRecoilEntitiesKnockback, blockingEntity.getX() - sourceEntity.getX(), blockingEntity.getZ() - sourceEntity.getZ());
+			sourceEntity.knockback(lvl * BaseFeature.enchantments$recoilEntitiesKnockback, blockingEntity.getX() - sourceEntity.getX(), blockingEntity.getZ() - sourceEntity.getZ());
 			if (sourceEntity instanceof Player)
 				sourceEntity.hurtMarked = true;
 		}
         else if (source.getDirectEntity() instanceof Projectile projectile)
-            projectile.setDeltaMovement(projectile.getDeltaMovement().scale(lvl * BaseFeature.enchantmentsRecoilProjectilesKnockback));
+            projectile.setDeltaMovement(projectile.getDeltaMovement().scale(lvl * BaseFeature.enchantments$recoilProjectilesKnockback));
     }
 }

@@ -19,6 +19,6 @@ public class FastRecoveryEnchantment extends Enchantment {
 	}
 
 	public static float getCooldownReduction(int lvl) {
-		return BaseFeature.enchantmentsFastRecoveryCooldownReduction.floatValue();
+		return BaseFeature.enchantments$fastRecoveryCooldownReduction.floatValue();
 	}
 }

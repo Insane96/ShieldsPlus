@@ -30,7 +30,7 @@ public class PerfectParryEnchantment extends Enchantment implements IBlockingEff
             return;
 
         int ticksSinceBlocking = blockingEntity.getUseItem().getUseDuration() - blockingEntity.getUseItemRemainingTicks();
-		if (ticksSinceBlocking <= BaseFeature.enchantmentsPerfectParryTickWindow) {
+		if (ticksSinceBlocking <= BaseFeature.enchantments$perfectParryTickWindow) {
 			//event.getEntity().level().broadcastEntityEvent(event.getEntity(), EntityEvent.ATTACK_BLOCKED);
 			event.setBlockedDamage(1024f);
 			if (source.getDirectEntity() instanceof LivingEntity entity) {

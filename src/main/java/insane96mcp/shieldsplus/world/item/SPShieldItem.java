@@ -78,7 +78,7 @@ public class SPShieldItem extends ShieldItem {
             cooldown = maxCooldown * BaseFeature.minCooldown;
         int fastRecovery = stack.getEnchantmentLevel(SPEnchantments.FAST_RECOVERY.get());
         if (fastRecovery > 0)
-            cooldown = (int) (cooldown * 0.6f);
+            cooldown = (int) (cooldown * (1f - BaseFeature.enchantments$fastRecoveryCooldownReduction));
         return (int) cooldown;
     }
 

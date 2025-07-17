@@ -57,7 +57,7 @@ public class ReinforcedEnchantment extends Enchantment {
 	}
 
 	public static float getDamageBlocked(int level) {
-		return BaseFeature.enchantmentsReinforcedBlockedDamageBonus.floatValue() * level;
+		return BaseFeature.enchantments$reinforcedBlockedDamageBonus.floatValue() * level;
 	}
 
 	public static float getDamageBlocked(ItemStack itemStack) {
