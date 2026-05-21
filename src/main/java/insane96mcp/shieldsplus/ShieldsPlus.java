@@ -1,57 +1,69 @@
 package insane96mcp.shieldsplus;
 
-import insane96mcp.shieldsplus.data.ShieldDefinitionReloader;
-import insane96mcp.shieldsplus.network.NetworkHandler;
-import insane96mcp.shieldsplus.setup.*;
-import insane96mcp.shieldsplus.setup.client.Client;
+import com.mojang.brigadier.CommandDispatcher;
+import com.mojang.logging.LogUtils;
+import insane96mcp.insanelib.setup.ILModConfig;
+import net.minecraft.commands.CommandBuildContext;
+import net.minecraft.commands.CommandSourceStack;
 import net.minecraft.resources.ResourceLocation;
-import net.minecraftforge.common.MinecraftForge;
-import net.minecraftforge.event.AddReloadListenerEvent;
-import net.minecraftforge.eventbus.api.EventPriority;
-import net.minecraftforge.eventbus.api.IEventBus;
-import net.minecraftforge.eventbus.api.SubscribeEvent;
-import net.minecraftforge.fml.ModLoadingContext;
-import net.minecraftforge.fml.common.Mod;
-import net.minecraftforge.fml.event.lifecycle.FMLCommonSetupEvent;
-import net.minecraftforge.fml.javafmlmod.FMLJavaModLoadingContext;
+import net.neoforged.bus.api.EventPriority;
+import net.neoforged.bus.api.IEventBus;
+import net.neoforged.bus.api.SubscribeEvent;
+import net.neoforged.fml.ModContainer;
+import net.neoforged.fml.common.Mod;
+import net.neoforged.fml.config.ModConfig;
+import net.neoforged.fml.event.lifecycle.FMLCommonSetupEvent;
+import net.neoforged.neoforge.common.NeoForge;
+import net.neoforged.neoforge.event.AddReloadListenerEvent;
+import net.neoforged.neoforge.event.RegisterCommandsEvent;
+import org.slf4j.Logger;
 
-import java.text.DecimalFormat;
+import javax.annotation.Nullable;
 
 @Mod(ShieldsPlus.MOD_ID)
 public class ShieldsPlus
 {
     public static final String MOD_ID = "shieldsplus";
-    public static final String RESOURCE_PREFIX = MOD_ID + ":";
+    public static final Logger LOGGER = LogUtils.getLogger();
 
-    public static DecimalFormat ONE_DECIMAL_FORMATTER;
-    public ShieldsPlus()
-    {
-        ModLoadingContext.get().registerConfig(net.minecraftforge.fml.config.ModConfig.Type.COMMON, Config.COMMON_SPEC);
-        MinecraftForge.EVENT_BUS.register(this);
-        FMLJavaModLoadingContext.get().getModEventBus().addListener(Client::setup);
-        FMLJavaModLoadingContext.get().getModEventBus().addListener(Client::creativeTabsBuildContents);
-        final IEventBus modEventBus = FMLJavaModLoadingContext.get().getModEventBus();
-        modEventBus.addListener(this::commonSetup);
-        SPItems.ITEMS.register(modEventBus);
-        SPSoundEvents.SOUND_EVENTS.register(modEventBus);
-        SPEnchantments.ENCHANTMENTS.register(modEventBus);
-        SPRecipeSerializers.RECIPE_SERIALIZERS.register(modEventBus);
+    public static ILModConfig CONFIG;
+
+    public ShieldsPlus(IEventBus modEventBus, ModContainer modContainer) {
+        CONFIG = new ILModConfig(id("main"), "Single Module", ModConfig.Type.COMMON, modEventBus, ShieldsPlus.class.getClassLoader());
+        modContainer.registerConfig(ModConfig.Type.COMMON, CONFIG.spec);
+        modEventBus.addListener(this::preInit);
+        NeoForge.EVENT_BUS.register(this);
     }
 
     @SubscribeEvent(priority = EventPriority.LOW)
     public void onAddReloadListener(AddReloadListenerEvent event) {
-        event.addListener(ShieldDefinitionReloader.INSTANCE);
+
     }
 
-    private void commonSetup(final FMLCommonSetupEvent event) {
-        NetworkHandler.init();
+    @SubscribeEvent
+    public void onRegisterCommands(RegisterCommandsEvent event) {
+        CommandDispatcher<CommandSourceStack> dispatcher = event.getDispatcher();
+        CommandBuildContext context = event.getBuildContext();
     }
 
-    public static ResourceLocation location(String path) {
+    public void preInit(FMLCommonSetupEvent event) {
+
+    }
+
+    public static ResourceLocation id(String path) {
         return ResourceLocation.fromNamespaceAndPath(MOD_ID, path);
     }
 
-    public static String lang(String key) {
-        return ShieldsPlus.MOD_ID + "." + key;
+    @Nullable
+    public static ResourceLocation locationFrom(String s) {
+        String[] split = s.split(":");
+        if (s.contains(":"))
+            return ResourceLocation.tryParse(s);
+        else
+            return ResourceLocation.fromNamespaceAndPath(MOD_ID, split[0]);
+    }
+
+    public static String lang(String path) {
+        return MOD_ID + "." + path;
     }
 }
