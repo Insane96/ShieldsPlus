@@ -3,6 +3,9 @@ package insane96mcp.shieldsplus;
 import com.mojang.brigadier.CommandDispatcher;
 import com.mojang.logging.LogUtils;
 import insane96mcp.insanelib.setup.ILModConfig;
+import insane96mcp.shieldsplus.setup.SPDataComponents;
+import insane96mcp.shieldsplus.setup.SPItems;
+import insane96mcp.shieldsplus.setup.SPSoundEvents;
 import net.minecraft.commands.CommandBuildContext;
 import net.minecraft.commands.CommandSourceStack;
 import net.minecraft.resources.ResourceLocation;
@@ -31,6 +34,9 @@ public class ShieldsPlus
     public ShieldsPlus(IEventBus modEventBus, ModContainer modContainer) {
         CONFIG = new ILModConfig(id("main"), "Single Module", ModConfig.Type.COMMON, modEventBus, ShieldsPlus.class.getClassLoader());
         modContainer.registerConfig(ModConfig.Type.COMMON, CONFIG.spec);
+        SPDataComponents.DATA_COMPONENTS.register(modEventBus);
+        SPItems.ITEMS.register(modEventBus);
+        SPSoundEvents.SOUND_EVENTS.register(modEventBus);
         modEventBus.addListener(this::preInit);
         NeoForge.EVENT_BUS.register(this);
     }

@@ -1,12 +1,21 @@
 {
-  "required": true,
-  "package": "insane96mcp.shieldsplus.mixin",
-  "compatibilityLevel": "JAVA_21",
-  "mixins": [],
-  "injectors": {
-    "defaultRequire": 1
-  },
-  "overwrites": {
-    "requireAnnotations": true
-  }
+    "required": true,
+    "package": "insane96mcp.shieldsplus.mixin",
+    "compatibilityLevel": "JAVA_21",
+    "minMixinExtrasVersion": "0.5.3",
+    "mixins": [
+        "ItemMixin",
+        "LivingEntityMixin",
+        "PlayerMixin"
+    ],
+    "injectors": {
+        "defaultRequire": 1
+    },
+    "overwrites": {
+        "requireAnnotations": true
+    },
+    "client": [
+        "LocalPlayerMixin",
+        "MinecraftMixin"
+    ]
 }

@@ -1,0 +1,13 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(Get-ChildItem -Path \"C:\\\\Users\\\\delvi\\\\source\\\\repos\\\\Insane96\\\\ShieldsPlus\" -Recurse -Force)",
+      "Bash(Select-Object FullName)",
+      "Bash(Sort-Object FullName)",
+      "Bash(Get-ChildItem -Path \"C:\\\\Users\\\\delvi\\\\source\\\\repos\\\\Insane96\\\\ShieldsPlus_1.20.1\" -Recurse)",
+      "Bash(Format-Table -AutoSize)",
+      "PowerShell(Get-ChildItem -Path \"C:\\\\Users\\\\delvi\\\\source\\\\repos\\\\Insane96\\\\ShieldsPlus\" -Recurse -Directory | Select-Object -First 50 | ForEach-Object { $_.FullName })",
+      "PowerShell(Get-ChildItem -Path \"C:\\\\Users\\\\delvi\\\\source\\\\repos\\\\Insane96\\\\ShieldsPlus\\\\src\\\\main\\\\java\\\\insane96mcp\\\\shieldsplus\" -Recurse -File | ForEach-Object { $_.FullName.Replace\\(\"C:\\\\Users\\\\delvi\\\\source\\\\repos\\\\Insane96\\\\ShieldsPlus\\\\src\\\\main\\\\java\\\\insane96mcp\\\\shieldsplus\", \"\"\\).TrimStart\\('\\\\'\\) })"
+    ]
+  }
+}
