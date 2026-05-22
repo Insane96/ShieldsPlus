@@ -6,6 +6,7 @@ import insane96mcp.insanelib.setup.ILModConfig;
 import insane96mcp.shieldsplus.setup.SPDataComponents;
 import insane96mcp.shieldsplus.setup.SPItems;
 import insane96mcp.shieldsplus.setup.SPSoundEvents;
+import insane96mcp.shieldsplus.setup.client.Client;
 import net.minecraft.commands.CommandBuildContext;
 import net.minecraft.commands.CommandSourceStack;
 import net.minecraft.resources.ResourceLocation;
@@ -34,6 +35,10 @@ public class ShieldsPlus
     public ShieldsPlus(IEventBus modEventBus, ModContainer modContainer) {
         CONFIG = new ILModConfig(id("main"), "Single Module", ModConfig.Type.COMMON, modEventBus, ShieldsPlus.class.getClassLoader());
         modContainer.registerConfig(ModConfig.Type.COMMON, CONFIG.spec);
+
+        modEventBus.addListener(Client::setup);
+        modEventBus.addListener(Client::creativeTabsBuildContents);
+
         SPDataComponents.DATA_COMPONENTS.register(modEventBus);
         SPItems.ITEMS.register(modEventBus);
         SPSoundEvents.SOUND_EVENTS.register(modEventBus);
@@ -61,7 +66,7 @@ public class ShieldsPlus
     }
 
     @Nullable
-    public static ResourceLocation locationFrom(String s) {
+    public static ResourceLocation idFrom(String s) {
         String[] split = s.split(":");
         if (s.contains(":"))
             return ResourceLocation.tryParse(s);
