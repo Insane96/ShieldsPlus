@@ -37,7 +37,7 @@ public class SPFeature extends Feature {
     @Config(min = 0, max = 1, description = "When shields go on cooldown, the time is given by how much time the shield has been blocking. This defines the minimum cooldown in percentage for the shield to go on cooldown (e.g. if you just block for a few ticks, the cooldown will be 30% of the shield's cooldown).")
     public static Double minCooldown = 0.3d;
 
-    @Config(min = 1, description = "How many seconds will ablaze set entities on fire per level.")
+    /*@Config(min = 1, description = "How many seconds will ablaze set entities on fire per level.")
     public static Integer enchantments$ablazeTimeOnFire = 2;
     @Config(min = 0, max = 1, description = "How much damage will the aegis enchantment negate per level.")
     public static Double enchantments$aegisPercentageDamageReduction = 0.1d;
@@ -54,7 +54,7 @@ public class SPFeature extends Feature {
     @Config(min = 0, max = 1, description = "Percentage amount of damage reflected.")
     public static Double enchantments$reflectionReflectedDamage = 0.08d;
     @Config(min = 0, max = 1, description = "Percentage bonus amount of damage blocked.")
-    public static Double enchantments$reinforcedBlockedDamageBonus = 0.1d;
+    public static Double enchantments$reinforcedBlockedDamageBonus = 0.1d;*/
 
     @SubscribeEvent
     public void onShieldBlock(LivingShieldBlockEvent event) {
