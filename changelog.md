@@ -2,6 +2,11 @@
   * Insta-blocking blocks more damage
 * Move creative event helper methods to InsaneLib
 
+## 2.1.0-beta
+* Added copper shield
+  * Not available in survival, [ISO](https://www.curseforge.com/minecraft/mc-mods/iguanatweaks-reborn) enables it
+* Fixed missing 
+
 # 2.0.1-beta
 * Fixed recipes not working
 

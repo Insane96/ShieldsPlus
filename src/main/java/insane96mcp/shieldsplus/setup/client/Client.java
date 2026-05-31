@@ -29,6 +29,7 @@ public class Client {
         if (event.getTabKey() == CreativeModeTabs.COMBAT) {
             addBefore(event, Items.SHIELD, SPItems.WOODEN_SHIELD.get());
             addBefore(event, Items.SHIELD, SPItems.STONE_SHIELD.get());
+            addBefore(event, Items.SHIELD, SPItems.COPPER_SHIELD.get());
             addBefore(event, Items.SHIELD, SPItems.IRON_SHIELD.get());
 
             addAfter(event, Items.SHIELD, SPItems.NETHERITE_SHIELD.get());

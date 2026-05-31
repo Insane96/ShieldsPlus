@@ -20,6 +20,7 @@ public class SPItems {
 
     public static final DeferredHolder<Item, SPShieldItem> WOODEN_SHIELD = registerShield("wooden_shield", new Item.Properties().durability(84), 2f, 5f, 0.75f, Ingredient.of(ItemTags.PLANKS));
     public static final DeferredHolder<Item, SPShieldItem> STONE_SHIELD = registerShield("stone_shield", new Item.Properties().durability(112), 3f, 4f, 1.25f, Ingredient.of(ItemTags.STONE_TOOL_MATERIALS));
+    public static final DeferredHolder<Item, SPShieldItem> COPPER_SHIELD = registerShield("copper_shield", new Item.Properties().durability(192), 3.5f, 3.5f, 1.6f, Ingredient.of(Items.COPPER_INGOT));
     public static final DeferredHolder<Item, SPShieldItem> IRON_SHIELD = registerShield("iron_shield", new Item.Properties().durability(332), 4f, 3f, 2f, Ingredient.of(Items.IRON_INGOT));
     public static final DeferredHolder<Item, SPShieldItem> GOLDEN_SHIELD = registerShield("golden_shield", new Item.Properties().durability(42), 2f, 6f, 0.5f, Ingredient.of(Items.GOLD_INGOT));
     public static final DeferredHolder<Item, SPShieldItem> DIAMOND_SHIELD = registerShield("diamond_shield", new Item.Properties().durability(588), 5f, 2.5f, 2.5f, Ingredient.of(Items.DIAMOND));
