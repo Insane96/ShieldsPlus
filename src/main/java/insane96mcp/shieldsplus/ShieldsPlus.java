@@ -6,6 +6,7 @@ import insane96mcp.insanelib.setup.ILModConfig;
 import insane96mcp.shieldsplus.render.ShieldBlockEntityWithoutLevelRenderer;
 import insane96mcp.shieldsplus.setup.SPDataComponents;
 import insane96mcp.shieldsplus.setup.SPItems;
+import insane96mcp.shieldsplus.setup.SPRecipeSerializers;
 import insane96mcp.shieldsplus.setup.SPSoundEvents;
 import insane96mcp.shieldsplus.setup.client.Client;
 import net.minecraft.commands.CommandBuildContext;
@@ -47,6 +48,7 @@ public class ShieldsPlus
 
         SPDataComponents.DATA_COMPONENTS.register(modEventBus);
         SPItems.ITEMS.register(modEventBus);
+        SPRecipeSerializers.RECIPE_SERIALIZERS.register(modEventBus);
         SPSoundEvents.SOUND_EVENTS.register(modEventBus);
         modEventBus.addListener(this::preInit);
         NeoForge.EVENT_BUS.register(this);
