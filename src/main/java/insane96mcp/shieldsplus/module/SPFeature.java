@@ -2,7 +2,9 @@ package insane96mcp.shieldsplus.module;
 
 import insane96mcp.insanelib.core.feature.Feature;
 import insane96mcp.insanelib.core.feature.LoadFeature;
+import insane96mcp.insanelib.core.feature.Module;
 import insane96mcp.insanelib.core.feature.config.Config;
+import insane96mcp.insanelib.util.IntegratedPack;
 import insane96mcp.shieldsplus.ShieldsPlus;
 import insane96mcp.shieldsplus.event.SPEventFactory;
 import insane96mcp.shieldsplus.world.item.SPShieldItem;
@@ -37,6 +39,9 @@ public class SPFeature extends Feature {
     @Config(min = 0, max = 1, description = "When shields go on cooldown, the time is given by how much time the shield has been blocking. This defines the minimum cooldown in percentage for the shield to go on cooldown (e.g. if you just block for a few ticks, the cooldown will be 30% of the shield's cooldown).")
     public static Double minCooldown = 0.3d;
 
+    @Config(description = "If true, enables a data pack that overrides the vanilla shield recipe with the mod's iron one.")
+    public static Boolean overrideVanillaShieldRecipe = true;
+
     /*@Config(min = 1, description = "How many seconds will ablaze set entities on fire per level.")
     public static Integer enchantments$ablazeTimeOnFire = 2;
     @Config(min = 0, max = 1, description = "How much damage will the aegis enchantment negate per level.")
@@ -55,6 +60,12 @@ public class SPFeature extends Feature {
     public static Double enchantments$reflectionReflectedDamage = 0.08d;
     @Config(min = 0, max = 1, description = "Percentage bonus amount of damage blocked.")
     public static Double enchantments$reinforcedBlockedDamageBonus = 0.1d;*/
+
+    @Override
+    public void init(Module module, boolean enabledByDefault, boolean canBeDisabled) {
+        super.init(module, enabledByDefault, canBeDisabled);
+        IntegratedPack.addServerPack(ShieldsPlus.MOD_ID, "vanilla_shield_override", "Shields+ Vanilla Shield Override", () -> overrideVanillaShieldRecipe);
+    }
 
     @SubscribeEvent
     public void onShieldBlock(LivingShieldBlockEvent event) {

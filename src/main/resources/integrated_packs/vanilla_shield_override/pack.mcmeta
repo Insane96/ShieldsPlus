@@ -1,0 +1,6 @@
+{
+    "pack": {
+        "description": "Overrides the vanilla shield recipe to give the mod's Iron Shield.",
+        "pack_format": 48
+    }
+}
