@@ -1,9 +1,6 @@
-* Allow insta-blocking  
-  * Insta-blocking blocks more damage
-* Move creative event helper methods to InsaneLib
-
 ## Upcoming
 * Attacking when blocking with crouch now puts the shield on a cooldown
+* Requires latest InsaneLib
 
 ## 2.1.0.1-beta
 * Fixed vanilla shield recipe not getting overridden
