@@ -18,6 +18,7 @@ import net.minecraft.world.item.Item;
 import net.neoforged.bus.api.SubscribeEvent;
 import net.neoforged.neoforge.common.ItemAbilities;
 import net.neoforged.neoforge.event.entity.living.LivingShieldBlockEvent;
+import net.neoforged.neoforge.event.entity.player.AttackEntityEvent;
 import net.neoforged.neoforge.event.tick.PlayerTickEvent;
 
 @LoadFeature(canBeDisabled = false)
@@ -34,6 +35,8 @@ public class SPFeature extends Feature {
     public static Boolean combatTestShieldDisabling = true;
     @Config(description = "If true, crouching will block with the shield and you can attack while blocking.")
     public static Boolean blockWithCrouch = true;
+    @Config(description = "When crouch blocking, after attacking, how many seconds will the shield be in cooldown for?")
+    public static Double blockWithCrouchExposure = 0.35d;
     @Config(description = "If true, shields can be lifted only for a certain amount of time and will go on cooldown.")
     public static Boolean liftedAndCooldown = true;
     @Config(min = 0, max = 1, description = "When shields go on cooldown, the time is given by how much time the shield has been blocking. This defines the minimum cooldown in percentage for the shield to go on cooldown (e.g. if you just block for a few ticks, the cooldown will be 30% of the shield's cooldown).")
@@ -117,13 +120,29 @@ public class SPFeature extends Feature {
         }
     }
 
+    @SubscribeEvent
+    public void onPlayerAttack(AttackEntityEvent event) {
+        if (!this.isEnabled()
+                || !canBlockWithCrouch(event.getEntity())
+                || !event.getEntity().isCrouching()
+                || !event.getEntity().isUsingItem()
+                || event.getEntity().getUsedItemHand() != InteractionHand.OFF_HAND
+                || !event.getEntity().getOffhandItem().canPerformAction(ItemAbilities.SHIELD_BLOCK))
+            return;
+
+        event.getEntity().getCooldowns().addCooldown(event.getEntity().getOffhandItem().getItem(), (int) (blockWithCrouchExposure * 20));
+        event.getEntity().stopUsingItem();
+    }
+
     /**
      Returns true if the player can block while crouching
      */
     public static boolean canBlockWithCrouch(LivingEntity livingEntity) {
+        if (!blockWithCrouch)
+            return false;
         if (livingEntity instanceof Player player && player.getCooldowns().isOnCooldown(player.getOffhandItem().getItem()))
             return false;
-        return blockWithCrouch && livingEntity.getOffhandItem().canPerformAction(ItemAbilities.SHIELD_BLOCK) && livingEntity.isCrouching() && SPEventFactory.canBlockWithCrouch(livingEntity, livingEntity.getOffhandItem());
+        return livingEntity.getOffhandItem().canPerformAction(ItemAbilities.SHIELD_BLOCK) && livingEntity.isCrouching() && SPEventFactory.canBlockWithCrouch(livingEntity, livingEntity.getOffhandItem());
     }
 
     public static boolean combatTestShieldDisabling() {
