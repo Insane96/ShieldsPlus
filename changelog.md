@@ -1,4 +1,4 @@
-## Upcoming
+## 2.1.1.0
 * Attacking when blocking with crouch now puts the shield on a cooldown
 * Requires latest InsaneLib
 
