@@ -41,8 +41,10 @@ public class SPFeature extends Feature {
     public static Boolean liftedAndCooldown = true;
     @Config(min = 0, max = 1, description = "When shields go on cooldown, the time is given by how much time the shield has been blocking. This defines the minimum cooldown in percentage for the shield to go on cooldown (e.g. if you just block for a few ticks, the cooldown will be 30% of the shield's cooldown).")
     public static Double minCooldown = 0.3d;
-    @Config(min = 0, description = "How much more damage (in percentage) is blocked if the player lifts the shield as soon as it's about to take damage (0.1s window)?")
-    public static Double parryBonusDamageBlocked = 1d;
+    @Config(min = 0, description = "How many seconds after lifting a shield to make a parry count as such")
+    public static Double parry$window = 0.1d;
+    @Config(min = 0, description = "How much more damage (in percentage) is blocked if the player lifts the shield as soon as it's about to take damage?")
+    public static Double parry$bonusDamageBlocked = 1d;
 
     @Config(description = "If true, enables a data pack that overrides the vanilla shield recipe with the mod's iron one.")
     public static Boolean overrideVanillaShieldRecipe = true;
@@ -78,11 +80,9 @@ public class SPFeature extends Feature {
                 || !shieldBlockFixedDamageAmount)
             return;
         float blockedDamage = SPShieldItem.getBlockedDamage(event.getEntity().getUseItem());
-        if (event.getEntity().getTicksUsingItem() <= 2)
-            blockedDamage *= (float) (1 + parryBonusDamageBlocked);
+        if (event.getEntity().getTicksUsingItem() <= parry$window * 20)
+            blockedDamage *= (float) (1 + parry$bonusDamageBlocked);
         //blockedDamage = ReinforcedEnchantment.increaseDamageBlocked(event.getEntity().getUseItem(), blockedDamage);
-        ShieldsPlus.LOGGER.debug("Blocked damage: " + blockedDamage);
-        ShieldsPlus.LOGGER.debug("Ticks using item: " + event.getEntity().getTicksUsingItem());
         event.setBlockedDamage(blockedDamage);
 
         //Process blocking enchantments
