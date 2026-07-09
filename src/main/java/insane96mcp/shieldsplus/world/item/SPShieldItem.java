@@ -99,8 +99,12 @@ public class SPShieldItem extends ShieldItem {
     public ItemStack tryApplyCooldown(ItemStack stack, LivingEntity entity) {
         if (!SPFeature.liftedAndCooldown)
             return stack;
+        if (!(entity instanceof Player player))
+            return stack;
+        if (player.getCooldowns().isOnCooldown(stack.getItem()))
+            return stack;
         float cooldown = this.calculateCooldownFromTimeLifted(stack, entity, entity.getUseItemRemainingTicks());
-        if (cooldown > 0 && entity instanceof Player player)
+        if (cooldown > 0)
             player.getCooldowns().addCooldown(stack.getItem(), (int) (cooldown * 20f));
         return stack;
     }
