@@ -1,6 +1,5 @@
-* Allow insta-blocking  
-  * Insta-blocking blocks more damage
-* Move creative event helper methods to InsaneLib
+## Upcoming
+* Updated to latest InsaneLib
 
 ## 2.1.0.1-beta
 * Fixed vanilla shield recipe not getting overridden
