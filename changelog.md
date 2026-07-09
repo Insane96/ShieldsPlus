@@ -1,4 +1,6 @@
 ## Upcoming
+* You can now parry with shields!
+  * Blocking as soon as receiving damage (0.1s window) will double the damage blocked
 * Updated to latest InsaneLib
 
 ## 2.1.0.1-beta
