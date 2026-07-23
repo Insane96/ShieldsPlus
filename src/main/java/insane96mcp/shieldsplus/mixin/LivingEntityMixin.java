@@ -23,7 +23,7 @@ import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
 
-@Mixin(value = LivingEntity.class)
+@Mixin(LivingEntity.class)
 public abstract class LivingEntityMixin extends Entity {
 
     @Shadow protected abstract void playHurtSound(DamageSource p_21160_);
@@ -41,6 +41,11 @@ public abstract class LivingEntityMixin extends Entity {
     @ModifyExpressionValue(method = "isBlocking", at = @At(value = "CONSTANT", args = "intValue=5"))
     private int shieldsPlus$blockingWindupTime(int ticks) {
         return SPFeature.shieldWindup;
+    }
+
+    @ModifyExpressionValue(method = "isDamageSourceBlocked", at = @At(value = "CONSTANT", args = "doubleValue=0.0"))
+    private double shieldsPlus$blockingAngleThreshold(double original) {
+        return -Math.cos(Math.toRadians(SPFeature.blockingAngle / 2.0));
     }
 
     @Inject(method = "releaseUsingItem", at = @At("HEAD"), cancellable = true)

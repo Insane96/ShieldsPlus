@@ -1,3 +1,7 @@
+# 2.2.1.0
+* Reduced blocking angle to 100 from vanilla 180
+  * Configurable
+
 # 2.2.0.0
 * You can now parry with shields!
     * Blocking as soon as receiving damage (0.1 s window) will double the damage blocked

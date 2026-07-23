@@ -27,6 +27,8 @@ public class SPFeature extends Feature {
 
     @Config(min = 0, description = "In vanilla when you start blocking with a shield, there's a 0.25 seconds (5 ticks) window where you are still not blocking. By default the windup is removed.")
     public static Integer shieldWindup = 0;
+    @Config(min = 0d, max = 360d, description = "The total width (in degrees) of the frontal arc in which attacks can be blocked with a shield. Vanilla is 180 (i.e. 90 degrees either side of where you're looking).")
+    public static Double blockingAngle = 100d;
     @Config(description = "If true shields will block only a certain amount of damage. If false the vanilla behaviour is used.")
     public static Boolean shieldBlockFixedDamageAmount = true;
     @Config(min = 0d, max = Float.MAX_VALUE, description = "The minimum damage dealt to the player for the shield to take damage. Vanilla is 3. E.g. With this set to 3, the shield will not be damaged if damage received is lower than 3.")
