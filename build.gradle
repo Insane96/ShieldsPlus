@@ -117,7 +117,7 @@ publishing {
     publications {
         register('mavenJava', MavenPublication) {
             groupId = 'maven.modrinth'
-            artifactId = mod_id
+            artifactId = modrinth_slug
             from components.java
         }
     }
