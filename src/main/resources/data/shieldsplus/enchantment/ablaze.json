@@ -1,0 +1,21 @@
+{
+  "description": {
+    "translate": "enchantment.shieldsplus.ablaze"
+  },
+  "supported_items": "#shieldsplus:enchantable/shields",
+  "weight": 5,
+  "max_level": 2,
+  "min_cost": {
+    "base": 12,
+    "per_level_above_first": 20
+  },
+  "max_cost": {
+    "base": 37,
+    "per_level_above_first": 20
+  },
+  "anvil_cost": 2,
+  "slots": [
+    "hand"
+  ],
+  "effects": {}
+}

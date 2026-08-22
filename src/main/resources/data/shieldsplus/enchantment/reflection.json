@@ -1,0 +1,22 @@
+{
+  "description": {
+    "translate": "enchantment.shieldsplus.reflection"
+  },
+  "supported_items": "#shieldsplus:enchantable/shields",
+  "exclusive_set": "#shieldsplus:exclusive_set/shield_mitigation",
+  "weight": 2,
+  "max_level": 4,
+  "min_cost": {
+    "base": 8,
+    "per_level_above_first": 10
+  },
+  "max_cost": {
+    "base": 22,
+    "per_level_above_first": 10
+  },
+  "anvil_cost": 4,
+  "slots": [
+    "hand"
+  ],
+  "effects": {}
+}

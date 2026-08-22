@@ -1,0 +1,21 @@
+{
+  "description": {
+    "translate": "enchantment.shieldsplus.celestial_guardian"
+  },
+  "supported_items": "#shieldsplus:enchantable/shields",
+  "weight": 1,
+  "max_level": 1,
+  "min_cost": {
+    "base": 25,
+    "per_level_above_first": 0
+  },
+  "max_cost": {
+    "base": 75,
+    "per_level_above_first": 0
+  },
+  "anvil_cost": 8,
+  "slots": [
+    "hand"
+  ],
+  "effects": {}
+}

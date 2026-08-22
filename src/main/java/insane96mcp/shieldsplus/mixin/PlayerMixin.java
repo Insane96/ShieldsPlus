@@ -2,9 +2,13 @@ package insane96mcp.shieldsplus.mixin;
 
 import com.llamalad7.mixinextras.injector.ModifyExpressionValue;
 import insane96mcp.shieldsplus.module.SPFeature;
+import insane96mcp.shieldsplus.world.item.enchantment.FastRecoveryEnchantmentEffect;
+import net.minecraft.core.HolderLookup.RegistryLookup;
+import net.minecraft.core.registries.Registries;
 import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.player.Player;
+import net.minecraft.world.item.enchantment.Enchantment;
 import net.minecraft.world.level.Level;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.injection.At;
@@ -25,11 +29,7 @@ public abstract class PlayerMixin extends LivingEntity {
         if (!SPFeature.combatTestShieldDisabling())
             return original;
 
-        int ticks = 32;
-        //TODO
-        //int fastRecovery = this.getUseItem().getEnchantmentLevel(SPEnchantments.FAST_RECOVERY.get());
-        //if (fastRecovery > 0)
-        //    ticks = (int) (ticks * (1 - FastRecoveryEnchantment.getCooldownReduction(fastRecovery)));
-        return ticks;
+        RegistryLookup<Enchantment> enchantmentLookup = this.level().registryAccess().lookupOrThrow(Registries.ENCHANTMENT);
+        return FastRecoveryEnchantmentEffect.reduceCooldown(this.getUseItem(), 32, enchantmentLookup);
     }
 }

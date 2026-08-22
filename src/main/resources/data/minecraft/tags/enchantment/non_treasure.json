@@ -1,0 +1,12 @@
+{
+  "replace": false,
+  "values": [
+    "shieldsplus:recoil",
+    "shieldsplus:reflection",
+    "shieldsplus:reinforced",
+    "shieldsplus:aegis",
+    "shieldsplus:ablaze",
+    "shieldsplus:lightweight",
+    "shieldsplus:fast_recovery"
+  ]
+}
