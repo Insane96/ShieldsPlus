@@ -1,5 +1,6 @@
 # Upcoming
 * Vanilla shields in loot is now replaced with mod's one
+* Vanilla shield is now hidden from creative inventory
 
 # 2.2.1.0
 * Reduced blocking angle to 100 from vanilla 180
