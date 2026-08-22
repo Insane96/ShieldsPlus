@@ -1,0 +1,7 @@
+{
+    "type": "insanelib:replace_loot",
+    "conditions": [],
+    "item_to_replace": "minecraft:shield",
+    "new_item": "shieldsplus:iron_shield",
+    "keep_durability": true
+}
