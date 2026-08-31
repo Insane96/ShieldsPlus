@@ -81,6 +81,8 @@ public class SPFeature extends Feature {
     public void init(Module module, boolean enabledByDefault, boolean canBeDisabled) {
         super.init(module, enabledByDefault, canBeDisabled);
         IntegratedPack.addServerPack(ShieldsPlus.MOD_ID, "vanilla_shield_override", "Shields+ Vanilla Shield Override", () -> overrideVanillaShieldRecipe);
+        CelestialGuardianEnchantmentEffect.LAST_ARMED_AT = this.createDataKey("celestial_guardian_last_armed_at");
+        CelestialGuardianEnchantmentEffect.ARMED_DAMAGE_AMOUNT = this.createDataKey("celestial_guardian_armed_damage_amount");
     }
 
     @SubscribeEvent
@@ -114,12 +116,12 @@ public class SPFeature extends Feature {
     public void onLivingDamage(LivingDamageEvent.Pre event) {
         RegistryLookup<Enchantment> enchantmentLookup = event.getEntity().level().registryAccess().lookupOrThrow(Registries.ENCHANTMENT);
         AegisEnchantmentEffect.reduceDamage(event, enchantmentLookup);
-        CelestialGuardianEnchantmentEffect.trySaveAmount(event.getEntity(), event.getNewDamage());
+        CelestialGuardianEnchantmentEffect.trackIncomingDamage(event.getEntity(), event.getNewDamage());
     }
 
     @SubscribeEvent
     public void onLivingDeath(LivingDeathEvent event) {
-        if (CelestialGuardianEnchantmentEffect.tryApply(event.getEntity())) {
+        if (CelestialGuardianEnchantmentEffect.tryConsumeSave(event.getEntity())) {
             event.getEntity().setHealth(1f);
             event.setCanceled(true);
         }
