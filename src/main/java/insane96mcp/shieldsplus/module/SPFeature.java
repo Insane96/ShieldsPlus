@@ -11,7 +11,6 @@ import insane96mcp.shieldsplus.setup.SPEnchantments;
 import insane96mcp.shieldsplus.world.item.SPShieldItem;
 import insane96mcp.shieldsplus.world.item.enchantment.AegisEnchantmentEffect;
 import insane96mcp.shieldsplus.world.item.enchantment.CelestialGuardianEnchantmentEffect;
-import insane96mcp.shieldsplus.world.item.enchantment.LightweightEnchantmentEffect;
 import insane96mcp.shieldsplus.world.item.enchantment.ReinforcedEnchantmentEffect;
 import net.minecraft.core.Holder;
 import net.minecraft.core.HolderLookup.RegistryLookup;
@@ -64,11 +63,9 @@ public class SPFeature extends Feature {
     public static Boolean overrideVanillaShieldRecipe = true;
 
     @Config(min = 0, description = "Amount of knockback given to entities per level.")
-    public static Double enchantments$recoilEntitiesKnockback = 0.5d;
+    public static Double enchantments$recoilEntitiesKnockback = 0.6d;
     @Config(min = 0, description = "Amount of knockback given to projectiles per level.")
     public static Double enchantments$recoilProjectilesKnockback = 5d;
-    @Config(min = 0, max = 1, description = "Percentage amount of damage reflected.")
-    public static Double enchantments$reflectionReflectedDamage = 0.08d;
     @Config(min = 0, max = 1, description = "Percentage bonus amount of damage blocked.")
     public static Double enchantments$reinforcedBlockedDamageBonus = 0.1d;
     @Config(min = 0, max = 1, description = "How much damage will the aegis enchantment negate per level.")
@@ -126,14 +123,6 @@ public class SPFeature extends Feature {
             event.getEntity().setHealth(1f);
             event.setCanceled(true);
         }
-    }
-
-    @SubscribeEvent
-    public void onPlayerTickPost(PlayerTickEvent.Post event) {
-        if (!this.isEnabled())
-            return;
-
-        LightweightEnchantmentEffect.onTick(event.getEntity());
     }
 
     @SubscribeEvent

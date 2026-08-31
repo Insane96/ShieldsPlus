@@ -5,6 +5,7 @@ import insane96mcp.shieldsplus.world.item.enchantment.*;
 import net.minecraft.core.registries.Registries;
 import net.minecraft.resources.ResourceKey;
 import net.minecraft.world.item.enchantment.Enchantment;
+import net.minecraft.world.item.enchantment.Enchantments;
 
 import java.util.Map;
 
@@ -15,7 +16,6 @@ import java.util.Map;
  */
 public class SPEnchantments {
     public static final ResourceKey<Enchantment> RECOIL = key("recoil");
-    public static final ResourceKey<Enchantment> REFLECTION = key("reflection");
     public static final ResourceKey<Enchantment> REINFORCED = key("reinforced");
     public static final ResourceKey<Enchantment> AEGIS = key("aegis");
     public static final ResourceKey<Enchantment> ABLAZE = key("ablaze");
@@ -25,9 +25,9 @@ public class SPEnchantments {
 
     public static final Map<ResourceKey<Enchantment>, IBlockingEnchantmentEffect> BLOCKING_EFFECTS = Map.of(
             RECOIL, new RecoilEnchantmentEffect(),
-            REFLECTION, new ReflectionEnchantmentEffect(),
             ABLAZE, new AblazeEnchantmentEffect(),
-            CELESTIAL_GUARDIAN, new CelestialGuardianEnchantmentEffect()
+            CELESTIAL_GUARDIAN, new CelestialGuardianEnchantmentEffect(),
+            Enchantments.THORNS, new ThornsEnchantmentEffect()
     );
 
     private static ResourceKey<Enchantment> key(String id) {

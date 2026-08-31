@@ -6,11 +6,14 @@ import insane96mcp.shieldsplus.module.SPFeature;
 import insane96mcp.shieldsplus.render.ShieldBlockEntityWithoutLevelRenderer;
 import insane96mcp.shieldsplus.setup.SPDataComponents;
 import insane96mcp.shieldsplus.setup.client.ClientMaterials;
+import insane96mcp.shieldsplus.world.item.enchantment.ReinforcedEnchantmentEffect;
 import net.minecraft.ChatFormatting;
 import net.minecraft.client.renderer.BlockEntityWithoutLevelRenderer;
 import net.minecraft.client.renderer.Sheets;
 import net.minecraft.client.resources.model.Material;
+import net.minecraft.core.HolderLookup;
 import net.minecraft.core.registries.BuiltInRegistries;
+import net.minecraft.core.registries.Registries;
 import net.minecraft.network.chat.Component;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.entity.LivingEntity;
@@ -19,6 +22,7 @@ import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.ShieldItem;
 import net.minecraft.world.item.TooltipFlag;
 import net.minecraft.world.item.crafting.Ingredient;
+import net.minecraft.world.item.enchantment.Enchantment;
 import net.minecraft.world.level.Level;
 import net.neoforged.neoforge.client.extensions.common.IClientItemExtensions;
 import org.jetbrains.annotations.NotNull;
@@ -124,7 +128,13 @@ public class SPShieldItem extends ShieldItem {
             tooltipComponents.add(Component.translatable(COOLDOWN, InsaneLib.ONE_DECIMAL_FORMATTER.format(getCooldown(stack))).withStyle(ChatFormatting.BLUE));
         }
         if (SPFeature.shieldBlockFixedDamageAmount) {
-            tooltipComponents.add(Component.translatable(DAMAGE_BLOCKED, InsaneLib.ONE_DECIMAL_FORMATTER.format(getBlockedDamage(stack))).withStyle(ChatFormatting.BLUE));
+            float blockedDamage = getBlockedDamage(stack);
+            HolderLookup.Provider registries = context.registries();
+            if (registries != null) {
+                HolderLookup.RegistryLookup<Enchantment> enchantmentLookup = registries.lookupOrThrow(Registries.ENCHANTMENT);
+                blockedDamage = ReinforcedEnchantmentEffect.increaseDamageBlocked(stack, blockedDamage, enchantmentLookup);
+            }
+            tooltipComponents.add(Component.translatable(DAMAGE_BLOCKED, InsaneLib.ONE_DECIMAL_FORMATTER.format(blockedDamage)).withStyle(ChatFormatting.BLUE));
         }
     }
 

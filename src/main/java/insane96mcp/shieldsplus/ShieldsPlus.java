@@ -9,6 +9,7 @@ import insane96mcp.shieldsplus.setup.SPItems;
 import insane96mcp.shieldsplus.setup.SPRecipeSerializers;
 import insane96mcp.shieldsplus.setup.SPSoundEvents;
 import insane96mcp.shieldsplus.setup.client.Client;
+import insane96mcp.shieldsplus.world.item.enchantment.LightweightEnchantmentEffect;
 import net.minecraft.commands.CommandBuildContext;
 import net.minecraft.commands.CommandSourceStack;
 import net.minecraft.resources.ResourceLocation;
@@ -44,6 +45,7 @@ public class ShieldsPlus
         modEventBus.addListener(Client::creativeTabsBuildContents);
         if (FMLEnvironment.dist == Dist.CLIENT) {
             modEventBus.addListener(ShieldBlockEntityWithoutLevelRenderer::onRegisterReloadListener);
+            NeoForge.EVENT_BUS.addListener(LightweightEnchantmentEffect::onUseItemMovSpeed);
         }
 
         SPDataComponents.DATA_COMPONENTS.register(modEventBus);
