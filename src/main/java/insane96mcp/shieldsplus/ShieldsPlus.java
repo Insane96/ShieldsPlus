@@ -3,6 +3,8 @@ package insane96mcp.shieldsplus;
 import com.mojang.brigadier.CommandDispatcher;
 import com.mojang.logging.LogUtils;
 import insane96mcp.insanelib.setup.ILModConfig;
+import insane96mcp.shieldsplus.module.RuneCompat;
+import insane96mcp.shieldsplus.module.SPRunes;
 import insane96mcp.shieldsplus.render.ShieldBlockEntityWithoutLevelRenderer;
 import insane96mcp.shieldsplus.setup.SPDataComponents;
 import insane96mcp.shieldsplus.setup.SPItems;
@@ -54,6 +56,9 @@ public class ShieldsPlus
         SPSoundEvents.SOUND_EVENTS.register(modEventBus);
         modEventBus.addListener(this::preInit);
         NeoForge.EVENT_BUS.register(this);
+
+        if (RuneCompat.isLoaded())
+            new SPRunes(modEventBus);
     }
 
     @SubscribeEvent(priority = EventPriority.LOW)

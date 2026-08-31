@@ -1,7 +1,5 @@
 {
-  "replace": false,
   "values": [
-    "#minecraft:enchantable/armor",
     "#shieldsplus:enchantable/shields"
   ]
 }

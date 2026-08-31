@@ -12,7 +12,8 @@ import net.neoforged.fml.event.lifecycle.FMLClientSetupEvent;
 import net.neoforged.neoforge.event.BuildCreativeModeTabContentsEvent;
 import net.neoforged.neoforge.registries.DeferredHolder;
 
-import static insane96mcp.insanelib.util.CreativeTabsUtils.*;
+import static insane96mcp.insanelib.util.CreativeTabsUtils.addAfter;
+import static insane96mcp.insanelib.util.CreativeTabsUtils.addBefore;
 
 public class Client {
 
@@ -39,7 +40,6 @@ public class Client {
             addAfter(event, Items.SHIELD, SPItems.NETHERITE_SHIELD.get());
             addAfter(event, Items.SHIELD, SPItems.DIAMOND_SHIELD.get());
             addAfter(event, Items.SHIELD, SPItems.GOLDEN_SHIELD.get());
-            remove(event, Items.SHIELD);
         }
     }
 }

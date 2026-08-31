@@ -25,5 +25,26 @@
   "enchantment.shieldsplus.perfect_parry": "Perfect Parry",
   "enchantment.shieldsplus.perfect_parry.desc": "Blocking at the same time as taking damage completely negates the damage and stuns the attacker",
   "enchantment.shieldsplus.celestial_guardian": "Celestial Guardian",
-  "enchantment.shieldsplus.celestial_guardian.desc": "Getting killed while blocking will give an absorption effect and keep you alive"
+  "enchantment.shieldsplus.celestial_guardian.desc": "Getting killed while blocking will give an absorption effect and keep you alive",
+
+  "rune.shieldsplus.recoil": "Recoil",
+  "rune.shieldsplus.recoil.description": "Increases knockback when blocking",
+  "rune.shieldsplus.recoil.info": "Entity knockback: +%s, Projectile knockback: x%s",
+  "rune.shieldsplus.reinforced": "Reinforced",
+  "rune.shieldsplus.reinforced.description": "Increases damage blocked",
+  "rune.shieldsplus.reinforced.info": "Damage blocked: +%s%%",
+  "rune.shieldsplus.aegis": "Aegis",
+  "rune.shieldsplus.aegis.description": "Reduces damage taken that passes the shield",
+  "rune.shieldsplus.aegis.info": "Damage reduction: %s%%",
+  "rune.shieldsplus.ablaze": "Ablaze",
+  "rune.shieldsplus.ablaze.description": "Sets attackers on fire",
+  "rune.shieldsplus.ablaze.info": "Time on fire: %ss",
+  "rune.shieldsplus.lightweight": "Lightweight",
+  "rune.shieldsplus.lightweight.description": "Reduces slowdown when blocking",
+  "rune.shieldsplus.lightweight.info": "Movement speed: +%s%%",
+  "rune.shieldsplus.fast_recovery": "Fast Recovery",
+  "rune.shieldsplus.fast_recovery.description": "Reduces cooldown",
+  "rune.shieldsplus.fast_recovery.info": "Cooldown reduction: %s%%",
+  "rune.shieldsplus.celestial_guardian": "Celestial Guardian",
+  "rune.shieldsplus.celestial_guardian.description": "Getting killed while blocking will give an absorption effect and keep you alive"
 }

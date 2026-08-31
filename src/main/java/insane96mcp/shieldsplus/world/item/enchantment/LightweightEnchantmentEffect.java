@@ -1,6 +1,7 @@
 package insane96mcp.shieldsplus.world.item.enchantment;
 
 import insane96mcp.insanelib.event.PlayerUseItemMovSpeedEvent;
+import insane96mcp.shieldsplus.module.RuneCompat;
 import insane96mcp.shieldsplus.module.SPFeature;
 import insane96mcp.shieldsplus.setup.SPEnchantments;
 import net.minecraft.core.registries.Registries;
@@ -23,6 +24,7 @@ public class LightweightEnchantmentEffect {
         int lvl = player.level().registryAccess().lookupOrThrow(Registries.ENCHANTMENT).get(SPEnchantments.LIGHTWEIGHT)
                 .map(useItem::getEnchantmentLevel)
                 .orElse(0);
+        lvl += RuneCompat.getRuneLevel(useItem, SPEnchantments.LIGHTWEIGHT);
         if (lvl <= 0)
             return;
 

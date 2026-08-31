@@ -12,7 +12,6 @@ import insane96mcp.shieldsplus.world.item.SPShieldItem;
 import insane96mcp.shieldsplus.world.item.enchantment.AegisEnchantmentEffect;
 import insane96mcp.shieldsplus.world.item.enchantment.CelestialGuardianEnchantmentEffect;
 import insane96mcp.shieldsplus.world.item.enchantment.ReinforcedEnchantmentEffect;
-import net.minecraft.core.Holder;
 import net.minecraft.core.HolderLookup.RegistryLookup;
 import net.minecraft.core.registries.Registries;
 import net.minecraft.tags.TagKey;
@@ -77,6 +76,23 @@ public class SPFeature extends Feature {
     @Config(min = 0, max = 1, description = "Percentage cooldown reduction with the Fast Recovery enchantment.")
     public static Double enchantments$fastRecoveryCooldownReduction = 0.35d;
 
+    @Config(description = "If Rune Enchanting is installed, whether shield-only runes granting the mod's enchantment effects are enabled.")
+    public static Boolean enchantments$runesEnabled = true;
+    @Config(min = 0, description = "Which level of Recoil the Recoil rune is equivalent to.")
+    public static Integer enchantments$recoilRuneLevelEquivalent = 2;
+    @Config(min = 0, description = "Which level of Reinforced the Reinforced rune is equivalent to.")
+    public static Integer enchantments$reinforcedRuneLevelEquivalent = 3;
+    @Config(min = 0, description = "Which level of Aegis the Aegis rune is equivalent to.")
+    public static Integer enchantments$aegisRuneLevelEquivalent = 3;
+    @Config(min = 0, description = "Which level of Ablaze the Ablaze rune is equivalent to.")
+    public static Integer enchantments$ablazeRuneLevelEquivalent = 1;
+    @Config(min = 0, description = "Which level of Lightweight the Lightweight rune is equivalent to.")
+    public static Integer enchantments$lightweightRuneLevelEquivalent = 1;
+    @Config(min = 0, description = "Which level of Fast Recovery the Fast Recovery rune is equivalent to.")
+    public static Integer enchantments$fastRecoveryRuneLevelEquivalent = 1;
+    @Config(min = 0, description = "Which level of Celestial Guardian the Celestial Guardian rune is equivalent to.")
+    public static Integer enchantments$celestialGuardianRuneLevelEquivalent = 1;
+
     @Override
     public void init(Module module, boolean enabledByDefault, boolean canBeDisabled) {
         super.init(module, enabledByDefault, canBeDisabled);
@@ -101,13 +117,13 @@ public class SPFeature extends Feature {
             event.setBlockedDamage(blockedDamage);
         }
 
-        //Process blocking enchantments
+        //Process blocking enchantments (real enchantment level plus any Rune Enchanting equivalent)
         if (useItem.getItem() instanceof ShieldItem) {
-            useItem.getAllEnchantments(enchantmentLookup).entrySet().forEach(entry -> {
-                Holder<Enchantment> enchantment = entry.getKey();
-                int lvl = entry.getIntValue();
-                enchantment.unwrapKey().map(SPEnchantments.BLOCKING_EFFECTS::get).ifPresent(blockingEffect ->
-                        blockingEffect.onBlocked(event.getEntity(), event.getDamageSource(), event.getBlockedDamage(), lvl, event));
+            SPEnchantments.BLOCKING_EFFECTS.forEach((enchantment, blockingEffect) -> {
+                int lvl = enchantmentLookup.get(enchantment).map(useItem::getEnchantmentLevel).orElse(0);
+                lvl += RuneCompat.getRuneLevel(useItem, enchantment);
+                if (lvl > 0)
+                    blockingEffect.onBlocked(event.getEntity(), event.getDamageSource(), event.getBlockedDamage(), lvl, event);
             });
         }
     }

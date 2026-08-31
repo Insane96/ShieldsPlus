@@ -1,4 +1,7 @@
 # Upcoming
+* Added back enchantments
+  * Also in Rune form
+  * RIP Perfect Parry
 * Vanilla shields in loot is now replaced with mod's one
 * Vanilla shield is now hidden from creative inventory
 
