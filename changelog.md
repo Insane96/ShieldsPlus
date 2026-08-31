@@ -1,4 +1,4 @@
-# Upcoming
+# 2.3.0.0
 * Added back enchantments
   * Also in Rune form
   * RIP Perfect Parry
