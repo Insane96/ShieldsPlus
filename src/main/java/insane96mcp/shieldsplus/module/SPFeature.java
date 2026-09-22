@@ -53,6 +53,7 @@ public class SPFeature extends Feature {
     public static Boolean liftedAndCooldown = true;
     @Config(min = 0, max = 1, description = "When shields go on cooldown, the time is given by how much time the shield has been blocking. This defines the minimum cooldown in percentage for the shield to go on cooldown (e.g. if you just block for a few ticks, the cooldown will be 30% of the shield's cooldown).")
     public static Double minCooldown = 0.3d;
+    //TODO Send back arrows with stronger force if parried
     @Config(min = 0, description = "How many seconds after lifting a shield to make a parry count as such")
     public static Double parry$window = 0.1d;
     @Config(min = 0, description = "How much more damage (in percentage) is blocked if the player lifts the shield as soon as it's about to take damage?")
@@ -125,6 +126,7 @@ public class SPFeature extends Feature {
                 if (lvl > 0)
                     blockingEffect.onBlocked(event.getEntity(), event.getDamageSource(), event.getBlockedDamage(), lvl, event);
             });
+            RuneCompat.tryTriggerThornsRune(event);
         }
     }
 

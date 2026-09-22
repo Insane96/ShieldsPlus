@@ -5,6 +5,7 @@ import net.minecraft.resources.ResourceKey;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.enchantment.Enchantment;
 import net.neoforged.fml.ModList;
+import net.neoforged.neoforge.event.entity.living.LivingShieldBlockEvent;
 
 import javax.annotation.Nullable;
 
@@ -38,6 +39,13 @@ public class RuneCompat {
             return 0;
 
         return SPRunes.getRuneLevel(stack, enchantment, levelEquivalent);
+    }
+
+    public static void tryTriggerThornsRune(LivingShieldBlockEvent event) {
+        if (!SPFeature.enchantments$runesEnabled || !isLoaded())
+            return;
+
+        SPRunes.tryTriggerThorns(event);
     }
 
     private static int levelEquivalentFor(ResourceKey<Enchantment> enchantment) {

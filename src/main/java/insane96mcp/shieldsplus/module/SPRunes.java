@@ -11,10 +11,14 @@ import net.minecraft.data.tags.IntrinsicHolderTagsProvider;
 import net.minecraft.network.chat.Component;
 import net.minecraft.network.chat.MutableComponent;
 import net.minecraft.resources.ResourceKey;
+import net.minecraft.server.level.ServerLevel;
+import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.enchantment.Enchantment;
+import net.minecraft.world.item.enchantment.EnchantmentTarget;
 import net.neoforged.bus.api.IEventBus;
+import net.neoforged.neoforge.event.entity.living.LivingShieldBlockEvent;
 import net.neoforged.neoforge.registries.RegisterEvent;
 
 import javax.annotation.Nullable;
@@ -27,10 +31,6 @@ import java.util.Map;
  * rune instead of only from the real enchantment. Only ever constructed if Rune Enchanting is installed (see
  * {@link RuneCompat} and {@link insane96mcp.shieldsplus.ShieldsPlus}), so this class - and therefore its
  * references to Rune Enchanting's classes - is never loaded otherwise.
- * <p>
- * These runes carry no gameplay logic of their own: {@link RuneCompat#getRuneLevel} is queried directly from
- * the same places that already read the real enchantment level ({@code SPFeature#onShieldBlock} and the
- * various {@code *EnchantmentEffect} helpers), and the returned rune-equivalent level is simply added on top.
  */
 public class SPRunes {
     private static final Map<ResourceKey<Enchantment>, Rune> RUNES = new LinkedHashMap<>();
@@ -68,6 +68,15 @@ public class SPRunes {
 
         Holder<Rune> holder = RERunes.REGISTRY.wrapAsHolder(rune);
         return RuneHelper.hasRune(stack, holder) ? levelEquivalent : 0;
+    }
+
+    public static void tryTriggerThorns(LivingShieldBlockEvent event) {
+        LivingEntity blockingEntity = event.getEntity();
+        ItemStack useItem = blockingEntity.getUseItem();
+        if (!RuneHelper.hasRune(useItem, RERunes.THORNS) || !(blockingEntity.level() instanceof ServerLevel serverLevel))
+            return;
+
+        RERunes.THORNS.value().onPostAttack(serverLevel, useItem, EnchantmentTarget.VICTIM, blockingEntity, event.getDamageSource());
     }
 
     private abstract static class ShieldRune extends Rune {

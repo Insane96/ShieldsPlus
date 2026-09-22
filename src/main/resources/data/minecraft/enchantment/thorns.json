@@ -50,6 +50,6 @@
   "slots": [
     "armor"
   ],
-  "supported_items": "#shieldsplus:enchantable/thorns",
+  "supported_items": "#minecraft:enchantable/thorns",
   "weight": 1
 }

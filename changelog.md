@@ -1,3 +1,6 @@
+# 2.3.0.1
+* Fixed Thorns Rune not working on Shields
+
 # 2.3.0.0
 * Added back enchantments
   * Also in Rune form
