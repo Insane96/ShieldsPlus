@@ -1,3 +1,6 @@
+# 2.3.0.2
+* Wooden Shield can now be used as furnace fuel
+
 # 2.3.0.1
 * Fixed Thorns Rune not working on Shields
 
