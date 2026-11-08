@@ -85,7 +85,7 @@ public class SPFeature extends Feature {
     public static Integer enchantments$reinforcedRuneLevelEquivalent = 3;
     @Config(min = 0, description = "Which level of Aegis the Aegis rune is equivalent to.")
     public static Integer enchantments$aegisRuneLevelEquivalent = 3;
-    @Config(min = 0, description = "Which level of Ablaze the Ablaze rune is equivalent to.")
+    @Config(min = 0, description = "Which level of Ablaze the Flame rune (from Rune Enchanting) is equivalent to when applied to a shield.")
     public static Integer enchantments$ablazeRuneLevelEquivalent = 1;
     @Config(min = 0, description = "Which level of Lightweight the Lightweight rune is equivalent to.")
     public static Integer enchantments$lightweightRuneLevelEquivalent = 1;

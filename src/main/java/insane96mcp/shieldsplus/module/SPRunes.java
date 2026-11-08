@@ -1,13 +1,16 @@
 package insane96mcp.shieldsplus.module;
 
 import insane96mcp.insanelib.InsaneLib;
+import insane96mcp.runeenchanting.RuneFeature;
 import insane96mcp.runeenchanting.RuneHelper;
 import insane96mcp.runeenchanting.runes.Rune;
 import insane96mcp.runeenchanting.setup.RERunes;
 import insane96mcp.shieldsplus.ShieldsPlus;
 import insane96mcp.shieldsplus.setup.SPEnchantments;
+import net.minecraft.ChatFormatting;
 import net.minecraft.core.Holder;
 import net.minecraft.data.tags.IntrinsicHolderTagsProvider;
+import net.minecraft.network.chat.CommonComponents;
 import net.minecraft.network.chat.Component;
 import net.minecraft.network.chat.MutableComponent;
 import net.minecraft.resources.ResourceKey;
@@ -15,20 +18,26 @@ import net.minecraft.server.level.ServerLevel;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.item.ShieldItem;
 import net.minecraft.world.item.enchantment.Enchantment;
 import net.minecraft.world.item.enchantment.EnchantmentTarget;
+import net.neoforged.bus.api.EventPriority;
 import net.neoforged.bus.api.IEventBus;
+import net.neoforged.neoforge.common.NeoForge;
 import net.neoforged.neoforge.event.entity.living.LivingShieldBlockEvent;
+import net.neoforged.neoforge.event.entity.player.ItemTooltipEvent;
 import net.neoforged.neoforge.registries.RegisterEvent;
 
 import javax.annotation.Nullable;
 import java.util.LinkedHashMap;
+import java.util.List;
 import java.util.Map;
 
 /**
  * Registers a Rune Enchanting equivalent for each of Shields+'s own shield enchantments (recoil, reinforced,
- * aegis, ablaze, lightweight, fast recovery, celestial guardian), so the effect can also be obtained from a
- * rune instead of only from the real enchantment. Only ever constructed if Rune Enchanting is installed (see
+ * aegis, lightweight, fast recovery, celestial guardian), so the effect can also be obtained from a rune
+ * instead of only from the real enchantment. Ablaze reuses Rune Enchanting's own Flame rune instead of
+ * registering a new one. Only ever constructed if Rune Enchanting is installed (see
  * {@link RuneCompat} and {@link insane96mcp.shieldsplus.ShieldsPlus}), so this class - and therefore its
  * references to Rune Enchanting's classes - is never loaded otherwise.
  */
@@ -37,6 +46,33 @@ public class SPRunes {
 
     public SPRunes(IEventBus modEventBus) {
         modEventBus.addListener(this::onRegister);
+        //Low priority so that Rune Enchanting has already added the Flame rune's lines
+        NeoForge.EVENT_BUS.addListener(EventPriority.LOW, SPRunes::onTooltip);
+    }
+
+    /** Flame's own tooltip doesn't cover what it does on shields, so the blocking effect is added right below it. */
+    private static void onTooltip(ItemTooltipEvent event) {
+        ItemStack stack = event.getItemStack();
+        if (!(stack.getItem() instanceof ShieldItem) || !RuneFeature.showExtraInfos(event.getFlags()))
+            return;
+
+        int level = RuneCompat.getRuneLevel(stack, SPEnchantments.ABLAZE);
+        if (level <= 0)
+            return;
+
+        List<Component> tooltip = event.getToolTip();
+        Component line = CommonComponents.space()
+                .append(Component.translatable("rune.shieldsplus.flame.shield_info", InsaneLib.ONE_DECIMAL_FORMATTER.format(level * SPFeature.enchantments$ablazeTimeOnFire)))
+                .withStyle(ChatFormatting.BLUE, ChatFormatting.ITALIC);
+
+        String flameInfo = CommonComponents.space().append(RERunes.FLAME.value().getInfoComponent()).getString();
+        for (int i = 0; i < tooltip.size(); i++) {
+            if (tooltip.get(i).getString().equals(flameInfo)) {
+                tooltip.add(i + 1, line);
+                return;
+            }
+        }
+        tooltip.add(line);
     }
 
     private void onRegister(RegisterEvent event) {
@@ -44,10 +80,11 @@ public class SPRunes {
             register(helper, SPEnchantments.RECOIL, "recoil", new RecoilRune());
             register(helper, SPEnchantments.REINFORCED, "reinforced", new ReinforcedRune());
             register(helper, SPEnchantments.AEGIS, "aegis", new AegisRune());
-            register(helper, SPEnchantments.ABLAZE, "ablaze", new AblazeRune());
             register(helper, SPEnchantments.LIGHTWEIGHT, "lightweight", new LightweightRune());
             register(helper, SPEnchantments.FAST_RECOVERY, "fast_recovery", new FastRecoveryRune());
             register(helper, SPEnchantments.CELESTIAL_GUARDIAN, "celestial_guardian", new CelestialGuardianRune());
+            //The Ablaze rune has been replaced by Rune Enchanting's Flame, items with Ablaze are loaded with Flame
+            RERunes.REGISTRY.addAlias(ShieldsPlus.id("ablaze"), RERunes.FLAME.getId());
         });
     }
 
@@ -62,12 +99,18 @@ public class SPRunes {
      * to touch.
      */
     public static int getRuneLevel(ItemStack stack, ResourceKey<Enchantment> enchantment, int levelEquivalent) {
-        Rune rune = RUNES.get(enchantment);
-        if (rune == null)
-            return 0;
+        Holder<Rune> holder = getRuneHolder(enchantment);
+        return holder != null && RuneHelper.hasRune(stack, holder) ? levelEquivalent : 0;
+    }
 
-        Holder<Rune> holder = RERunes.REGISTRY.wrapAsHolder(rune);
-        return RuneHelper.hasRune(stack, holder) ? levelEquivalent : 0;
+    @Nullable
+    private static Holder<Rune> getRuneHolder(ResourceKey<Enchantment> enchantment) {
+        //Ablaze has no rune of its own: Rune Enchanting's Flame acts as its rune when applied to a shield
+        if (enchantment.equals(SPEnchantments.ABLAZE))
+            return RERunes.FLAME;
+
+        Rune rune = RUNES.get(enchantment);
+        return rune == null ? null : RERunes.REGISTRY.wrapAsHolder(rune);
     }
 
     public static void tryTriggerThorns(LivingShieldBlockEvent event) {
@@ -153,23 +196,6 @@ public class SPRunes {
         public MutableComponent getInfoComponent() {
             return Component.translatable(getInfoTranslationKey(),
                     InsaneLib.ONE_DECIMAL_FORMATTER.format(SPFeature.enchantments$aegisRuneLevelEquivalent * SPFeature.enchantments$aegisPercentageDamageReduction * 100));
-        }
-    }
-
-    public static class AblazeRune extends ShieldRune {
-        public AblazeRune() {
-            super("Ablaze", "Sets attackers on fire when blocking with a shield");
-        }
-
-        @Override
-        public @Nullable String getInfo() {
-            return "Time on fire: %ss";
-        }
-
-        @Override
-        public MutableComponent getInfoComponent() {
-            return Component.translatable(getInfoTranslationKey(),
-                    InsaneLib.ONE_DECIMAL_FORMATTER.format(SPFeature.enchantments$ablazeRuneLevelEquivalent * SPFeature.enchantments$ablazeTimeOnFire));
         }
     }
 

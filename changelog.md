@@ -1,3 +1,7 @@
+# Upcoming
+* Removed the Ablaze Rune, Rune Enchanting's Flame Rune now applies to shields and does the same
+  * Existing Ablaze Runes are converted to Flame
+
 # 2.3.0.2
 * Wooden Shield can now be used as furnace fuel
 
