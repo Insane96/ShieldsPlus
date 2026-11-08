@@ -1,4 +1,4 @@
-# Upcoming
+# 2.3.1.0
 * Removed the Ablaze Rune, Rune Enchanting's Flame Rune now applies to shields and does the same
   * Existing Ablaze Runes are converted to Flame
 
